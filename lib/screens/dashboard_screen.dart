@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // For date formatting
+import 'package:inkingi/components/TTransactionTile.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/screens/add_transaction.dart';
@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 import '../widgets/overview_card.dart';
 import '../widgets/profit_chart.dart';
 import '../widgets/credit_profile.dart';
-import '../models/transaction.dart'; // Import the Transaction model
 
 class DashboardScreen extends StatelessWidget {
   static const String routeName = '/dashboardScreen';
@@ -131,7 +130,7 @@ class DashboardScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  // Recent Transactions List (Last 3)
+                  // Use TransactionTile for the last 3 transactions
                   if (lastThreeTransactions.isEmpty)
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -145,77 +144,11 @@ class DashboardScreen extends StatelessWidget {
                     )
                   else
                     Column(
-                      children: lastThreeTransactions.map((transaction) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(vertical: 4.0),
-                          padding: const EdgeInsets.all(16.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border(
-                              left: BorderSide(
-                                color: transaction.isIncome
-                                    ? AppColors.lightGreen
-                                    : AppColors.secondaryOrange,
-                                width: 4,
-                              ),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.05),
-                                blurRadius: 8,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                transaction.isIncome
-                                    ? Icons.arrow_upward
-                                    : Icons.arrow_downward,
-                                color: transaction.isIncome
-                                    ? AppColors.lightGreen
-                                    : AppColors.secondaryOrange,
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      transaction.description,
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: AppColors.textPrimary,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      '${DateFormat('d MMM yyyy, hh:mm a').format(transaction.date)} • ${transaction.category}',
-                                      style: const TextStyle(
-                                        color: AppColors.textSecondary,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Text(
-                                '${transaction.isIncome ? '+' : '-'}${transaction.amount.toStringAsFixed(0)} RWF',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: transaction.isIncome
-                                      ? AppColors.lightGreen
-                                      : AppColors.secondaryOrange,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }).toList(),
+                      children: lastThreeTransactions
+                          .map((transaction) => TTransactionTile(
+                                transaction: transaction,
+                              ))
+                          .toList(),
                     ),
                 ],
               ),
