@@ -1,5 +1,6 @@
 // lib/screens/transactions_screen.dart
 import 'package:flutter/material.dart';
+import 'package:inkingi/components/TAppBar.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/models/transaction.dart';
@@ -57,21 +58,16 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
         return Scaffold(
           backgroundColor: AppColors.background,
-          appBar: AppBar(
-            backgroundColor: AppColors.background,
-            elevation: 0,
-            scrolledUnderElevation: 0,
-            surfaceTintColor: AppColors.background,
-            title: const Text(
-              'Ibikorwa', // Transactions
-              style: TextStyle(color: AppColors.textPrimary),
-              overflow: TextOverflow.ellipsis,
-            ),
+          appBar: CustomAppBar(
+            title: 'Ibikorwa', // transactions
           ),
           body: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 16.0,
+                ),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,

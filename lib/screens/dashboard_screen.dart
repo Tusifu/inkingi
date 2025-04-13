@@ -29,7 +29,10 @@ class DashboardScreen extends StatelessWidget {
           backgroundColor: AppColors.background,
           body: SafeArea(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 0.0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -81,37 +84,17 @@ class DashboardScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Inyungu', // Profit
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.textPrimary,
-                        ),
-                      ),
-                      Text(
-                        '+${provider.profit.toStringAsFixed(0)} RWF',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.lightGreen,
-                        ),
-                      ),
-                    ],
+                  const ProfitChart(
+                    profit: 45000,
                   ),
-                  const SizedBox(height: 9),
-                  const ProfitChart(),
                   const SizedBox(height: 16),
                   const CreditProfile(),
-                  const SizedBox(height: 16),
+                  // const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Ibikorwa bya Vuba a Vuba', // Recent Transactions
+                        'Incamake', // Recent Transactions
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -136,13 +119,13 @@ class DashboardScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 0),
                   // Use TransactionTile for the last 3 transactions
                   if (lastThreeTransactions.isEmpty)
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.0),
                       child: Text(
-                        'Nta bikorwa bya vuba a vuba biracyari', // No recent transactions
+                        'Nta bikorwa bya vuba a vuba biracyari',
                         style: TextStyle(
                           color: AppColors.textSecondary,
                           fontSize: 14,

@@ -1,47 +1,31 @@
 // lib/screens/reports_screen.dart
 import 'package:flutter/material.dart';
+import 'package:inkingi/components/TAppBar.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
 import 'package:provider/provider.dart';
 import '../providers/reports_provider.dart';
+import '../utils/date_utils.dart'; // Import DateUtils
 
 class ReportsScreen extends StatelessWidget {
   static const String routeName = '/reportsScreen';
   const ReportsScreen({super.key});
 
-  // Translate report period keys to Kinyarwanda
+  // Translate report period keys to Kinyarwanda using DateUtils
   String _translatePeriod(String period) {
-    // Translate months
-    const months = {
-      'January': 'Mutarama',
-      'February': 'Gashyantare',
-      'March': 'Werurwe',
-      'April': 'Mata',
-      'May': 'Gicurasi',
-      'June': 'Kamena',
-      'July': 'Nyakanga',
-      'August': 'Kanama',
-      'September': 'Nzeli',
-      'October': 'Ukwakira',
-      'November': 'Ugushyingo',
-      'December': 'Ukuboza',
-    };
-
     // Translate quarters
     if (period.startsWith('Q')) {
-      final quarterNumber = period.substring(1);
-      return 'Igice $quarterNumber';
+      return DateUtilities.translateQuarter(period);
     }
 
     // Translate weeks
     if (period.startsWith('Week')) {
-      final weekNumber = period.split(' ')[1];
-      return 'Icyumweru $weekNumber';
+      return DateUtilities.translateWeek(period);
     }
 
     // Translate months
-    return months[period] ?? period;
+    return DateUtilities.translateMonth(period);
   }
 
   @override
@@ -55,33 +39,29 @@ class ReportsScreen extends StatelessWidget {
 
           return Scaffold(
             backgroundColor: AppColors.background,
-            appBar: AppBar(
-              backgroundColor: AppColors.background,
-              elevation: 0,
-              scrolledUnderElevation: 0, // Explicitly set to 0 for scrolling
-              surfaceTintColor: AppColors.background, // Prevent tint changes
-              title: const Text(
-                'Raporo', // Reports
-                style: TextStyle(color: AppColors.textPrimary),
-                overflow: TextOverflow.ellipsis,
-              ),
+            appBar: CustomAppBar(
+              title: 'Raporo', // transactions
             ),
             body: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.only(
+                    left: 16.0,
+                    right: 16.0,
+                    top: 16.0,
+                    bottom: 8.0,
+                  ),
                   child: _buildModernFilter(context, provider),
                 ),
                 Expanded(
                   child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     itemCount: report.length,
                     itemBuilder: (context, index) {
                       final period = report.keys.elementAt(index);
                       final data = report[period]!;
                       return Card(
-                        color: Colors.white,
+                        color: AppColors.cardBackgroundColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -105,14 +85,14 @@ class ReportsScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Ayinjiye: ${data['Income']!.toStringAsFixed(0)} RWF',
+                                    'Ayinjiye ${data['Income']!.toStringAsFixed(0)} RWF',
                                     style: const TextStyle(
                                       color: AppColors.lightGreen,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   Text(
-                                    'Ayasohowe: ${data['Expenses']!.toStringAsFixed(0)} RWF',
+                                    'Ayasohotse: ${data['Expenses']!.toStringAsFixed(0)} RWF',
                                     style: const TextStyle(
                                       color: AppColors.secondaryOrange,
                                     ),
@@ -178,7 +158,7 @@ class ReportsScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: isSelected
                       ? AppColors.primaryColor
-                      : AppColors.greyColor100, // Background for unselected
+                      : AppColors.greyColor100,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(

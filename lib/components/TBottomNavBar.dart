@@ -45,12 +45,11 @@ class TBottomNavBar extends StatelessWidget {
   ];
 
   void _navigateTo(BuildContext context, int index) {
-    // Handle navigation for non-"Add" items
     if (index == 2) {
       // Middle item (Add Transaction)
-      showDialog(
-        context: context,
-        builder: (context) => const AddTransactionScreen(),
+      Navigator.push(
+        context,
+        AppTransitions.fadeNamed(AddTransactionScreen.routeName),
       );
     } else {
       String routeName = _navItems[index]['route'];

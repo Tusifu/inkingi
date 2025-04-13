@@ -1,5 +1,6 @@
 // lib/screens/loans_screen.dart
 import 'package:flutter/material.dart';
+import 'package:inkingi/components/TAppBar.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:provider/provider.dart';
 import '../constants/colors.dart';
@@ -17,21 +18,13 @@ class LoansScreen extends StatelessWidget {
         builder: (context, provider, child) {
           return Scaffold(
             backgroundColor: AppColors.background,
-            appBar: AppBar(
-              backgroundColor: AppColors.background,
-              elevation: 0,
-              scrolledUnderElevation: 0, // Explicitly set to 0 for scrolling
-              surfaceTintColor: AppColors.background, // Prevent tint changes
-              title: const Text(
-                'Inguzanyo', // Loan Eligibility
-                style: TextStyle(color: AppColors.textPrimary),
-                overflow: TextOverflow.ellipsis,
-              ),
+            appBar: CustomAppBar(
+              title: 'Inguzanyo', // loans
             ),
             body: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16.0,
-                vertical: 8.0,
+                vertical: 16.0,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -255,8 +248,8 @@ class LoansScreen extends StatelessWidget {
                                 ),
                                 child: Text(
                                   loan.isEligible
-                                      ? 'Saba Nonaha' // Apply Now
-                                      : 'Ntugishoboye', // Not Eligible
+                                      ? 'Saba Nonaha'
+                                      : 'Nturemererwa',
                                   style: TextStyle(
                                     color: loan.isEligible
                                         ? Colors.white
