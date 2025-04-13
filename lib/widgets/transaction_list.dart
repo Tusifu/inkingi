@@ -1,6 +1,6 @@
+// lib/widgets/transaction_list.dart
 import 'package:flutter/material.dart';
 import 'package:inkingi/components/TTransactionTile.dart';
-import 'package:intl/intl.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/models/transaction.dart';
 
@@ -14,18 +14,57 @@ class TransactionList extends StatelessWidget {
     required this.filter,
   });
 
+  // Custom date formatter for Kinyarwanda
+  String _formatDateToKinyarwanda(DateTime date) {
+    const daysOfWeek = [
+      'Ku Cyumweru', // Sunday
+      'Kuwa Mbere', // Monday
+      'Kuwa Kabiri', // Tuesday
+      'Kuwa Gatatu', // Wednesday
+      'Kuwa Kane', // Thursday
+      'Kuwa Gatanu', // Friday
+      'Kuwa Gatandatu', // Saturday
+    ];
+
+    const months = [
+      '', // Index 0 (not used)
+      'Mutarama', // January
+      'Gashyantare', // February
+      'Werurwe', // March
+      'Mata', // April
+      'Gicurasi', // May
+      'Kamena', // June
+      'Nyakanga', // July
+      'Kanama', // August
+      'Nzeli', // September
+      'Ukwakira', // October
+      'Ugushyingo', // November
+      'Ukuboza', // December
+    ];
+
+    final dayName = daysOfWeek[date.weekday % 7];
+    final day = date.day;
+    final monthName = months[date.month];
+    final year = date.year;
+
+    return '$dayName, $day $monthName $year';
+  }
+
   @override
   Widget build(BuildContext context) {
-    final filteredTransactions = transactions.where((t) {
-      if (filter == 'Income') return t.isIncome;
-      if (filter == 'Expenses') return !t.isIncome;
-      return true;
-    }).toList();
+    // Only apply filter if filter is not 'All'
+    final transactionsToShow = filter == 'All'
+        ? transactions
+        : transactions.where((t) {
+            if (filter == 'Income') return t.isIncome;
+            if (filter == 'Expenses') return !t.isIncome;
+            return true;
+          }).toList();
 
     // Group transactions by date
     final Map<String, List<Transaction>> groupedTransactions = {};
-    for (var transaction in filteredTransactions) {
-      final dateKey = DateFormat('EEEE, MMMM d, yyyy').format(transaction.date);
+    for (var transaction in transactionsToShow) {
+      final dateKey = _formatDateToKinyarwanda(transaction.date);
       if (!groupedTransactions.containsKey(dateKey)) {
         groupedTransactions[dateKey] = [];
       }

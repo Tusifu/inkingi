@@ -20,7 +20,7 @@ class OverviewCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.cardBackground,
+        color: AppColors.cardBackgroundColor,
         borderRadius: BorderRadius.circular(12),
         border: Border(
           left: BorderSide(

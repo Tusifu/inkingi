@@ -1,12 +1,13 @@
+// lib/components/TBottomNavBar.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:inkingi/constants/colors.dart';
+import 'package:inkingi/screens/add_transaction.dart';
 import 'package:inkingi/screens/dashboard_screen.dart';
 import 'package:inkingi/screens/loans_screen.dart';
 import 'package:inkingi/screens/reports_screen.dart';
 import 'package:inkingi/screens/transactions_screen.dart';
 import 'package:inkingi/utils/Transition/transitionUtils.dart';
-import 'package:inkingi/utils/styles.dart';
 
 class TBottomNavBar extends StatelessWidget {
   final int currentSelected;
@@ -18,109 +19,127 @@ class TBottomNavBar extends StatelessWidget {
   final List<Map<String, dynamic>> _navItems = [
     {
       'icon': 'assets/svgs/bottomNavbar/homeGrey.svg',
-      'label': 'Home',
+      'label': 'Ahabanza', // Home
       'route': DashboardScreen.routeName,
     },
     {
       'icon': 'assets/svgs/bottomNavbar/transactions.svg',
-      'label': 'Transactions',
+      'label': 'Ibikorwa', // Transactions
       'route': TransactionsScreen.routeName,
     },
     {
+      'icon': 'assets/svgs/bottomNavbar/add.svg',
+      'label': 'Ongeramo',
+      'route': '',
+    },
+    {
       'icon': 'assets/svgs/bottomNavbar/reports.svg',
-      'label': 'Reports',
+      'label': 'Raporo', // Reports
       'route': ReportsScreen.routeName,
     },
     {
       'icon': 'assets/svgs/bottomNavbar/loans.svg',
-      'label': 'Loans',
+      'label': 'Inguzanyo', // Loans
       'route': LoansScreen.routeName,
-    },
-    {
-      'icon': 'assets/svgs/bottomNavbar/profileGrey.svg',
-      'label': 'Profile',
-      'route': '',
     },
   ];
 
   void _navigateTo(BuildContext context, int index) {
-    String routeName = _navItems[index]['route'];
-    if (ModalRoute.of(context)?.settings.name != routeName &&
-        routeName.isNotEmpty) {
-      // Use fadeReplacementNamed for other routes
-      Navigator.pushReplacement(
-        context,
-        AppTransitions.fadeReplacementNamed(routeName),
+    // Handle navigation for non-"Add" items
+    if (index == 2) {
+      // Middle item (Add Transaction)
+      showDialog(
+        context: context,
+        builder: (context) => const AddTransactionScreen(),
       );
+    } else {
+      String routeName = _navItems[index]['route'];
+      if (ModalRoute.of(context)?.settings.name != routeName &&
+          routeName.isNotEmpty) {
+        Navigator.pushReplacement(
+          context,
+          AppTransitions.fadeReplacementNamed(routeName),
+        );
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
-        right: 20,
-        left: 20,
-        bottom: 34,
-        top: 10,
-      ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 4,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: isHome ? AppColors.greyColor50 : AppColors.background,
-        borderRadius: BorderRadius.circular(24),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, -2),
+          ),
+        ],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(_navItems.length, (index) {
           bool isSelected = currentSelected == index;
+          bool isAddButton = index == 2; // Middle item is the "Add" button
+
           return GestureDetector(
             onTap: () => _navigateTo(context, index),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              padding: EdgeInsets.symmetric(
-                horizontal: isSelected ? 4 : 0,
-                vertical: isSelected ? 4 : 0,
-              ),
-              decoration: BoxDecoration(
-                color: isSelected
-                    ? AppColors.primaryColor.withOpacity(0.4)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(18),
-              ),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: isSelected
-                        ? AppColors.primaryColor
-                        : isHome
-                            ? AppColors.greyColor100
-                            : Colors.transparent,
-                    radius: isSelected ? 16 : 20,
-                    child: SvgPicture.asset(
-                      _navItems[index]['icon'],
-                      width: 20,
-                      height: 20,
-                      colorFilter: isSelected
-                          ? const ColorFilter.mode(
-                              Colors.white,
-                              BlendMode.srcIn,
-                            )
-                          : null,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (isAddButton)
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 8),
+                    child: Material(
+                      elevation: 4,
+                      borderRadius: BorderRadius.circular(12),
+                      child: Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: SvgPicture.asset(
+                          _navItems[index]['icon'],
+                          width: 24,
+                          height: 24,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                      ),
                     ),
+                  )
+                else
+                  SvgPicture.asset(
+                    _navItems[index]['icon'],
+                    width: 24,
+                    height: 24,
+                    colorFilter: isSelected
+                        ? ColorFilter.mode(
+                            AppColors.primaryColor,
+                            BlendMode.srcIn,
+                          )
+                        : null,
                   ),
-                  if (isSelected) ...[
-                    const SizedBox(width: 4),
-                    Text(
-                      _navItems[index]['label'],
-                      style: Styles.h8HeadingWithPrimary100,
-                    ),
-                    const SizedBox(width: 8),
-                  ]
-                ],
-              ),
+                const SizedBox(height: 4),
+                Text(
+                  _navItems[index]['label'],
+                  style: TextStyle(
+                    color: isSelected || isAddButton
+                        ? AppColors.primaryColor
+                        : AppColors.textSecondary,
+                    fontSize: 12,
+                    fontWeight: isSelected || isAddButton
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                  ),
+                ),
+                const SizedBox(height: 8),
+              ],
             ),
           );
         }),

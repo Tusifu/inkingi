@@ -1,8 +1,9 @@
+// lib/screens/dashboard_screen.dart
 import 'package:flutter/material.dart';
-import 'package:inkingi/components/TTransactionTile.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
+import 'package:inkingi/components/TTransactionTile.dart';
 import 'package:inkingi/constants/colors.dart';
-import 'package:inkingi/screens/add_transaction.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
 import 'package:inkingi/screens/transactions_screen.dart';
 import 'package:inkingi/utils/Transition/transitionUtils.dart';
@@ -35,15 +36,21 @@ class DashboardScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        "Financial overview",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
+                      Row(
+                        children: [
+                          SvgPicture.asset("assets/svgs/bk_logo.svg"),
+                          const SizedBox(width: 8),
+                          const Text(
+                            "Incamake y'Imari", // Financial overview
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
                       ),
                       Text(
-                        "April 1, 2025",
+                        "1 Mata 2025", // April 1, 2025
                         style: const TextStyle(
                           fontWeight: FontWeight.w300,
                           fontSize: 13,
@@ -56,7 +63,7 @@ class DashboardScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: OverviewCard(
-                          title: 'Total Income',
+                          title: 'Amafaranga Yose Yinjiye', // Total Income
                           amount: provider.totalIncome,
                           percentageChange: 12,
                           isPositive: true,
@@ -65,7 +72,7 @@ class DashboardScreen extends StatelessWidget {
                       const SizedBox(width: 16),
                       Expanded(
                         child: OverviewCard(
-                          title: 'Total Expenses',
+                          title: 'Amafaranga Yose Yasohotse', // Total Expenses
                           amount: provider.totalExpenses,
                           percentageChange: 5,
                           isPositive: false,
@@ -78,7 +85,7 @@ class DashboardScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Profit',
+                        'Inyungu', // Profit
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -104,7 +111,7 @@ class DashboardScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Recent Transactions',
+                        'Ibikorwa bya Vuba a Vuba', // Recent Transactions
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -120,7 +127,7 @@ class DashboardScreen extends StatelessWidget {
                           );
                         },
                         child: const Text(
-                          'View All',
+                          'Reba Byose', // View All
                           style: TextStyle(
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.w600,
@@ -135,7 +142,7 @@ class DashboardScreen extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.0),
                       child: Text(
-                        'No recent transactions',
+                        'Nta bikorwa bya vuba a vuba biracyari', // No recent transactions
                         style: TextStyle(
                           color: AppColors.textSecondary,
                           fontSize: 14,
@@ -153,16 +160,6 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => const AddTransactionScreen(),
-              );
-            },
-            backgroundColor: AppColors.primaryColor,
-            child: const Icon(Icons.add),
           ),
           bottomNavigationBar: TBottomNavBar(
             currentSelected: 0,

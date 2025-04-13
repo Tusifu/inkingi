@@ -1,3 +1,4 @@
+// lib/widgets/credit_profile.dart
 import 'package:flutter/material.dart';
 import 'package:inkingi/constants/colors.dart';
 
@@ -9,16 +10,16 @@ class CreditProfile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.cardBackground,
-        borderRadius: BorderRadius.circular(12),
+        color: AppColors.cardBackgroundColor,
+        borderRadius: BorderRadius.circular(16),
         border: const Border(
           left: BorderSide(color: AppColors.secondaryOrange, width: 4),
         ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -32,8 +33,8 @@ class CreditProfile extends StatelessWidget {
                 children: [
                   Icon(Icons.trending_up, color: AppColors.secondaryOrange),
                   const SizedBox(width: 8),
-                  Text(
-                    'Building Credit Profile',
+                  const Text(
+                    'Kubaka Profayili y’Inguzanyo', // Building Credit Profile
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -43,19 +44,22 @@ class CreditProfile extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
-              Text(
-                'Keep using Inkingi to improve your score',
-                style: TextStyle(color: AppColors.textSecondary),
+              const Text(
+                'Komeza gukoresha Inkingi wongere amanota.',
+                style: TextStyle(
+                  color: AppColors.textSecondary,
+                  fontSize: 14,
+                ),
               ),
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Text(
-                    'Credit Score',
+                  const Text(
+                    'Amanota y’Inguzanyo', // Credit Score
                     style: TextStyle(color: AppColors.textSecondary),
                   ),
                   const SizedBox(width: 8),
-                  Text(
+                  const Text(
                     '68%',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -71,11 +75,12 @@ class CreditProfile extends StatelessWidget {
                   value: 0.68,
                   backgroundColor: AppColors.textSecondary.withOpacity(0.2),
                   valueColor: AlwaysStoppedAnimation(AppColors.secondaryOrange),
+                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
             ],
           ),
-          Icon(Icons.arrow_forward, color: AppColors.primaryColor),
+          // Icon(Icons.arrow_forward, color: AppColors.primaryColor),
         ],
       ),
     );

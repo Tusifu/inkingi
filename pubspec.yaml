@@ -78,6 +78,14 @@ flutter:
     - assets/svgs/bottomNavbar/transactions.svg
     - assets/svgs/bottomNavbar/reports.svg
     - assets/svgs/bottomNavbar/loans.svg
+    - assets/svgs/bottomNavbar/add.svg
+
+
+    # SVGS
+
+    - assets/svgs/bk_logo.svg
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -1,3 +1,4 @@
+// lib/screens/loans_screen.dart
 import 'package:flutter/material.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:provider/provider.dart';
@@ -19,20 +20,26 @@ class LoansScreen extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: AppColors.background,
               elevation: 0,
+              scrolledUnderElevation: 0, // Explicitly set to 0 for scrolling
+              surfaceTintColor: AppColors.background, // Prevent tint changes
               title: const Text(
-                'Loan Eligibility',
+                'Inguzanyo', // Loan Eligibility
                 style: TextStyle(color: AppColors.textPrimary),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             body: SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: AppColors.cardBackground,
+                      color: AppColors.cardBackgroundColor,
                       borderRadius: BorderRadius.circular(12),
                       border: const Border(
                         left: BorderSide(
@@ -57,33 +64,36 @@ class LoansScreen extends StatelessWidget {
                                 Icon(Icons.trending_up,
                                     color: AppColors.secondaryOrange),
                                 const SizedBox(width: 8),
-                                Text(
-                                  'Building Credit Profile',
+                                const Text(
+                                  'Kubaka Profayili y’Inguzanyo', // Building Credit Profile
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: AppColors.textPrimary,
                                   ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ],
                             ),
                             const SizedBox(height: 8),
-                            Text(
-                              'Keep using Inkingi to improve your score',
+                            const Text(
+                              'Komeza gukoresha Inkingi wongere amanota.', // Keep using Inkingi to improve your score (shortened)
                               style: TextStyle(color: AppColors.textSecondary),
+                              overflow: TextOverflow.ellipsis,
                             ),
                             const SizedBox(height: 8),
                             Row(
                               children: [
-                                Text(
-                                  'Credit Score',
+                                const Text(
+                                  'Amanota y’Inguzanyo', // Credit Score
                                   style:
                                       TextStyle(color: AppColors.textSecondary),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
                                   '${provider.creditScore.toStringAsFixed(0)}%',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: AppColors.textPrimary,
                                   ),
@@ -109,33 +119,39 @@ class LoansScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Text(
-                    'How to improve your score',
+                  const Text(
+                    'Uko wongera amanota yawe', // How to improve your score
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 8),
-                  _buildTip('Record more transactions',
-                      'Regular transaction recording shows consistent business activity.'),
-                  _buildTip('Increase your profit margin',
-                      'Higher profits indicate stronger business performance.'),
-                  _buildTip('Maintain consistent income',
-                      'Steady income streams show business stability.'),
+                  _buildTip(
+                      'Andika ibikorwa byinshi', // Record more transactions
+                      'Kwiyandikisha ibikorwa buri gihe bigaragaza...'), // Regular transaction recording shows consistent business activity
+                  _buildTip(
+                      'Ongera inyungu yawe', // Increase your profit margin
+                      'Inyungu ziri hejuru zigaragaza imikorere...'), // Higher profits indicate stronger business performance
+                  _buildTip(
+                      'Gumana amafranga yinjiye atari uko', // Maintain consistent income
+                      'Amafranga yinjiye atari uko agaragaza...'), // Steady income streams show business stability
                   const SizedBox(height: 16),
-                  Text(
-                    'Available Loan Offers',
+                  const Text(
+                    'Amaturo ya Inguzanyo Ariho', // Available Loan Offers
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 8),
                   ...provider.availableLoans.map((loan) {
                     return Card(
+                      color: AppColors.cardBackgroundColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -147,12 +163,15 @@ class LoansScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  loan.title,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.textPrimary,
+                                Expanded(
+                                  child: Text(
+                                    loan.title,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.textPrimary,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                                 Text(
@@ -169,21 +188,53 @@ class LoansScreen extends StatelessWidget {
                               style: const TextStyle(
                                 color: AppColors.textSecondary,
                               ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
                             ),
                             const SizedBox(height: 8),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  'Loan Amount\n${loan.amount.toStringAsFixed(0)} RWF',
-                                  style: const TextStyle(
-                                    color: AppColors.textPrimary,
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'Amafaranga ya Inguzanyo', // Loan Amount
+                                        style: TextStyle(
+                                          color: AppColors.textPrimary,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Text(
+                                        '${loan.amount.toStringAsFixed(0)} RWF',
+                                        style: const TextStyle(
+                                          color: AppColors.textPrimary,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Text(
-                                  'Duration\n${loan.duration}',
-                                  style: const TextStyle(
-                                    color: AppColors.textPrimary,
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      const Text(
+                                        'Igihe', // Duration
+                                        style: TextStyle(
+                                          color: AppColors.textPrimary,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Text(
+                                        loan.duration,
+                                        style: const TextStyle(
+                                          color: AppColors.textPrimary,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -204,13 +255,14 @@ class LoansScreen extends StatelessWidget {
                                 ),
                                 child: Text(
                                   loan.isEligible
-                                      ? 'Apply Now'
-                                      : 'Not Eligible',
+                                      ? 'Saba Nonaha' // Apply Now
+                                      : 'Ntugishoboye', // Not Eligible
                                   style: TextStyle(
                                     color: loan.isEligible
                                         ? Colors.white
                                         : AppColors.textSecondary,
                                   ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ),
@@ -225,11 +277,14 @@ class LoansScreen extends StatelessWidget {
                                       size: 16,
                                     ),
                                     const SizedBox(width: 4),
-                                    Text(
-                                      'Improve your score to qualify',
-                                      style: TextStyle(
-                                        color: Colors.orange,
-                                        fontSize: 12,
+                                    const Expanded(
+                                      child: Text(
+                                        'Ongera amanota yawe kugira ngo...', // Improve your score to qualify
+                                        style: TextStyle(
+                                          color: Colors.orange,
+                                          fontSize: 12,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
                                   ],
@@ -244,7 +299,7 @@ class LoansScreen extends StatelessWidget {
               ),
             ),
             bottomNavigationBar: TBottomNavBar(
-              currentSelected: 3,
+              currentSelected: 4,
             ),
           );
         },
@@ -254,6 +309,7 @@ class LoansScreen extends StatelessWidget {
 
   Widget _buildTip(String title, String description) {
     return Card(
+      color: AppColors.cardBackgroundColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -274,6 +330,7 @@ class LoansScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: AppColors.primaryColor,
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -281,6 +338,8 @@ class LoansScreen extends StatelessWidget {
                     style: const TextStyle(
                       color: AppColors.textSecondary,
                     ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                   ),
                 ],
               ),

@@ -1,15 +1,17 @@
+// lib/constants/colors.dart
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const primaryColor = Color(0xFFF59E0B);
-  static const secondaryOrange = Color(0xFFF59E0B);
+  // BK Mobile-inspired colors
+  static const primaryColor = Color(0xFF0964CE);
+  static const secondaryOrange = Color(0xFFFFA726);
   static const lightGreen = Color(0xFF34D399);
-  static const background = Color(0xFFFAFAFA);
-  static const cardBackground = Colors.white;
+  static const background = Color(0xFFF5F7FA);
+  static const cardBackgroundColor = Colors.white;
   static const textPrimary = Color(0xFF1E293B);
   static const textSecondary = Color(0xFF64748B);
-  static const Color greyColor50 = Color(0xFFFAFAFA);
-  static const Color greyColor100 = Color(0xFFF1F0EF);
+  static const Color greyColor50 = Color(0xFFF5F7FA);
+  static const Color greyColor100 = Color(0xFFEFF1F5);
   static const Color greyColor300 = Color(0xFFB0ADA9);
   static const Color greyColor200 = Color(0xFFD7D4D0);
   static const Color greyColor400 = Color(0xFF8A8784);

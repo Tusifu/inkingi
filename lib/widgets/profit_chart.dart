@@ -1,3 +1,4 @@
+// lib/widgets/profit_chart.dart
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:inkingi/constants/colors.dart';
@@ -11,13 +12,13 @@ class ProfitChart extends StatelessWidget {
       height: 200,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.cardBackground,
-        borderRadius: BorderRadius.circular(12),
+        color: AppColors.cardBackgroundColor,
+        borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -32,8 +33,8 @@ class ProfitChart extends StatelessWidget {
                 getTitlesWidget: (value, meta) {
                   return Text(
                     '${value.toInt()}k',
-                    style:
-                        TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                    style: const TextStyle(
+                        color: AppColors.textSecondary, fontSize: 12),
                   );
                 },
               ),
@@ -43,18 +44,18 @@ class ProfitChart extends StatelessWidget {
                 showTitles: true,
                 getTitlesWidget: (value, meta) {
                   const days = [
-                    'Mon',
-                    'Tue',
-                    'Wed',
-                    'Thu',
-                    'Fri',
-                    'Sat',
-                    'Sun'
+                    'Mon', // Mweri
+                    'Tue', // Kabiri
+                    'Wed', // Gatatu
+                    'Thu', // Kane
+                    'Fri', // Gatanu
+                    'Sat', // Gatandatu
+                    'Sun' // Cyumweru
                   ];
                   return Text(
                     days[value.toInt()],
-                    style:
-                        TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                    style: const TextStyle(
+                        color: AppColors.textSecondary, fontSize: 12),
                   );
                 },
               ),
