@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/models/transaction.dart';
+import '../models/transaction.dart';
 
 class ReportsProvider with ChangeNotifier {
   final List<Transaction> transactions;

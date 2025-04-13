@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inkingi/core/constants/colors.dart';
+import 'package:inkingi/constants/colors.dart';
 
 class CreditProfile extends StatelessWidget {
   const CreditProfile({super.key});

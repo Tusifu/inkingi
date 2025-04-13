@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:inkingi/core/constants/colors.dart';
-import 'package:inkingi/features/add_transaction/add_transaction.dart';
-import 'package:inkingi/features/provider/dashboard_provider.dart';
+import 'package:inkingi/constants/colors.dart';
+import 'package:inkingi/screens/add_transaction.dart';
+import 'package:inkingi/providers/dashboard_provider.dart';
 import 'package:provider/provider.dart';
-import 'widgets/transaction_list.dart';
+import '../widgets/transaction_list.dart';
 
 class TransactionsScreen extends StatefulWidget {
   const TransactionsScreen({super.key});

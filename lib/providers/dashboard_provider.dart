@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:inkingi/core/models/transaction.dart';
-import 'package:inkingi/core/services/storage_service.dart';
+import 'package:inkingi/models/transaction.dart';
+import 'package:inkingi/services/storage_service.dart';
 
 class DashboardProvider with ChangeNotifier {
   List<Transaction> _transactions = [];

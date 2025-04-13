@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'core/services/storage_service.dart';
+import 'services/storage_service.dart';
 import 'app.dart';
 
 void main() async {

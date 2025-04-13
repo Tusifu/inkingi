@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:inkingi/core/models/transaction.dart';
+import 'package:inkingi/models/transaction.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageService {

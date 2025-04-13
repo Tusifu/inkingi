@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:inkingi/features/add_transaction/add_transaction.dart';
-import 'package:inkingi/features/provider/dashboard_provider.dart';
+import 'package:inkingi/screens/add_transaction.dart';
+import 'package:inkingi/providers/dashboard_provider.dart';
 import 'package:provider/provider.dart';
-import 'features/dashboard/dashboard_screen.dart';
-import 'features/transactions/transactions_screen.dart';
-import 'features/reports/reports_screen.dart';
-import 'features/loans/loans_screen.dart';
+import 'screens/dashboard_screen.dart';
+import 'screens/transactions_screen.dart';
+import 'screens/reports_screen.dart';
+import 'screens/loans_screen.dart';
 
 class InkingiApp extends StatelessWidget {
   const InkingiApp({super.key});

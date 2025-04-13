@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:inkingi/core/constants/colors.dart';
-import 'package:inkingi/features/add_transaction/add_transaction.dart';
-import 'package:inkingi/features/provider/dashboard_provider.dart';
+import 'package:inkingi/constants/colors.dart';
+import 'package:inkingi/screens/add_transaction.dart';
+import 'package:inkingi/providers/dashboard_provider.dart';
 import 'package:provider/provider.dart';
-import 'widgets/overview_card.dart';
-import 'widgets/profit_chart.dart';
-import 'widgets/credit_profile.dart';
+import '../widgets/overview_card.dart';
+import '../widgets/profit_chart.dart';
+import '../widgets/credit_profile.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});

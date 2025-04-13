@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:inkingi/core/models/transaction.dart';
-import 'package:inkingi/core/services/categorization_service.dart';
-import 'package:inkingi/features/provider/dashboard_provider.dart';
+import 'package:inkingi/models/transaction.dart';
+import 'package:inkingi/services/categorization_service.dart';
+import 'package:inkingi/providers/dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class AddTransactionProvider with ChangeNotifier {

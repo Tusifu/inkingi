@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../core/constants/colors.dart';
-import 'provider/loans_provider.dart';
+import '../constants/colors.dart';
+import '../providers/loans_provider.dart';
 
 class LoansScreen extends StatelessWidget {
   const LoansScreen({super.key});

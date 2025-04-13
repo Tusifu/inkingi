@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:inkingi/core/constants/colors.dart';
+import 'package:inkingi/constants/colors.dart';
 import 'package:provider/provider.dart';
-import 'provider/transaction_provider.dart';
-import 'widgets/transaction_form.dart';
+import '../providers/transaction_provider.dart';
+import 'transaction_form.dart';
 
 class TransactionScreen extends StatelessWidget {
   const TransactionScreen({super.key});

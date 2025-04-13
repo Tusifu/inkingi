@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inkingi/core/models/loan.dart';
+import 'package:inkingi/models/loan.dart';
 
 class LoansProvider with ChangeNotifier {
   double creditScore = 68.0; // From mock data
