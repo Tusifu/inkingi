@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/screens/add_transaction.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
@@ -6,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../widgets/transaction_list.dart';
 
 class TransactionsScreen extends StatefulWidget {
+  static const String routeName = '/transactionsScreen';
   const TransactionsScreen({super.key});
 
   @override
@@ -20,6 +22,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     return Consumer<DashboardProvider>(
       builder: (context, provider, child) {
         return Scaffold(
+          backgroundColor: AppColors.background,
           appBar: AppBar(
             backgroundColor: AppColors.background,
             elevation: 0,
@@ -69,33 +72,11 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 builder: (context) => const AddTransactionScreen(),
               );
             },
-            backgroundColor: AppColors.primaryBlue,
+            backgroundColor: AppColors.primaryColor,
             child: const Icon(Icons.add),
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.dashboard), label: 'Dashboard'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.attach_money), label: 'Transactions'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart), label: 'Reports'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.account_balance), label: 'Loans'),
-            ],
-            currentIndex: 2,
-            selectedItemColor: AppColors.primaryBlue,
-            unselectedItemColor: AppColors.textSecondary,
-            onTap: (index) {
-              if (index == 1) {
-                Navigator.pushNamed(context, '/dashboard');
-              } else if (index == 3) {
-                Navigator.pushNamed(context, '/reports');
-              } else if (index == 4) {
-                Navigator.pushNamed(context, '/loans');
-              }
-            },
+          bottomNavigationBar: TBottomNavBar(
+            currentSelected: 1,
           ),
         );
       },
@@ -112,7 +93,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: isSelected
-              ? AppColors.primaryBlue
+              ? AppColors.primaryColor
               : AppColors.textSecondary.withOpacity(0.2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),

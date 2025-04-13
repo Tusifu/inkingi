@@ -75,7 +75,7 @@ class CreditProfile extends StatelessWidget {
               ),
             ],
           ),
-          Icon(Icons.arrow_forward, color: AppColors.primaryBlue),
+          Icon(Icons.arrow_forward, color: AppColors.primaryColor),
         ],
       ),
     );

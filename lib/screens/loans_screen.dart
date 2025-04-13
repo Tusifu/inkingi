@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:provider/provider.dart';
 import '../constants/colors.dart';
 import '../providers/loans_provider.dart';
 
 class LoansScreen extends StatelessWidget {
+  static const String routeName = '/loansScreen';
   const LoansScreen({super.key});
 
   @override
@@ -13,6 +15,7 @@ class LoansScreen extends StatelessWidget {
       child: Consumer<LoansProvider>(
         builder: (context, provider, child) {
           return Scaffold(
+            backgroundColor: AppColors.background,
             appBar: AppBar(
               backgroundColor: AppColors.background,
               elevation: 0,
@@ -100,7 +103,8 @@ class LoansScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Icon(Icons.arrow_forward, color: AppColors.primaryBlue),
+                        Icon(Icons.arrow_forward,
+                            color: AppColors.primaryColor),
                       ],
                     ),
                   ),
@@ -191,7 +195,7 @@ class LoansScreen extends StatelessWidget {
                                 onPressed: loan.isEligible ? () {} : null,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: loan.isEligible
-                                      ? AppColors.primaryBlue
+                                      ? AppColors.primaryColor
                                       : AppColors.textSecondary
                                           .withOpacity(0.2),
                                   shape: RoundedRectangleBorder(
@@ -239,30 +243,8 @@ class LoansScreen extends StatelessWidget {
                 ],
               ),
             ),
-            bottomNavigationBar: BottomNavigationBar(
-              items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.dashboard), label: 'Dashboard'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.attach_money), label: 'Transactions'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.bar_chart), label: 'Reports'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.account_balance), label: 'Loans'),
-              ],
-              currentIndex: 4,
-              selectedItemColor: AppColors.primaryBlue,
-              unselectedItemColor: AppColors.textSecondary,
-              onTap: (index) {
-                if (index == 1) {
-                  Navigator.pushNamed(context, '/dashboard');
-                } else if (index == 2) {
-                  Navigator.pushNamed(context, '/transactions');
-                } else if (index == 3) {
-                  Navigator.pushNamed(context, '/reports');
-                }
-              },
+            bottomNavigationBar: TBottomNavBar(
+              currentSelected: 3,
             ),
           );
         },
@@ -279,7 +261,7 @@ class LoansScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
-            Icon(Icons.trending_up, color: AppColors.primaryBlue),
+            Icon(Icons.trending_up, color: AppColors.primaryColor),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
@@ -290,7 +272,7 @@ class LoansScreen extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.primaryBlue,
+                      color: AppColors.primaryColor,
                     ),
                   ),
                   const SizedBox(height: 4),

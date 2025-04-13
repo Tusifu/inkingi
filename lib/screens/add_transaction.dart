@@ -4,6 +4,7 @@ import '../constants/colors.dart';
 import '../providers/add_transaction_provider.dart';
 
 class AddTransactionScreen extends StatelessWidget {
+  static const String routeName = '/addTransactionScreen';
   const AddTransactionScreen({super.key});
 
   @override
@@ -100,7 +101,7 @@ class AddTransactionScreen extends StatelessWidget {
                           Navigator.pop(context);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryBlue,
+                          backgroundColor: AppColors.primaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -118,7 +119,7 @@ class AddTransactionScreen extends StatelessWidget {
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryBlue,
+                        backgroundColor: AppColors.primaryColor,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),

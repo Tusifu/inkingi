@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
 import 'package:provider/provider.dart';
 import '../providers/reports_provider.dart';
 
 class ReportsScreen extends StatelessWidget {
+  static const String routeName = '/reportsScreen';
   const ReportsScreen({super.key});
 
   @override
@@ -17,6 +19,7 @@ class ReportsScreen extends StatelessWidget {
           final report = provider.generateReport();
 
           return Scaffold(
+            backgroundColor: AppColors.background,
             appBar: AppBar(
               backgroundColor: AppColors.background,
               elevation: 0,
@@ -91,30 +94,8 @@ class ReportsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            bottomNavigationBar: BottomNavigationBar(
-              items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.dashboard), label: 'Dashboard'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.attach_money), label: 'Transactions'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.bar_chart), label: 'Reports'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.account_balance), label: 'Loans'),
-              ],
-              currentIndex: 3,
-              selectedItemColor: AppColors.primaryBlue,
-              unselectedItemColor: AppColors.textSecondary,
-              onTap: (index) {
-                if (index == 1) {
-                  Navigator.pushNamed(context, '/dashboard');
-                } else if (index == 2) {
-                  Navigator.pushNamed(context, '/transactions');
-                } else if (index == 4) {
-                  Navigator.pushNamed(context, '/loans');
-                }
-              },
+            bottomNavigationBar: TBottomNavBar(
+              currentSelected: 2,
             ),
           );
         },
@@ -129,7 +110,7 @@ class ReportsScreen extends StatelessWidget {
         onPressed: () => provider.setReportType(type),
         style: ElevatedButton.styleFrom(
           backgroundColor: provider.reportType == type
-              ? AppColors.primaryBlue
+              ? AppColors.primaryColor
               : AppColors.textSecondary.withOpacity(0.2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),

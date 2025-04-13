@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // For date formatting
+import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/screens/add_transaction.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
+import 'package:inkingi/screens/transactions_screen.dart';
+import 'package:inkingi/utils/Transition/transitionUtils.dart';
 import 'package:provider/provider.dart';
 import '../widgets/overview_card.dart';
 import '../widgets/profit_chart.dart';
 import '../widgets/credit_profile.dart';
+import '../models/transaction.dart'; // Import the Transaction model
 
 class DashboardScreen extends StatelessWidget {
+  static const String routeName = '/dashboardScreen';
   const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Consumer<DashboardProvider>(
       builder: (context, provider, child) {
+        // Get the last 3 transactions, sorted by date (most recent first)
+        final recentTransactions = provider.transactions
+          ..sort((a, b) => b.date.compareTo(a.date)); // Sort descending
+        final lastThreeTransactions = recentTransactions.take(3).toList();
+
         return Scaffold(
           backgroundColor: AppColors.background,
           body: SafeArea(
@@ -25,7 +36,7 @@ class DashboardScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Financial overview",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -34,16 +45,14 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       Text(
                         "April 1, 2025",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w300,
                           fontSize: 13,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 16,
-                  ),
+                  const SizedBox(height: 16),
                   Row(
                     children: [
                       Expanded(
@@ -69,7 +78,7 @@ class DashboardScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Profit',
                         style: TextStyle(
                           fontSize: 14,
@@ -79,7 +88,7 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       Text(
                         '+${provider.profit.toStringAsFixed(0)} RWF',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: AppColors.lightGreen,
@@ -95,7 +104,7 @@ class DashboardScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Recent Transactions',
                         style: TextStyle(
                           fontSize: 18,
@@ -105,18 +114,109 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/transactions');
+                          Navigator.push(
+                            context,
+                            AppTransitions.fadeNamed(
+                                TransactionsScreen.routeName),
+                          );
                         },
-                        child: Text(
+                        child: const Text(
                           'View All',
                           style: TextStyle(
-                            color: AppColors.primaryBlue,
+                            color: AppColors.primaryColor,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
                     ],
                   ),
+                  const SizedBox(height: 8),
+                  // Recent Transactions List (Last 3)
+                  if (lastThreeTransactions.isEmpty)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.0),
+                      child: Text(
+                        'No recent transactions',
+                        style: TextStyle(
+                          color: AppColors.textSecondary,
+                          fontSize: 14,
+                        ),
+                      ),
+                    )
+                  else
+                    Column(
+                      children: lastThreeTransactions.map((transaction) {
+                        return Container(
+                          margin: const EdgeInsets.symmetric(vertical: 4.0),
+                          padding: const EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border(
+                              left: BorderSide(
+                                color: transaction.isIncome
+                                    ? AppColors.lightGreen
+                                    : AppColors.secondaryOrange,
+                                width: 4,
+                              ),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.05),
+                                blurRadius: 8,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                transaction.isIncome
+                                    ? Icons.arrow_upward
+                                    : Icons.arrow_downward,
+                                color: transaction.isIncome
+                                    ? AppColors.lightGreen
+                                    : AppColors.secondaryOrange,
+                              ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      transaction.description,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.textPrimary,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      '${DateFormat('d MMM yyyy, hh:mm a').format(transaction.date)} • ${transaction.category}',
+                                      style: const TextStyle(
+                                        color: AppColors.textSecondary,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text(
+                                '${transaction.isIncome ? '+' : '-'}${transaction.amount.toStringAsFixed(0)} RWF',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: transaction.isIncome
+                                      ? AppColors.lightGreen
+                                      : AppColors.secondaryOrange,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
                 ],
               ),
             ),
@@ -128,33 +228,12 @@ class DashboardScreen extends StatelessWidget {
                 builder: (context) => const AddTransactionScreen(),
               );
             },
-            backgroundColor: AppColors.primaryBlue,
+            backgroundColor: AppColors.primaryColor,
             child: const Icon(Icons.add),
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.dashboard), label: 'Dashboard'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.attach_money), label: 'Transactions'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart), label: 'Reports'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.account_balance), label: 'Loans'),
-            ],
-            currentIndex: 1,
-            useLegacyColorScheme: false,
-            selectedItemColor: AppColors.primaryBlue,
-            unselectedItemColor: AppColors.textSecondary,
-            onTap: (index) {
-              if (index == 1) {
-                Navigator.pushNamed(context, '/transactions');
-              } else if (index == 2) {
-                Navigator.pushNamed(context, '/reports');
-              } else if (index == 3) {
-                Navigator.pushNamed(context, '/loans');
-              }
-            },
+          bottomNavigationBar: TBottomNavBar(
+            currentSelected: 0,
+            isHome: true,
           ),
         );
       },

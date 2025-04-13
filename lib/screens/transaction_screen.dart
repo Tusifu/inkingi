@@ -12,6 +12,7 @@ class TransactionScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => TransactionProvider(),
       child: Scaffold(
+        backgroundColor: AppColors.background,
         appBar: AppBar(
           backgroundColor: AppColors.background,
           elevation: 0,
