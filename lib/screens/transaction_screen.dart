@@ -17,7 +17,7 @@ class TransactionScreen extends StatelessWidget {
           backgroundColor: AppColors.background,
           elevation: 0,
           title: const Text(
-            'Record Transaction',
+            'Bika Igikorwa',
             style: TextStyle(color: AppColors.textPrimary),
           ),
         ),

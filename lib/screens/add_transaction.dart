@@ -1,5 +1,6 @@
 // lib/screens/add_transaction_screen.dart
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:inkingi/components/TAppBar.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
@@ -54,12 +55,20 @@ class AddTransactionScreen extends StatelessWidget {
                     controller: provider.descriptionController,
                     maxLines: 5,
                     minLines: 3,
+                    style: GoogleFonts.outfit(
+                      color: Colors.white, // White text color
+                    ),
+                    cursorColor: Colors.white, // White cursor color
                     decoration: InputDecoration(
                       hintText: provider.useManualEntry
-                          ? 'Ibisobanuro (Urugero: Imyenda Yaguwe)'
-                          : 'Ibisobanuro (Urugero: Yaguze imyenda 5000 amafranga)',
+                          ? 'Ibisobanuro (Urugero: Imyenda Yaguzwe)'
+                          : 'Ibisobanuro (Urugero: Naguze imyenda 5000 amafaranga)',
+                      hintStyle: GoogleFonts.outfit(
+                        color: Colors
+                            .white70, // Slightly translucent white for hint text
+                      ),
                       filled: true,
-                      fillColor: Colors.grey[100],
+                      fillColor: Colors.grey[900], // Dark background color
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: const BorderSide(
@@ -89,17 +98,18 @@ class AddTransactionScreen extends StatelessWidget {
                     TextField(
                       controller: provider.amountController,
                       keyboardType: TextInputType.number,
+                      style: GoogleFonts.outfit(
+                        color: Colors.white, // White text color
+                      ),
+                      cursorColor: Colors.white, // White cursor color
                       decoration: InputDecoration(
-                        hintText: 'Umubare (Urugero: 5000)',
-                        filled: true,
-                        fillColor: Colors.grey[100],
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: AppColors.primaryColor,
-                            width: 1.5,
-                          ),
+                        hintText: 'Umubare urugero (5000)',
+                        hintStyle: GoogleFonts.outfit(
+                          color: Colors
+                              .white70, // Slightly translucent white for hint text
                         ),
+                        filled: true,
+                        fillColor: Colors.grey[900],
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: const BorderSide(
@@ -120,17 +130,18 @@ class AddTransactionScreen extends StatelessWidget {
                     TextField(
                       controller: provider.dateController,
                       readOnly: true,
+                      style: GoogleFonts.outfit(
+                        color: Colors.white, // White text color
+                      ),
+                      cursorColor: Colors.white, // White cursor color
                       decoration: InputDecoration(
-                        hintText: 'Itariki (Urugero: 13/4/2025)',
-                        filled: true,
-                        fillColor: Colors.grey[100],
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: AppColors.primaryColor,
-                            width: 1.5,
-                          ),
+                        hintText: 'Italiki',
+                        hintStyle: GoogleFonts.outfit(
+                          color: Colors
+                              .white70, // Slightly translucent white for hint text
                         ),
+                        filled: true,
+                        fillColor: Colors.grey[900],
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: const BorderSide(
@@ -161,143 +172,147 @@ class AddTransactionScreen extends StatelessWidget {
                     const SizedBox(height: 20),
                   ],
                   // Income/Expense toggle
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () => provider.setTransactionType(true),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: provider.isIncome
-                                ? AppColors.lightGreen
-                                : AppColors.textSecondary.withOpacity(0.2),
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                  if (provider.useManualEntry)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () => provider.setTransactionType(true),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: provider.isIncome
+                                  ? AppColors.lightGreen
+                                  : AppColors.textSecondary.withOpacity(0.2),
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              elevation: provider.isIncome ? 5 : 0,
                             ),
-                            elevation: provider.isIncome ? 5 : 0,
-                          ),
-                          child: const Text(
-                            'Yinjiye',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () => provider.setTransactionType(false),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: !provider.isIncome
-                                ? AppColors.secondaryOrange
-                                : AppColors.textSecondary.withOpacity(0.2),
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            elevation: !provider.isIncome ? 5 : 0,
-                          ),
-                          child: const Text(
-                            'Yasohotse',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                            child: const Text(
+                              'Yinjiye',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  // Category dropdown
-                  DropdownButtonFormField<String>(
-                    value: provider.selectedCategory,
-                    isExpanded: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey[100],
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(
-                          color: AppColors.primaryColor,
-                          width: 1.5,
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () => provider.setTransactionType(false),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: !provider.isIncome
+                                  ? AppColors.secondaryOrange
+                                  : AppColors.textSecondary.withOpacity(0.2),
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              elevation: !provider.isIncome ? 5 : 0,
+                            ),
+                            child: const Text(
+                              'Yasohotse',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(
-                          color: AppColors.primaryColor,
-                          width: 1.5,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(
-                          color: AppColors.primaryColor,
-                          width: 2,
-                        ),
-                      ),
+                      ],
                     ),
-                    onChanged: (value) {
-                      if (value != null) {
-                        provider.setCategory(value);
-                      }
-                    },
-                    items: [
-                      if (provider.isIncome) ...[
-                        const DropdownMenuItem(
-                            value: 'Sales', child: Text('Kugurisha')),
-                        const DropdownMenuItem(
-                            value: 'Salary', child: Text('Umushahara')),
-                        const DropdownMenuItem(
-                            value: 'Rent Income',
-                            child: Text('Kodesha Yinjiye')),
-                        const DropdownMenuItem(
-                            value: 'Dividend', child: Text('Umugabane')),
-                        const DropdownMenuItem(
-                            value: 'Interest', child: Text('Intere')),
-                        const DropdownMenuItem(
-                            value: 'Royalty', child: Text('Royalty')),
-                        const DropdownMenuItem(
-                            value: 'Commission', child: Text('Komisiyo')),
-                        const DropdownMenuItem(
-                            value: 'Bonus', child: Text('Bonuse')),
-                        const DropdownMenuItem(
-                            value: 'Income', child: Text('Amafaranga Yinjiye')),
-                      ],
-                      if (!provider.isIncome) ...[
-                        const DropdownMenuItem(
-                            value: 'Inventory', child: Text('Ibicuruzwa')),
-                        const DropdownMenuItem(
-                            value: 'Utilities', child: Text('Ibikoresho')),
-                        const DropdownMenuItem(
-                            value: 'Rent', child: Text('Kukodesha')),
-                        const DropdownMenuItem(
-                            value: 'Payroll',
-                            child: Text('Umushahara Wabakozi')),
-                        const DropdownMenuItem(
-                            value: 'Loan', child: Text('Inguzanyo')),
-                        const DropdownMenuItem(
-                            value: 'Insurance', child: Text('Ubwishingizi')),
-                        const DropdownMenuItem(
-                            value: 'Tax', child: Text('Umutego')),
-                        const DropdownMenuItem(
-                            value: 'Fine', child: Text('Fine')),
-                        const DropdownMenuItem(
-                            value: 'Marketing', child: Text('Kwamamaza')),
-                        const DropdownMenuItem(
-                            value: 'Training', child: Text('Amasomo')),
-                        const DropdownMenuItem(
-                            value: 'Expense',
-                            child: Text('Amafaranga Yasohotse')),
-                      ],
-                    ],
-                  ),
                   const SizedBox(height: 16),
+                  // Category dropdown
+                  if (provider.useManualEntry)
+                    DropdownButtonFormField<String>(
+                      value: provider.selectedCategory,
+                      isExpanded: true,
+                      style: GoogleFonts.outfit(
+                        color: Colors.grey, // White text color
+                      ),
+                      decoration: InputDecoration(
+                        hintText: 'Ikiciro',
+                        hintStyle: GoogleFonts.outfit(
+                          color: Colors
+                              .white70, // Slightly translucent white for hint text
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey[900],
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                            color: AppColors.primaryColor,
+                            width: 1.5,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                            color: AppColors.primaryColor,
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                      onChanged: (value) {
+                        if (value != null) {
+                          provider.setCategory(value);
+                        }
+                      },
+                      items: [
+                        if (provider.isIncome) ...[
+                          const DropdownMenuItem(
+                              value: 'Sales', child: Text('Kugurisha')),
+                          const DropdownMenuItem(
+                              value: 'Salary', child: Text('Umushahara')),
+                          const DropdownMenuItem(
+                              value: 'Rent Income',
+                              child: Text('Kodesha Yinjiye')),
+                          const DropdownMenuItem(
+                              value: 'Dividend', child: Text('Umugabane')),
+                          const DropdownMenuItem(
+                              value: 'Interest', child: Text('Intere')),
+                          const DropdownMenuItem(
+                              value: 'Royalty', child: Text('Royalty')),
+                          const DropdownMenuItem(
+                              value: 'Commission', child: Text('Komisiyo')),
+                          const DropdownMenuItem(
+                              value: 'Bonus', child: Text('Bonuse')),
+                          const DropdownMenuItem(
+                              value: 'Income',
+                              child: Text('Amafaranga Yinjiye')),
+                        ],
+                        if (!provider.isIncome) ...[
+                          const DropdownMenuItem(
+                              value: 'Inventory', child: Text('Ibicuruzwa')),
+                          const DropdownMenuItem(
+                              value: 'Utilities', child: Text('Ibikoresho')),
+                          const DropdownMenuItem(
+                              value: 'Rent', child: Text('Kukodesha')),
+                          const DropdownMenuItem(
+                              value: 'Payroll',
+                              child: Text('Umushahara Wabakozi')),
+                          const DropdownMenuItem(
+                              value: 'Loan', child: Text('Inguzanyo')),
+                          const DropdownMenuItem(
+                              value: 'Insurance', child: Text('Ubwishingizi')),
+                          const DropdownMenuItem(
+                              value: 'Tax', child: Text('Umutego')),
+                          const DropdownMenuItem(
+                              value: 'Fine', child: Text('Fine')),
+                          const DropdownMenuItem(
+                              value: 'Marketing', child: Text('Kwamamaza')),
+                          const DropdownMenuItem(
+                              value: 'Training', child: Text('Amasomo')),
+                          const DropdownMenuItem(
+                              value: 'Expense',
+                              child: Text('Amafaranga Yasohotse')),
+                        ],
+                      ],
+                    ),
+                  if (provider.useManualEntry) const SizedBox(height: 16),
                   // Action buttons
                   // Row(
                   //   children: [

@@ -3,6 +3,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/utils/date_utils.dart';
+import 'package:intl/intl.dart';
 
 class ProfitChart extends StatelessWidget {
   final double profit; // Add profit as a parameter
@@ -43,7 +44,7 @@ class ProfitChart extends StatelessWidget {
                 ),
               ),
               Text(
-                '+${profit.toStringAsFixed(0)} RWF',
+                '+${NumberFormat.decimalPattern().format(profit)} RWF',
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,

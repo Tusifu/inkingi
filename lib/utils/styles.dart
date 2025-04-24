@@ -19,6 +19,14 @@ abstract class Styles {
     height: 44.0 / 36.0,
   );
 
+  static TextStyle h1HeadingWithWhiteColor200 = GoogleFonts.outfit(
+    fontSize: 36.0,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+    letterSpacing: 0,
+    height: 44.0 / 36.0,
+  );
+
   // H2
   static TextStyle h2HeadingWithPrimaryColor200 = GoogleFonts.outfit(
     fontSize: 28.0,
@@ -35,12 +43,28 @@ abstract class Styles {
     height: 36.0 / 28.0,
   );
 
+  static TextStyle h2HeadingWithWhiteColor200 = GoogleFonts.outfit(
+    fontSize: 28.0,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+    letterSpacing: 0,
+    height: 36.0 / 28.0,
+  );
+
   // H3
 
   static TextStyle h3HeadingWithBlackColor200 = GoogleFonts.outfit(
     fontSize: 24.0,
     fontWeight: FontWeight.w600,
     color: AppColors.blackColor,
+    letterSpacing: 0,
+    height: 32.0 / 28.0,
+  );
+
+  static TextStyle h3HeadingWithWhiteColor200 = GoogleFonts.outfit(
+    fontSize: 24.0,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
     letterSpacing: 0,
     height: 32.0 / 28.0,
   );
@@ -55,12 +79,28 @@ abstract class Styles {
     height: 28.0 / 20.0,
   );
 
+  static TextStyle h4HeadingWithWhiteColor200 = GoogleFonts.outfit(
+    fontSize: 20.0,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+    letterSpacing: 0,
+    height: 28.0 / 20.0,
+  );
+
   // H5
 
   static TextStyle h5HeadingWithBlackColor200 = GoogleFonts.outfit(
     fontSize: 18.0,
     fontWeight: FontWeight.w600,
     color: AppColors.blackColor,
+    letterSpacing: 0,
+    height: 26.0 / 18.0,
+  );
+
+  static TextStyle h5HeadingWithWhiteColor200 = GoogleFonts.outfit(
+    fontSize: 18.0,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
     letterSpacing: 0,
     height: 26.0 / 18.0,
   );
@@ -162,6 +202,14 @@ abstract class Styles {
     height: 16.0 / 14.0,
   );
 
+  static TextStyle h7HeadingWithWhiteColor100 = GoogleFonts.outfit(
+    fontSize: 14.0,
+    fontWeight: FontWeight.w400,
+    color: Colors.white,
+    letterSpacing: 0,
+    height: 16.0 / 14.0,
+  );
+
   // H8
 
   static TextStyle h8HeadingWithPrimary100 = GoogleFonts.outfit(
@@ -196,6 +244,13 @@ abstract class Styles {
     fontSize: 12.0,
     fontWeight: FontWeight.w400,
     color: AppColors.success500,
+    letterSpacing: 0,
+    height: 16.0 / 12.0,
+  );
+  static TextStyle h8HeadingWithWhiteColor100 = GoogleFonts.outfit(
+    fontSize: 12.0,
+    fontWeight: FontWeight.w400,
+    color: Colors.white,
     letterSpacing: 0,
     height: 16.0 / 12.0,
   );

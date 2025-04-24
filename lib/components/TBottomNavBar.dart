@@ -68,7 +68,7 @@ class TBottomNavBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardBackgroundColor,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -97,7 +97,7 @@ class TBottomNavBar extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: AppColors.primaryColor,
+                          color: AppColors.primaryColorBlue,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: SvgPicture.asset(
@@ -119,22 +119,24 @@ class TBottomNavBar extends StatelessWidget {
                     height: 24,
                     colorFilter: isSelected
                         ? ColorFilter.mode(
-                            AppColors.primaryColor,
+                            AppColors.primaryColorBlue,
                             BlendMode.srcIn,
                           )
-                        : null,
+                        : ColorFilter.mode(
+                            AppColors.textColor,
+                            BlendMode.srcIn,
+                          ),
                   ),
                 const SizedBox(height: 4),
                 Text(
                   _navItems[index]['label'],
                   style: TextStyle(
-                    color: isSelected || isAddButton
-                        ? AppColors.primaryColor
+                    color: isSelected
+                        ? AppColors.primaryColorBlue
                         : AppColors.textSecondary,
                     fontSize: 12,
-                    fontWeight: isSelected || isAddButton
-                        ? FontWeight.bold
-                        : FontWeight.normal,
+                    fontWeight:
+                        isSelected ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),
                 const SizedBox(height: 8),

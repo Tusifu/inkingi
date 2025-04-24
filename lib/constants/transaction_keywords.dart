@@ -219,6 +219,10 @@ class TransactionKeywords {
     'tip yakiriye', // tip received
     'gratuity yakiriye', // gratuity received
     'amafaranga ya serivisi yakiriye', // service fee received
+    'naranguje',
+    'n\'aranguje',
+    'yishyuye',
+    'nacuruje',
   ];
 
   // English keywords for Expenses
@@ -460,5 +464,12 @@ class TransactionKeywords {
     'amasomo ikiguzi', // training cost
     'igikorwa ikiguzi', // event cost
     'impano yatanze kuri', // donation made
+
+    'nishyuye',
+    'nahashye',
+    'naranguye',
+    'n\'aranguye',
+    'n\'ahashye',
+    'naguze',
   ];
 }

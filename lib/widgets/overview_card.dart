@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:inkingi/utils/styles.dart';
+import 'package:intl/intl.dart';
 import '../constants/colors.dart';
 
 class OverviewCard extends StatelessWidget {
@@ -42,18 +44,15 @@ class OverviewCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(
-              color: AppColors.textSecondary,
-              fontSize: 14,
-            ),
+            style: Styles.h7HeadingWithWhiteColor100,
           ),
           const SizedBox(height: 8),
           Text(
-            '${amount.toStringAsFixed(0)} RWF',
+            '${NumberFormat.decimalPattern().format(amount)} RWF',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
+              color: AppColors.textColor,
             ),
           ),
           const SizedBox(height: 8),
@@ -68,12 +67,12 @@ class OverviewCard extends StatelessWidget {
               ),
               const SizedBox(width: 2),
               Text(
-                '$percentageChange% from last period',
+                '$percentageChange% kuva mugihe giheruka',
                 style: TextStyle(
                   color: isPositive
                       ? AppColors.lightGreen
                       : AppColors.secondaryOrange,
-                  fontSize: 10,
+                  fontSize: 8.5,
                 ),
               ),
             ],

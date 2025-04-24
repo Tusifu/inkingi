@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:inkingi/components/TAppBar.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
+import 'package:inkingi/constants/colors.dart';
+import 'package:inkingi/providers/loans_provider.dart';
 import 'package:provider/provider.dart';
-import '../constants/colors.dart';
-import '../providers/loans_provider.dart';
 
 class LoansScreen extends StatelessWidget {
   static const String routeName = '/loansScreen';
@@ -58,7 +58,7 @@ class LoansScreen extends StatelessWidget {
                                     color: AppColors.secondaryOrange),
                                 const SizedBox(width: 8),
                                 const Text(
-                                  'Kubaka Profayili y’Inguzanyo', // Building Credit Profile
+                                  'Kubaka Umwirondoro y’Inguzanyo', // Building Credit Profile
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -133,7 +133,7 @@ class LoansScreen extends StatelessWidget {
                       'Amafranga yinjiye atari uko agaragaza...'), // Steady income streams show business stability
                   const SizedBox(height: 16),
                   const Text(
-                    'Amaturo ya Inguzanyo Ariho', // Available Loan Offers
+                    'Inguzanyo w\'abona', // Available Loan Offers
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -310,7 +310,10 @@ class LoansScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
-            Icon(Icons.trending_up, color: AppColors.primaryColor),
+            Icon(
+              Icons.trending_up,
+              color: AppColors.textColor,
+            ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
@@ -321,7 +324,7 @@ class LoansScreen extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.primaryColor,
+                      color: AppColors.textColor,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),

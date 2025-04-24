@@ -50,6 +50,9 @@ class CategorizationService {
       if (description.contains('sold') ||
           description.contains('sales') ||
           description.contains('yaguze') ||
+          description.contains('naranguje') ||
+          description.contains('n\'aranguje') ||
+          description.contains('yishyuye') ||
           description.contains('kugurisha') ||
           description.contains('kugurisha ibintu') ||
           description.contains('kugurisha ibicuruzwa') ||
@@ -97,9 +100,17 @@ class CategorizationService {
       // Expense-specific categories
       if (description.contains('bought') ||
           description.contains('purchased') ||
-          description.contains('yaguze') ||
-          description.contains('gura') ||
+          description.contains('spent') ||
+          description.contains('spend') ||
+          description.contains('naguze') ||
+          description.contains('n\'aguze') ||
           description.contains('kugura') ||
+          description.contains('nishyuye') ||
+          description.contains('ibicuruzwa') ||
+          description.contains('nahashye') ||
+          description.contains('naranguye') ||
+          description.contains('n\'aranguye') ||
+          description.contains('n\'ahashye') ||
           description.contains('ibicuruzwa') ||
           description.contains('stock') ||
           description.contains('ibintu')) {

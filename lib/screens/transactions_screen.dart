@@ -1,5 +1,6 @@
 // lib/screens/transactions_screen.dart
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:inkingi/components/TAppBar.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
@@ -84,12 +85,21 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                   ),
                   child: TextField(
                     controller: _searchController,
+                    style: GoogleFonts.outfit(
+                      color: Colors.white, // White text color
+                    ),
+                    cursorColor: Colors.white, // White cursor color
                     decoration: InputDecoration(
-                      hintText:
-                          'Shakisha ibikorwa...', // Search transactions...
+                      hintText: 'Shakisha ibikorwa',
+                      hintStyle: GoogleFonts.outfit(
+                        color: Colors
+                            .white70, // Slightly translucent white for hint text
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[900], // Search transactions...
                       prefixIcon: Icon(
                         Icons.search,
-                        color: AppColors.primaryColor,
+                        color: AppColors.greyColor50,
                       ),
                       suffixIcon: _searchQuery.isNotEmpty
                           ? IconButton(
@@ -152,7 +162,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: AppColors.greyColor50,
+        color: AppColors.blackColor,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -179,7 +189,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 decoration: BoxDecoration(
                   color: isSelected
                       ? AppColors.primaryColor
-                      : AppColors.greyColor100, // Background for unselected
+                      : Colors.grey, // Background for unselected
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(

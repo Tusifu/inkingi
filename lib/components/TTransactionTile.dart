@@ -16,7 +16,7 @@ class TTransactionTile extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 4.0),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardBackgroundColor,
         borderRadius: BorderRadius.circular(12),
         border: Border(
           left: BorderSide(
@@ -67,7 +67,7 @@ class TTransactionTile extends StatelessWidget {
             ),
           ),
           Text(
-            '${transaction.isIncome ? '+' : '-'}${transaction.amount.toStringAsFixed(0)} RWF',
+            '${transaction.isIncome ? '+' : '-'}${NumberFormat.decimalPattern().format(transaction.amount)} RWF',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,

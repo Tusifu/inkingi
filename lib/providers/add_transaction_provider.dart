@@ -90,7 +90,7 @@ class AddTransactionProvider with ChangeNotifier {
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Ibikorwa byongewe neza'),
+        content: Text('Igikorwa cyagenze neza'),
         backgroundColor: Colors.green,
         duration: Duration(seconds: 2),
       ),
@@ -137,7 +137,7 @@ class AddTransactionProvider with ChangeNotifier {
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Ibikorwa byongewe neza'),
+        content: Text('Igikorwa cyagenze neza'),
         backgroundColor: Colors.green,
         duration: Duration(seconds: 2),
       ),

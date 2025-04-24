@@ -4,9 +4,10 @@ import 'package:inkingi/components/TAppBar.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
+import 'package:inkingi/providers/reports_provider.dart';
+import 'package:inkingi/utils/date_utils.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../providers/reports_provider.dart';
-import '../utils/date_utils.dart'; // Import DateUtils
 
 class ReportsScreen extends StatelessWidget {
   static const String routeName = '/reportsScreen';
@@ -85,14 +86,14 @@ class ReportsScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Ayinjiye ${data['Income']!.toStringAsFixed(0)} RWF',
+                                    'Ayinjiye ${NumberFormat.decimalPattern().format(data['Income']!)} RWF',
                                     style: const TextStyle(
                                       color: AppColors.lightGreen,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   Text(
-                                    'Ayasohotse: ${data['Expenses']!.toStringAsFixed(0)} RWF',
+                                    'Ayasohotse: ${NumberFormat.decimalPattern().format(data['Expenses']!)} RWF',
                                     style: const TextStyle(
                                       color: AppColors.secondaryOrange,
                                     ),
@@ -128,7 +129,7 @@ class ReportsScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: AppColors.greyColor50,
+        color: Colors.black,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -158,7 +159,7 @@ class ReportsScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: isSelected
                       ? AppColors.primaryColor
-                      : AppColors.greyColor100,
+                      : Colors.grey, // Background for unselected
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(

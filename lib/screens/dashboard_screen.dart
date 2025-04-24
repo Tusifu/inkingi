@@ -5,12 +5,13 @@ import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/components/TTransactionTile.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
+import 'package:inkingi/screens/loans_screen.dart';
 import 'package:inkingi/screens/transactions_screen.dart';
 import 'package:inkingi/utils/Transition/transitionUtils.dart';
+import 'package:inkingi/widgets/credit_profile.dart';
+import 'package:inkingi/widgets/overview_card.dart';
+import 'package:inkingi/widgets/profit_chart.dart';
 import 'package:provider/provider.dart';
-import '../widgets/overview_card.dart';
-import '../widgets/profit_chart.dart';
-import '../widgets/credit_profile.dart';
 
 class DashboardScreen extends StatelessWidget {
   static const String routeName = '/dashboardScreen';
@@ -43,20 +44,22 @@ class DashboardScreen extends StatelessWidget {
                         children: [
                           SvgPicture.asset("assets/svgs/bk_logo.svg"),
                           const SizedBox(width: 8),
-                          const Text(
+                          Text(
                             "Incamake y'Imari", // Financial overview
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
+                              color: AppColors.textColor,
                             ),
                           ),
                         ],
                       ),
                       Text(
-                        "1 Mata 2025", // April 1, 2025
+                        "24 Mata 2025",
                         style: const TextStyle(
                           fontWeight: FontWeight.w300,
                           fontSize: 13,
+                          color: AppColors.textColor,
                         ),
                       ),
                     ],
@@ -88,7 +91,17 @@ class DashboardScreen extends StatelessWidget {
                     profit: 45000,
                   ),
                   const SizedBox(height: 16),
-                  const CreditProfile(),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        AppTransitions.fadeNamed(
+                          LoansScreen.routeName,
+                        ),
+                      );
+                    },
+                    child: CreditProfile(),
+                  ),
                   // const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
