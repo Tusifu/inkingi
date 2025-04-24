@@ -87,8 +87,8 @@ class DashboardScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 16),
-                  const ProfitChart(
-                    profit: 45000,
+                  ProfitChart(
+                    profit: (provider.totalIncome - provider.totalExpenses),
                   ),
                   const SizedBox(height: 16),
                   GestureDetector(

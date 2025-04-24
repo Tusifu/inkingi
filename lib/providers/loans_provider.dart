@@ -5,20 +5,19 @@ class LoansProvider with ChangeNotifier {
   double creditScore = 68.0; // From mock data
   List<Loan> availableLoans = [
     Loan(
-      title: 'Small Business Starter',
-      description:
-          'Perfect for small inventory purchases or minor business expenses.',
+      title: 'Overdraft',
+      description: 'Inguzanyo nziza yo kuzamura ubucuruzi',
       amount: 50000,
       apr: 12.5,
-      duration: '3 months',
+      duration: 'Umwaka',
       isEligible: false,
     ),
     Loan(
-      title: 'Business Growth',
-      description: 'Ideal for expanding your business operations.',
+      title: 'Stock Loan',
+      description: 'Inguzanyo nziza yo kuzamura stock ya Business',
       amount: 100000,
       apr: 15.0,
-      duration: '6 months',
+      duration: 'imyaka 3',
       isEligible: false,
     ),
   ];

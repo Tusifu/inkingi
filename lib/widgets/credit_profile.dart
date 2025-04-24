@@ -45,7 +45,7 @@ class CreditProfile extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               const Text(
-                'Komeza gukoresha Inkingi wongere amanota.',
+                'Komeza gukoresha BK Inkingi wongere amanota.',
                 style: TextStyle(
                   color: AppColors.textSecondary,
                   fontSize: 14,
@@ -55,24 +55,25 @@ class CreditProfile extends StatelessWidget {
               Row(
                 children: [
                   const Text(
-                    'Amanota y’Inguzanyo', // Credit Score
+                    'Amafaranga y\'inguzanyo ugezeho', // Credit Score
                     style: TextStyle(color: AppColors.textSecondary),
                   ),
                   const SizedBox(width: 8),
                   const Text(
-                    '68%',
+                    '300,000 RWF',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
+                      fontSize: 12,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 10),
               Container(
-                width: 200,
+                width: 300,
                 child: LinearProgressIndicator(
-                  value: 0.68,
+                  value: 0.25,
                   backgroundColor: AppColors.textSecondary.withOpacity(0.2),
                   valueColor: AlwaysStoppedAnimation(AppColors.secondaryOrange),
                   borderRadius: BorderRadius.circular(8),

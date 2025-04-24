@@ -4,6 +4,7 @@ import 'package:inkingi/components/TAppBar.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/providers/loans_provider.dart';
+import 'package:inkingi/widgets/credit_profile.dart';
 import 'package:provider/provider.dart';
 
 class LoansScreen extends StatelessWidget {
@@ -29,88 +30,7 @@ class LoansScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: AppColors.cardBackgroundColor,
-                      borderRadius: BorderRadius.circular(12),
-                      border: const Border(
-                        left: BorderSide(
-                            color: AppColors.secondaryOrange, width: 4),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(Icons.trending_up,
-                                    color: AppColors.secondaryOrange),
-                                const SizedBox(width: 8),
-                                const Text(
-                                  'Kubaka Umwirondoro y’Inguzanyo', // Building Credit Profile
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.textPrimary,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            const Text(
-                              'Komeza gukoresha Inkingi wongere amanota.', // Keep using Inkingi to improve your score (shortened)
-                              style: TextStyle(color: AppColors.textSecondary),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 8),
-                            Row(
-                              children: [
-                                const Text(
-                                  'Amanota y’Inguzanyo', // Credit Score
-                                  style:
-                                      TextStyle(color: AppColors.textSecondary),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  '${provider.creditScore.toStringAsFixed(0)}%',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.textPrimary,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Container(
-                              width: 200,
-                              child: LinearProgressIndicator(
-                                value: provider.creditScore / 100,
-                                backgroundColor:
-                                    AppColors.textSecondary.withOpacity(0.2),
-                                valueColor: AlwaysStoppedAnimation(
-                                    AppColors.secondaryOrange),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Icon(Icons.arrow_forward,
-                            color: AppColors.primaryColor),
-                      ],
-                    ),
-                  ),
+                  CreditProfile(),
                   const SizedBox(height: 16),
                   const Text(
                     'Uko wongera amanota yawe', // How to improve your score
@@ -129,11 +49,11 @@ class LoansScreen extends StatelessWidget {
                       'Ongera inyungu yawe', // Increase your profit margin
                       'Inyungu ziri hejuru zigaragaza imikorere...'), // Higher profits indicate stronger business performance
                   _buildTip(
-                      'Gumana amafranga yinjiye atari uko', // Maintain consistent income
+                      'Gumana amafaranga yinjiye atari uko', // Maintain consistent income
                       'Amafranga yinjiye atari uko agaragaza...'), // Steady income streams show business stability
                   const SizedBox(height: 16),
                   const Text(
-                    'Inguzanyo w\'abona', // Available Loan Offers
+                    'Inguzanyo wabona', // Available Loan Offers
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -272,10 +192,10 @@ class LoansScreen extends StatelessWidget {
                                     const SizedBox(width: 4),
                                     const Expanded(
                                       child: Text(
-                                        'Ongera amanota yawe kugira ngo...', // Improve your score to qualify
+                                        'Ongera amanota yawe kugira ngo uhabwe iyi nguzanyo.', // Improve your score to qualify
                                         style: TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 12,
+                                          fontSize: 11,
                                         ),
                                         overflow: TextOverflow.ellipsis,
                                       ),
