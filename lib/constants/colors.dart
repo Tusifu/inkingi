@@ -6,6 +6,7 @@ class AppColors {
   // static const primaryColor = Color(0xFF0964CE);
   static const primaryColor = Color.fromARGB(255, 36, 32, 32);
   static const primaryColorBlue = Color.fromARGB(255, 15, 60, 111);
+  static const primaryColorLight = Color.fromARGB(255, 67, 115, 170);
   static const secondaryOrange = Color(0xFFFFA726);
   // static const secondaryOrange = Color.fromARGB(255, 217, 59, 59);
   static const lightGreen = Color(0xFF34D399);

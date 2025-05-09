@@ -34,7 +34,7 @@ class CreditProfile extends StatelessWidget {
                   Icon(Icons.trending_up, color: AppColors.secondaryOrange),
                   const SizedBox(width: 8),
                   const Text(
-                    'Kubaka Umwirondoro y’Inguzanyo', // Building Credit Profile
+                    'Kubaka Umwirondoro w’Inguzanyo', // Building Credit Profile
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

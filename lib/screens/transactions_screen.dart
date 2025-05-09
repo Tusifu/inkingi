@@ -73,8 +73,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
-                    border:
-                        Border.all(color: AppColors.primaryColor, width: 1.5),
+                    border: Border.all(
+                      color: AppColors.greyColor500,
+                      width: 1.5,
+                    ),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.05),
@@ -188,8 +190,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? AppColors.primaryColor
-                      : Colors.grey, // Background for unselected
+                      ? AppColors.primaryColorBlue
+                      : AppColors.greyColor700, // Background for unselected
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(

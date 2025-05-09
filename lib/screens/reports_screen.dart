@@ -158,8 +158,8 @@ class ReportsScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? AppColors.primaryColor
-                      : Colors.grey, // Background for unselected
+                      ? AppColors.primaryColorBlue
+                      : AppColors.greyColor700,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(

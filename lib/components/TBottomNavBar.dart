@@ -119,7 +119,7 @@ class TBottomNavBar extends StatelessWidget {
                     height: 24,
                     colorFilter: isSelected
                         ? ColorFilter.mode(
-                            AppColors.primaryColorBlue,
+                            AppColors.primaryColorLight,
                             BlendMode.srcIn,
                           )
                         : ColorFilter.mode(
@@ -132,11 +132,10 @@ class TBottomNavBar extends StatelessWidget {
                   _navItems[index]['label'],
                   style: TextStyle(
                     color: isSelected
-                        ? AppColors.primaryColorBlue
+                        ? AppColors.primaryColorLight
                         : AppColors.textSecondary,
                     fontSize: 12,
-                    fontWeight:
-                        isSelected ? FontWeight.bold : FontWeight.normal,
+                    fontWeight: isSelected ? FontWeight.bold : FontWeight.w300,
                   ),
                 ),
                 const SizedBox(height: 8),

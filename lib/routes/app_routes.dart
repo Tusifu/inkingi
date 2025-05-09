@@ -3,6 +3,7 @@ import 'package:inkingi/screens/add_transaction.dart';
 import 'package:inkingi/screens/dashboard_screen.dart';
 import 'package:inkingi/screens/loans_screen.dart';
 import 'package:inkingi/screens/reports_screen.dart';
+import 'package:inkingi/screens/SplashScreen.dart';
 import 'package:inkingi/screens/transactions_screen.dart';
 
 class AppRoutes {
@@ -12,6 +13,7 @@ class AppRoutes {
   static String get addTransaction => AddTransactionScreen.routeName;
   static String get reports => ReportsScreen.routeName;
   static String get loans => LoansScreen.routeName;
+  static String get splash => SplashScreen.routeName;
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -25,6 +27,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const ReportsScreen());
       case LoansScreen.routeName:
         return MaterialPageRoute(builder: (_) => const LoansScreen());
+      case SplashScreen.routeName:
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
       default:
         return _errorRoute();
     }
@@ -42,6 +46,8 @@ class AppRoutes {
         return const ReportsScreen();
       case LoansScreen.routeName:
         return const LoansScreen();
+      case SplashScreen.routeName:
+        return const SplashScreen();
       default:
         return const Scaffold(
           body: Center(

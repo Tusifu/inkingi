@@ -149,82 +149,6 @@ class TransactionKeywords {
     'earnings from',
   ];
 
-  // Kinyarwanda keywords for Income
-  static const List<String> kinyarwandaIncomeKeywords = [
-    // Sales-related
-    'yaguze', // bought (often used in context of sales)
-    'kugurisha', // to sell
-    'amafaranga yinjiye', // income (money that entered)
-    'yinjiye', // entered (income)
-    'inyungu', // profit
-    'amafaranga yinjira', // money that enters
-    'kugurisha ibintu', // selling items
-    'kugurisha ibicuruzwa', // selling products
-    'kugurisha serivisi', // selling services
-    'umugabane', // dividend
-    'intere', // interest
-    'royalty', // royalty (borrowed term)
-    'komisiyo', // commission
-    'bonuse', // bonus (borrowed term)
-    'umushahara', // salary
-    'amafranga yishyurwa', // wages
-    'ishyura', // pay
-    'kwishyura', // payment
-    'yakiriye', // received
-    'depo', // deposit (borrowed term)
-    'amasubirwa', // refund
-    'cashback', // cashback (borrowed term)
-    'ubwishyu', // reimbursement
-    'inkunga', // grant
-    'impano', // donation/gift
-    'igihembo', // award/prize
-    'utushyitse', // winnings
-    'ishoramari', // investment
-    'kodesha yakiriye', // rent received
-    'amafranga ya serivisi', // service fee
-    'amafranga ya consulting', // consulting fee
-    'freelance', // freelance (borrowed term)
-    'kontrakt', // contract (borrowed term)
-    'stipend', // stipend (borrowed term)
-    'ubushobozi', // allowance
-    'pension', // pension (borrowed term)
-    'trust', // trust (borrowed term)
-    'settlement', // settlement (borrowed term)
-    'ubutabera', // compensation
-    'sponsorship', // sponsorship (borrowed term)
-    'tip', // tip (borrowed term)
-    'gratuity', // gratuity (borrowed term)
-    'amafaranga yakiriye', // money received
-    'amafaranga yishyuye', // money paid (in context of receiving payment)
-    'amafaranga yinjira kuri', // money entering from
-    'inyungu kuri', // profit from
-    'utushyitse kuri', // winnings from
-    'ishoramari yinjira', // investment return
-    'kodesha yishyuye', // rent payment
-    'ubwishyu yishyuye', // reimbursement received
-    'inkunga yakiriye', // grant received
-    'impano yakiriye', // donation/gift received
-    'igihembo yakiriye', // award/prize received
-    'umugabane yakiriye', // dividend received
-    'intere yakiriye', // interest received
-    'royalty yakiriye', // royalty received
-    'komisiyo yakiriye', // commission received
-    'bonuse yakiriye', // bonus received
-    'umushahara yakiriye', // salary received
-    'amafranga yishyurwa yakiriye', // wages received
-    'ishyura yakiriye', // pay received
-    'depo yakiriye', // deposit received
-    'amasubirwa yakiriye', // refund received
-    'ubwishyu yakiriye', // reimbursement received
-    'tip yakiriye', // tip received
-    'gratuity yakiriye', // gratuity received
-    'amafaranga ya serivisi yakiriye', // service fee received
-    'naranguje',
-    'n\'aranguje',
-    'yishyuye',
-    'nacuruje',
-  ];
-
   // English keywords for Expenses
   static const List<String> englishExpenseKeywords = [
     // Purchase-related
@@ -370,6 +294,82 @@ class TransactionKeywords {
     'gift given',
   ];
 
+  // Kinyarwanda keywords for Income
+  static const List<String> kinyarwandaIncomeKeywords = [
+    // Sales-related
+    'yaguze', // bought (often used in context of sales)
+    'kugurisha', // to sell
+    'amafaranga yinjiye', // income (money that entered)
+    'yinjiye', // entered (income)
+    'inyungu', // profit
+    'amafaranga yinjira', // money that enters
+    'kugurisha ibintu', // selling items
+    'kugurisha ibicuruzwa', // selling products
+    'kugurisha serivisi', // selling services
+    'umugabane', // dividend
+    'intere', // interest
+    'royalty', // royalty (borrowed term)
+    'komisiyo', // commission
+    'bonuse', // bonus (borrowed term)
+    'umushahara', // salary
+    'amafranga yishyurwa', // wages
+    'ishyura', // pay
+    'kwishyura', // payment
+    'yakiriye', // received
+    'depo', // deposit (borrowed term)
+    'amasubirwa', // refund
+    'cashback', // cashback (borrowed term)
+    'ubwishyu', // reimbursement
+    'inkunga', // grant
+    'impano', // donation/gift
+    'igihembo', // award/prize
+    'utushyitse', // winnings
+    'ishoramari', // investment
+    'kodesha yakiriye', // rent received
+    'amafranga ya serivisi', // service fee
+    'amafranga ya consulting', // consulting fee
+    'freelance', // freelance (borrowed term)
+    'kontrakt', // contract (borrowed term)
+    'stipend', // stipend (borrowed term)
+    'ubushobozi', // allowance
+    'pension', // pension (borrowed term)
+    'trust', // trust (borrowed term)
+    'settlement', // settlement (borrowed term)
+    'ubutabera', // compensation
+    'sponsorship', // sponsorship (borrowed term)
+    'tip', // tip (borrowed term)
+    'gratuity', // gratuity (borrowed term)
+    'amafaranga yakiriye', // money received
+    'amafaranga yishyuye', // money paid (in context of receiving payment)
+    'amafaranga yinjira kuri', // money entering from
+    'inyungu kuri', // profit from
+    'utushyitse kuri', // winnings from
+    'ishoramari yinjira', // investment return
+    'kodesha yishyuye', // rent payment
+    'ubwishyu yishyuye', // reimbursement received
+    'inkunga yakiriye', // grant received
+    'impano yakiriye', // donation/gift received
+    'igihembo yakiriye', // award/prize received
+    'umugabane yakiriye', // dividend received
+    'intere yakiriye', // interest received
+    'royalty yakiriye', // royalty received
+    'komisiyo yakiriye', // commission received
+    'bonuse yakiriye', // bonus received
+    'umushahara yakiriye', // salary received
+    'amafranga yishyurwa yakiriye', // wages received
+    'ishyura yakiriye', // pay received
+    'depo yakiriye', // deposit received
+    'amasubirwa yakiriye', // refund received
+    'ubwishyu yakiriye', // reimbursement received
+    'tip yakiriye', // tip received
+    'gratuity yakiriye', // gratuity received
+    'amafaranga ya serivisi yakiriye', // service fee received
+    'naranguje',
+    'n\'aranguje',
+    'yishyuye',
+    'nacuruje',
+  ];
+
   // Kinyarwanda keywords for Expenses
   static const List<String> kinyarwandaExpenseKeywords = [
     // Purchase-related
@@ -464,7 +464,6 @@ class TransactionKeywords {
     'amasomo ikiguzi', // training cost
     'igikorwa ikiguzi', // event cost
     'impano yatanze kuri', // donation made
-
     'nishyuye',
     'nahashye',
     'naranguye',

@@ -43,8 +43,9 @@ class AddTransactionScreen extends StatelessWidget {
                     onChanged: (value) {
                       provider.setUseManualEntry(value);
                     },
-                    activeColor: AppColors.primaryColor,
-                    activeTrackColor: AppColors.primaryColor.withOpacity(0.5),
+                    activeColor: AppColors.primaryColorBlue,
+                    activeTrackColor: const Color.fromARGB(255, 91, 104, 119)
+                        .withOpacity(0.5),
                     inactiveThumbColor: AppColors.textSecondary,
                     inactiveTrackColor:
                         AppColors.textSecondary.withOpacity(0.3),
@@ -72,21 +73,21 @@ class AddTransactionScreen extends StatelessWidget {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: const BorderSide(
-                          color: AppColors.primaryColor,
+                          color: AppColors.greyColor500,
                           width: 1.5,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: const BorderSide(
-                          color: AppColors.primaryColor,
+                          color: AppColors.greyColor500,
                           width: 1.5,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: const BorderSide(
-                          color: AppColors.primaryColor,
+                          color: AppColors.greyColor300,
                           width: 2,
                         ),
                       ),
@@ -113,14 +114,14 @@ class AddTransactionScreen extends StatelessWidget {
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: const BorderSide(
-                            color: AppColors.primaryColor,
+                            color: AppColors.greyColor500,
                             width: 1.5,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: const BorderSide(
-                            color: AppColors.primaryColor,
+                            color: AppColors.greyColor300,
                             width: 2,
                           ),
                         ),
@@ -145,14 +146,14 @@ class AddTransactionScreen extends StatelessWidget {
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: const BorderSide(
-                            color: AppColors.primaryColor,
+                            color: AppColors.greyColor500,
                             width: 1.5,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: const BorderSide(
-                            color: AppColors.primaryColor,
+                            color: AppColors.greyColor300,
                             width: 2,
                           ),
                         ),
@@ -244,14 +245,14 @@ class AddTransactionScreen extends StatelessWidget {
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: const BorderSide(
-                            color: AppColors.primaryColor,
+                            color: AppColors.greyColor500,
                             width: 1.5,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: const BorderSide(
-                            color: AppColors.primaryColor,
+                            color: AppColors.greyColor300,
                             width: 2,
                           ),
                         ),
@@ -375,7 +376,7 @@ class AddTransactionScreen extends StatelessWidget {
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryColor,
+                        backgroundColor: AppColors.primaryColorBlue,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),

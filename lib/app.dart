@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inkingi/routes/app_routes.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
-import 'package:inkingi/screens/dashboard_screen.dart';
+import 'package:inkingi/screens/SplashScreen.dart';
 import 'package:provider/provider.dart';
 
 class InkingiApp extends StatelessWidget {
@@ -22,7 +22,7 @@ class InkingiApp extends StatelessWidget {
             Theme.of(context).textTheme,
           ),
         ),
-        initialRoute: DashboardScreen.routeName,
+        initialRoute: SplashScreen.routeName,
         onGenerateRoute: AppRoutes.generateRoute,
       ),
     );
