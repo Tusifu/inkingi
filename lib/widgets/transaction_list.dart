@@ -1,18 +1,19 @@
-// lib/widgets/transaction_list.dart
 import 'package:flutter/material.dart';
 import 'package:inkingi/components/TTransactionTile.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/models/transaction.dart';
-import 'package:inkingi/utils/date_utils.dart'; // Import DateUtils
+import 'package:inkingi/utils/date_utils.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
   final String filter;
+  final Function(String)? onDelete; // Add onDelete callback
 
   const TransactionList({
     super.key,
     required this.transactions,
     required this.filter,
+    this.onDelete,
   });
 
   @override
@@ -41,6 +42,16 @@ class TransactionList extends StatelessWidget {
       groupedTransactions[dateKey]!.add(transaction);
     }
 
+    if (groupedTransactions.isEmpty) {
+      return const Center(
+        child: Text(
+          'Nta bikorwa bihari. Andika ibikorwa bishya kugira ngo utangire!',
+          style: TextStyle(color: AppColors.textSecondary),
+          textAlign: TextAlign.center,
+        ),
+      );
+    }
+
     return ListView.builder(
       itemCount: groupedTransactions.length,
       itemBuilder: (context, index) {
@@ -64,7 +75,12 @@ class TransactionList extends StatelessWidget {
             ...transactionsForDate.map((transaction) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: TTransactionTile(transaction: transaction),
+                child: TTransactionTile(
+                  transaction: transaction,
+                  onDelete: onDelete != null
+                      ? () => onDelete!(transaction.id)
+                      : null, // Pass the onDelete callback
+                ),
               );
             }).toList(),
           ],

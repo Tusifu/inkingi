@@ -1,10 +1,10 @@
-// lib/screens/add_transaction_screen.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inkingi/components/TAppBar.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/providers/add_transaction_provider.dart';
+import 'package:inkingi/providers/dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class AddTransactionScreen extends StatelessWidget {
@@ -25,6 +25,9 @@ class AddTransactionScreen extends StatelessWidget {
         ),
         body: Consumer<AddTransactionProvider>(
           builder: (context, provider, child) {
+            final dashboardProvider =
+                Provider.of<DashboardProvider>(context, listen: false);
+
             return SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -57,19 +60,18 @@ class AddTransactionScreen extends StatelessWidget {
                     maxLines: 5,
                     minLines: 3,
                     style: GoogleFonts.outfit(
-                      color: Colors.white, // White text color
+                      color: Colors.white,
                     ),
-                    cursorColor: Colors.white, // White cursor color
+                    cursorColor: Colors.white,
                     decoration: InputDecoration(
                       hintText: provider.useManualEntry
                           ? 'Ibisobanuro (Urugero: Imyenda Yaguzwe)'
                           : 'Ibisobanuro (Urugero: Naguze imyenda 5000 amafaranga)',
                       hintStyle: GoogleFonts.outfit(
-                        color: Colors
-                            .white70, // Slightly translucent white for hint text
+                        color: Colors.white70,
                       ),
                       filled: true,
-                      fillColor: Colors.grey[900], // Dark background color
+                      fillColor: Colors.grey[900],
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: const BorderSide(
@@ -100,14 +102,13 @@ class AddTransactionScreen extends StatelessWidget {
                       controller: provider.amountController,
                       keyboardType: TextInputType.number,
                       style: GoogleFonts.outfit(
-                        color: Colors.white, // White text color
+                        color: Colors.white,
                       ),
-                      cursorColor: Colors.white, // White cursor color
+                      cursorColor: Colors.white,
                       decoration: InputDecoration(
                         hintText: 'Umubare urugero (5000)',
                         hintStyle: GoogleFonts.outfit(
-                          color: Colors
-                              .white70, // Slightly translucent white for hint text
+                          color: Colors.white70,
                         ),
                         filled: true,
                         fillColor: Colors.grey[900],
@@ -132,14 +133,13 @@ class AddTransactionScreen extends StatelessWidget {
                       controller: provider.dateController,
                       readOnly: true,
                       style: GoogleFonts.outfit(
-                        color: Colors.white, // White text color
+                        color: Colors.white,
                       ),
-                      cursorColor: Colors.white, // White cursor color
+                      cursorColor: Colors.white,
                       decoration: InputDecoration(
                         hintText: 'Italiki',
                         hintStyle: GoogleFonts.outfit(
-                          color: Colors
-                              .white70, // Slightly translucent white for hint text
+                          color: Colors.white70,
                         ),
                         filled: true,
                         fillColor: Colors.grey[900],
@@ -232,13 +232,12 @@ class AddTransactionScreen extends StatelessWidget {
                       value: provider.selectedCategory,
                       isExpanded: true,
                       style: GoogleFonts.outfit(
-                        color: Colors.grey, // White text color
+                        color: Colors.grey,
                       ),
                       decoration: InputDecoration(
                         hintText: 'Ikiciro',
                         hintStyle: GoogleFonts.outfit(
-                          color: Colors
-                              .white70, // Slightly translucent white for hint text
+                          color: Colors.white70,
                         ),
                         filled: true,
                         fillColor: Colors.grey[900],
@@ -314,66 +313,14 @@ class AddTransactionScreen extends StatelessWidget {
                       ],
                     ),
                   if (provider.useManualEntry) const SizedBox(height: 16),
-                  // Action buttons
-                  // Row(
-                  //   children: [
-                  //     Expanded(
-                  //       child: OutlinedButton(
-                  //         onPressed: () => Navigator.pop(context),
-                  //         style: OutlinedButton.styleFrom(
-                  //           padding: const EdgeInsets.symmetric(vertical: 16),
-                  //           side: const BorderSide(
-                  //             color: AppColors.textSecondary,
-                  //             width: 1.5,
-                  //           ),
-                  //           shape: RoundedRectangleBorder(
-                  //             borderRadius: BorderRadius.circular(12),
-                  //           ),
-                  //         ),
-                  //         child: const Text(
-                  //           'Hagarika',
-                  //           style: TextStyle(
-                  //             color: AppColors.textSecondary,
-                  //             fontSize: 16,
-                  //             fontWeight: FontWeight.w600,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     const SizedBox(width: 16),
-                  //     Expanded(
-                  //       child: ElevatedButton(
-                  //         onPressed: () {
-                  //           provider.addTransaction(context);
-                  //           Navigator.pop(context);
-                  //         },
-                  //         style: ElevatedButton.styleFrom(
-                  //           backgroundColor: AppColors.primaryColor,
-                  //           padding: const EdgeInsets.symmetric(vertical: 16),
-                  //           shape: RoundedRectangleBorder(
-                  //             borderRadius: BorderRadius.circular(12),
-                  //           ),
-                  //           elevation: 5,
-                  //         ),
-                  //         child: Text(
-                  //           provider.useManualEntry ? 'Bika' : 'Shyiraho',
-                  //           style: const TextStyle(
-                  //             color: Colors.white,
-                  //             fontSize: 16,
-                  //             fontWeight: FontWeight.w600,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  // const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
                         provider.addTransaction(context);
-                        Navigator.pop(context);
+                        if (dashboardProvider.error == null) {
+                          Navigator.pop(context);
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColorBlue,
@@ -400,6 +347,14 @@ class AddTransactionScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  if (dashboardProvider.error != null) ...[
+                    const SizedBox(height: 16),
+                    Text(
+                      dashboardProvider.error!,
+                      style: const TextStyle(color: Colors.red, fontSize: 14),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ],
               ),
             );

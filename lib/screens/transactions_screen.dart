@@ -1,4 +1,3 @@
-// lib/screens/transactions_screen.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inkingi/components/TAppBar.dart';
@@ -6,8 +5,8 @@ import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/models/transaction.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
+import 'package:inkingi/widgets/transaction_list.dart';
 import 'package:provider/provider.dart';
-import '../widgets/transaction_list.dart';
 
 class TransactionsScreen extends StatefulWidget {
   static const String routeName = '/transactionsScreen';
@@ -18,8 +17,8 @@ class TransactionsScreen extends StatefulWidget {
 }
 
 class _TransactionsScreenState extends State<TransactionsScreen> {
-  String _filter = 'Byose'; // Filter state
-  String _searchQuery = ''; // Search query state
+  String _filter = 'Byose';
+  String _searchQuery = '';
   final TextEditingController _searchController = TextEditingController();
 
   @override
@@ -60,10 +59,19 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
         return Scaffold(
           backgroundColor: AppColors.background,
           appBar: CustomAppBar(
-            title: 'Ibikorwa', // transactions
+            title: 'Ibikorwa',
           ),
           body: Column(
             children: [
+              if (provider.error != null)
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    provider.error!,
+                    style: const TextStyle(color: Colors.red),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16.0,
@@ -88,17 +96,16 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                   child: TextField(
                     controller: _searchController,
                     style: GoogleFonts.outfit(
-                      color: Colors.white, // White text color
+                      color: Colors.white,
                     ),
-                    cursorColor: Colors.white, // White cursor color
+                    cursorColor: Colors.white,
                     decoration: InputDecoration(
                       hintText: 'Shakisha ibikorwa',
                       hintStyle: GoogleFonts.outfit(
-                        color: Colors
-                            .white70, // Slightly translucent white for hint text
+                        color: Colors.white70,
                       ),
                       filled: true,
-                      fillColor: Colors.grey[900], // Search transactions...
+                      fillColor: Colors.grey[900],
                       prefixIcon: Icon(
                         Icons.search,
                         color: AppColors.greyColor50,
@@ -142,6 +149,9 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 child: TransactionList(
                   transactions: transactionsToShow,
                   filter: 'All', // Pass 'All' to avoid double-filtering
+                  onDelete: (id) async {
+                    await provider.deleteTransaction(id);
+                  },
                 ),
               ),
             ],
@@ -156,9 +166,9 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
   Widget _buildModernFilter() {
     final filters = [
-      'Byose', // All
-      'Ayinjiye', // Income
-      'Ayasohowe', // Expenses
+      'Byose',
+      'Ayinjiye',
+      'Ayasohowe',
     ];
 
     return Container(
@@ -191,7 +201,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 decoration: BoxDecoration(
                   color: isSelected
                       ? AppColors.primaryColorBlue
-                      : AppColors.greyColor700, // Background for unselected
+                      : AppColors.greyColor700,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(

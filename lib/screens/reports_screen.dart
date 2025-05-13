@@ -1,4 +1,3 @@
-// lib/screens/reports_screen.dart
 import 'package:flutter/material.dart';
 import 'package:inkingi/components/TAppBar.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
@@ -41,7 +40,7 @@ class ReportsScreen extends StatelessWidget {
           return Scaffold(
             backgroundColor: AppColors.background,
             appBar: CustomAppBar(
-              title: 'Raporo', // transactions
+              title: 'Raporo',
             ),
             body: Column(
               children: [

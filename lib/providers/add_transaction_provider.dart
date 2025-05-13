@@ -1,8 +1,7 @@
-// lib/providers/add_transaction_provider.dart
 import 'package:flutter/material.dart';
 import 'package:inkingi/models/transaction.dart';
-import 'package:inkingi/services/categorization_service.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
+import 'package:inkingi/services/categorization_service.dart';
 import 'package:provider/provider.dart';
 
 class AddTransactionProvider with ChangeNotifier {
@@ -74,12 +73,15 @@ class AddTransactionProvider with ChangeNotifier {
 
     final transaction = Transaction(
       id: DateTime.now().toString(),
-      description: description,
-      amount: amount,
+      description: description.toString(),
+      amount: amount.toDouble(),
       isIncome: isIncome,
-      category: selectedCategory,
+      category: selectedCategory.toString(),
       date: date,
     );
+
+    print(" TRANSACTIONS TO BE SAVED");
+    print(transaction.toJson());
 
     final dashboardProvider =
         Provider.of<DashboardProvider>(context, listen: false);

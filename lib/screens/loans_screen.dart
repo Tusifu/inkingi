@@ -1,8 +1,9 @@
-// lib/screens/loans_screen.dart
 import 'package:flutter/material.dart';
 import 'package:inkingi/components/TAppBar.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
+import 'package:inkingi/models/loan.dart';
+import 'package:inkingi/providers/dashboard_provider.dart';
 import 'package:inkingi/providers/loans_provider.dart';
 import 'package:inkingi/widgets/credit_profile.dart';
 import 'package:provider/provider.dart';
@@ -13,14 +14,31 @@ class LoansScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dashboardProvider =
+        Provider.of<DashboardProvider>(context, listen: false);
     return ChangeNotifierProvider(
-      create: (_) => LoansProvider()..checkEligibility(),
+      create: (_) =>
+          LoansProvider(dashboardProvider.transactions)..checkEligibility(),
       child: Consumer<LoansProvider>(
         builder: (context, provider, child) {
+          // Ensure availableLoans is not empty (though it should be initialized)
+          final loans = provider.availableLoans.isEmpty
+              ? [
+                  Loan(
+                    title: 'No Loans Available',
+                    description: 'No loan offers are currently available.',
+                    amount: 0,
+                    apr: 0.0,
+                    duration: 'N/A',
+                    isEligible: false,
+                  )
+                ]
+              : provider.availableLoans;
+
           return Scaffold(
             backgroundColor: AppColors.background,
             appBar: CustomAppBar(
-              title: 'Inguzanyo', // loans
+              title: 'Inguzanyo',
             ),
             body: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(
@@ -62,7 +80,7 @@ class LoansScreen extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 8),
-                  ...provider.availableLoans.map((loan) {
+                  ...loans.map((loan) {
                     return Card(
                       color: AppColors.cardBackgroundColor,
                       shape: RoundedRectangleBorder(

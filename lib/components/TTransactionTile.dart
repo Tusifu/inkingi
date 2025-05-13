@@ -1,14 +1,17 @@
-// lib/components/transaction_tile.dart
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/models/transaction.dart';
+import 'package:intl/intl.dart';
 
 class TTransactionTile extends StatelessWidget {
   final Transaction transaction;
+  final VoidCallback? onDelete;
 
-  const TTransactionTile({super.key, required this.transaction});
+  const TTransactionTile({
+    super.key,
+    required this.transaction,
+    this.onDelete,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -66,15 +69,25 @@ class TTransactionTile extends StatelessWidget {
               ],
             ),
           ),
-          Text(
-            '${transaction.isIncome ? '+' : '-'}${NumberFormat.decimalPattern().format(transaction.amount)} RWF',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: transaction.isIncome
-                  ? AppColors.lightGreen
-                  : AppColors.secondaryOrange,
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                '${transaction.isIncome ? '+' : '-'}${NumberFormat.decimalPattern().format(transaction.amount)} RWF',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: transaction.isIncome
+                      ? AppColors.lightGreen
+                      : AppColors.secondaryOrange,
+                ),
+              ),
+              if (onDelete != null)
+                IconButton(
+                  icon: const Icon(Icons.delete, color: Colors.red),
+                  onPressed: onDelete,
+                ),
+            ],
           ),
         ],
       ),
