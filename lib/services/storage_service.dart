@@ -84,7 +84,6 @@ class StorageService {
   }
 
   Future<List<Transaction>> getTransactions() async {
-    // deleteAllTransactions();
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query('transactions');
     try {
@@ -92,8 +91,6 @@ class StorageService {
         DateTime transactionDate;
         final dateValue = maps[i]['date'];
 
-        // Debug: Log the raw date value and its type
-        print('Raw date value: $dateValue, Type: ${dateValue.runtimeType}');
         try {
           transactionDate = DateTime.fromMillisecondsSinceEpoch(
               int.parse(dateValue.toString()));

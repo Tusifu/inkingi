@@ -80,9 +80,6 @@ class AddTransactionProvider with ChangeNotifier {
       date: date,
     );
 
-    print(" TRANSACTIONS TO BE SAVED");
-    print(transaction.toJson());
-
     final dashboardProvider =
         Provider.of<DashboardProvider>(context, listen: false);
     dashboardProvider.addTransaction(transaction);
@@ -169,7 +166,6 @@ class AddTransactionProvider with ChangeNotifier {
       try {
         return double.parse(fallbackMatch.group(0)!);
       } catch (e) {
-        print('Error parsing fallback amount: $e');
         return 0.0;
       }
     }
