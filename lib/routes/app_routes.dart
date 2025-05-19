@@ -5,6 +5,7 @@ import 'package:inkingi/screens/authentication/register_screen.dart';
 import 'package:inkingi/screens/authentication/verify_otp_screen.dart';
 import 'package:inkingi/screens/dashboard_screen.dart';
 import 'package:inkingi/screens/loans_screen.dart';
+import 'package:inkingi/screens/profile_screen.dart';
 import 'package:inkingi/screens/reports_screen.dart';
 import 'package:inkingi/screens/SplashScreen.dart';
 import 'package:inkingi/screens/transactions_screen.dart';
@@ -20,6 +21,7 @@ class AppRoutes {
   static String get register => RegisterScreen.routeName;
   static String get login => LoginScreen.routeName;
   static String get verifyOtp => VerifyOtpScreen.routeName;
+  static String get profile => ProfileScreen.routeName;
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -41,6 +43,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case VerifyOtpScreen.routeName:
         return MaterialPageRoute(builder: (_) => const VerifyOtpScreen());
+      case ProfileScreen.routeName:
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
       default:
         return _errorRoute();
     }
@@ -66,6 +70,8 @@ class AppRoutes {
         return const RegisterScreen();
       case VerifyOtpScreen.routeName:
         return const VerifyOtpScreen();
+      case ProfileScreen.routeName:
+        return const ProfileScreen();
       default:
         return const Scaffold(
           body: Center(

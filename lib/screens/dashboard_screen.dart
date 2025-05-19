@@ -2,10 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:inkingi/components/TBottomNavBar.dart';
+import 'package:inkingi/components/TProfileAvatar.dart';
 import 'package:inkingi/components/TTransactionTile.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
 import 'package:inkingi/screens/loans_screen.dart';
+import 'package:inkingi/screens/profile_screen.dart';
 import 'package:inkingi/screens/transactions_screen.dart';
 import 'package:inkingi/utils/Transition/transitionUtils.dart';
 import 'package:inkingi/widgets/credit_profile.dart';
@@ -54,12 +56,20 @@ class DashboardScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Text(
-                        "24 Mata 2025",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 13,
-                          color: AppColors.textColor,
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          right: 5.0,
+                          bottom: 5.0,
+                        ),
+                        child: ProfileAvatar(
+                          initial: "T",
+                          size: 35.0,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              AppTransitions.fadeNamed(ProfileScreen.routeName),
+                            );
+                          },
                         ),
                       ),
                     ],

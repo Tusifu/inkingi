@@ -11,7 +11,7 @@ class AddTransactionProvider with ChangeNotifier {
   bool isIncome = true;
   String selectedCategory = 'Sales';
   DateTime? selectedDate;
-  bool useManualEntry = false;
+  bool useManualEntry = true;
 
   void setTransactionType(bool isIncome) {
     this.isIncome = isIncome;

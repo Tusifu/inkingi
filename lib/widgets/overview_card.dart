@@ -50,7 +50,7 @@ class OverviewCard extends StatelessWidget {
           Text(
             '${NumberFormat.decimalPattern().format(amount)} RWF',
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
               color: AppColors.textColor,
             ),

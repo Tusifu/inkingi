@@ -262,16 +262,16 @@ class AddTransactionScreen extends StatelessWidget {
                       items: [
                         if (provider.isIncome) ...[
                           const DropdownMenuItem(
-                              value: 'Sales', child: Text('Kugurisha')),
+                              value: 'Sales', child: Text('Kugurisha 🏷️')),
                           const DropdownMenuItem(
-                              value: 'Salary', child: Text('Umushahara')),
+                              value: 'Salary', child: Text('Umushahara 💸')),
                           const DropdownMenuItem(
                               value: 'Rent Income',
                               child: Text('Kodesha Yinjiye')),
                           const DropdownMenuItem(
-                              value: 'Dividend', child: Text('Umugabane')),
+                              value: 'Dividend', child: Text('Umugabane ꗈ')),
                           const DropdownMenuItem(
-                              value: 'Interest', child: Text('Intere')),
+                              value: 'Interest', child: Text('Intere %')),
                           const DropdownMenuItem(
                               value: 'Royalty', child: Text('Royalty')),
                           const DropdownMenuItem(
@@ -280,13 +280,13 @@ class AddTransactionScreen extends StatelessWidget {
                               value: 'Bonus', child: Text('Bonuse')),
                           const DropdownMenuItem(
                               value: 'Income',
-                              child: Text('Amafaranga Yinjiye')),
+                              child: Text('Amafaranga Yinjiye 📥')),
                         ],
                         if (!provider.isIncome) ...[
                           const DropdownMenuItem(
-                              value: 'Inventory', child: Text('Ibicuruzwa')),
+                              value: 'Inventory', child: Text('Ibicuruzwa 📦')),
                           const DropdownMenuItem(
-                              value: 'Utilities', child: Text('Ibikoresho')),
+                              value: 'Utilities', child: Text('Ibikoresho 🧱')),
                           const DropdownMenuItem(
                               value: 'Rent', child: Text('Kukodesha')),
                           const DropdownMenuItem(
@@ -306,7 +306,7 @@ class AddTransactionScreen extends StatelessWidget {
                               value: 'Training', child: Text('Amasomo')),
                           const DropdownMenuItem(
                               value: 'Expense',
-                              child: Text('Amafaranga Yasohotse')),
+                              child: Text('Amafaranga Yasohotse 📤')),
                         ],
                       ],
                     ),
