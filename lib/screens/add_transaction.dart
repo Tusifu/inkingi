@@ -165,9 +165,7 @@ class AddTransactionScreen extends StatelessWidget {
                           firstDate: DateTime(2000),
                           lastDate: DateTime(2100),
                         );
-                        if (pickedDate != null) {
-                          provider.setSelectedDate(pickedDate);
-                        }
+                        provider.setSelectedDate(pickedDate ?? DateTime.now());
                       },
                     ),
                     const SizedBox(height: 20),
