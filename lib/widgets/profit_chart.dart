@@ -194,13 +194,6 @@ class ProfitChart extends StatelessWidget {
             List.generate(7, (i) => now.subtract(Duration(days: 6 - i)));
         final transactions = dashboardProvider.transactions;
 
-        // Debug: Log transactions for verification
-        print('Transactions: ${transactions.length}');
-        for (var t in transactions) {
-          print(
-              'Date: ${t.date}, Amount: ${t.amount}, IsIncome: ${t.isIncome}');
-        }
-
         // Aggregate income, expenses, and profit per day
         final Map<DateTime, Map<String, double>> dailyData = {};
         for (var transaction in transactions) {

@@ -5,7 +5,7 @@ import 'package:inkingi/models/register_models.dart';
 
 class AuthService {
   final Dio _dio = Dio();
-  final String _baseUrl = 'http://54.162.241.114:8090/inkingi-service';
+  final String _baseUrl = 'http://54.161.32.33:8090/inkingi-service';
 
   AuthService() {
     _dio.options.baseUrl = _baseUrl;
@@ -16,7 +16,7 @@ class AuthService {
   Future<LoginResponse> login(LoginRequest request) async {
     try {
       final response = await _dio.post(
-        '/auth/login',
+        '/login',
         data: request.toJson(),
       );
       if (response.statusCode == 200) {
