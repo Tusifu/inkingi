@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inkingi/screens/add_transaction.dart';
 import 'package:inkingi/screens/dashboard_screen.dart';
 import 'package:inkingi/screens/loans_screen.dart';
+import 'package:inkingi/screens/profile_screen.dart';
 import 'package:inkingi/screens/reports_screen.dart';
 import 'package:inkingi/screens/SplashScreen.dart';
 import 'package:inkingi/screens/transactions_screen.dart';
@@ -14,6 +15,7 @@ class AppRoutes {
   static String get reports => ReportsScreen.routeName;
   static String get loans => LoansScreen.routeName;
   static String get splash => SplashScreen.routeName;
+  static String get profile => ProfileScreen.routeName;
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -29,6 +31,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const LoansScreen());
       case SplashScreen.routeName:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
+      case ProfileScreen.routeName:
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
       default:
         return _errorRoute();
     }
@@ -48,6 +52,8 @@ class AppRoutes {
         return const LoansScreen();
       case SplashScreen.routeName:
         return const SplashScreen();
+      case ProfileScreen.routeName:
+        return const ProfileScreen();
       default:
         return const Scaffold(
           body: Center(
