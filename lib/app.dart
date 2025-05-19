@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:inkingi/providers/auth_provider.dart';
 import 'package:inkingi/routes/app_routes.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
 import 'package:inkingi/screens/SplashScreen.dart';
@@ -13,6 +14,7 @@ class InkingiApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
         // Provide StorageService as a singleton
         Provider<StorageService>(
           create: (_) => StorageService(),

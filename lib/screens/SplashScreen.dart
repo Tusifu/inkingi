@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Navigator.of(context).push(
       AppTransitions.fadeReplacementNamed(
-        AppRoutes.dashboard,
+        AppRoutes.login,
         duration: const Duration(milliseconds: 400),
       ),
     );
