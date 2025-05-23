@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class GenericResponse {
   final String message;
   final String status;

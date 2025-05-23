@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inkingi/components/TToast.dart';
-import 'package:inkingi/models/login_models.dart';
-import 'package:inkingi/providers/auth_provider.dart';
 import 'package:inkingi/services/auth_service.dart';
-import 'package:provider/provider.dart';
 
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/routes/app_routes.dart';
@@ -34,39 +30,46 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _handleLogin() async {
-    if (_isLoading) return;
+    Navigator.of(context).push(
+      AppTransitions.fadeReplacementNamed(
+        AppRoutes.dashboard,
+        duration: const Duration(milliseconds: 400),
+      ),
+    );
 
-    setState(() {
-      _isLoading = true;
-    });
+    // if (_isLoading) return;
 
-    try {
-      final request = LoginRequest(
-        username: _usernameController.text,
-        password: _passwordController.text,
-      );
-      final response = await _authService.login(request);
-      Provider.of<AuthProvider>(context, listen: false).setAuthData(
-        userId: response.userId,
-        token: response.token,
-      );
-      Navigator.of(context).push(
-        AppTransitions.fadeReplacementNamed(
-          AppRoutes.dashboard,
-          duration: const Duration(milliseconds: 400),
-        ),
-      );
-    } catch (e) {
-      TToast.show(
-        context: context,
-        message: e.toString(),
-        isSuccess: false,
-      );
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
-    }
+    // setState(() {
+    //   _isLoading = true;
+    // });
+
+    // try {
+    //   final request = LoginRequest(
+    //     username: _usernameController.text,
+    //     password: _passwordController.text,
+    //   );
+    //   final response = await _authService.login(request);
+    //   Provider.of<AuthProvider>(context, listen: false).setAuthData(
+    //     userId: response.userId,
+    //     token: response.token,
+    //   );
+    //   Navigator.of(context).push(
+    //     AppTransitions.fadeReplacementNamed(
+    //       AppRoutes.dashboard,
+    //       duration: const Duration(milliseconds: 400),
+    //     ),
+    //   );
+    // } catch (e) {
+    //   TToast.show(
+    //     context: context,
+    //     message: e.toString(),
+    //     isSuccess: false,
+    //   );
+    // } finally {
+    //   setState(() {
+    //     _isLoading = false;
+    //   });
+    // }
   }
 
   void _navigateToRegister() {
