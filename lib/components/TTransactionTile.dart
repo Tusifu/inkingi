@@ -24,8 +24,8 @@ class TTransactionTile extends StatelessWidget {
         border: Border(
           left: BorderSide(
             color: transaction.isIncome
-                ? AppColors.lightGreen
-                : AppColors.secondaryOrange,
+                ? AppColors.incomeColor
+                : AppColors.expensesColor,
             width: 4,
           ),
         ),
@@ -42,8 +42,8 @@ class TTransactionTile extends StatelessWidget {
           Icon(
             transaction.isIncome ? Icons.arrow_upward : Icons.arrow_downward,
             color: transaction.isIncome
-                ? AppColors.lightGreen
-                : AppColors.secondaryOrange,
+                ? AppColors.incomeColor
+                : AppColors.expensesColor,
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -78,8 +78,8 @@ class TTransactionTile extends StatelessWidget {
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: transaction.isIncome
-                      ? AppColors.lightGreen
-                      : AppColors.secondaryOrange,
+                      ? AppColors.incomeColor
+                      : AppColors.expensesColor,
                 ),
               ),
               if (onDelete != null)

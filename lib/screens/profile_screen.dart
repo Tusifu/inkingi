@@ -5,7 +5,9 @@ import 'package:inkingi/components/TProfileAvatar.dart';
 
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/routes/app_routes.dart';
+import 'package:inkingi/screens/loans_screen.dart';
 import 'package:inkingi/utils/Transition/transitionUtils.dart';
+import 'package:inkingi/widgets/credit_profile.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const String routeName = '/profile';
@@ -19,8 +21,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   // final _authProvider = AuthProvider();
   bool _isLoading = false;
-  String _userName = "Tusifu Edison"; // Placeholder; replace with actual data
-  String _companyName = "Inkingi Corp"; // Placeholder; replace with actual data
+  String _userName = "Tusifu Edison";
+  String _companyName = "Inkingi Corp";
   List<String> _allowedPeople = [
     "Tom",
     "Jane",
@@ -28,14 +30,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     "Jan"
   ]; // Placeholder data
   List<Map<String, String>> _options = [
-    {"title": "Edit Profile", "icon": "edit", "route": "/editProfile"},
-    {"title": "Settings", "icon": "settings", "route": "/settings"},
+    {"title": "Hindura umwirondoro", "icon": "edit", "route": "/editProfile"},
+    {"title": "Guhindura", "icon": "settings", "route": "/settings"},
     {
-      "title": "Notifications",
+      "title": "Amamenyesha",
       "icon": "notifications",
       "route": "/notifications"
     },
-    {"title": "Logout", "icon": "logout", "route": "/login"},
+    {"title": "Gusohoka", "icon": "logout", "route": "/login"},
   ]; // Placeholder options
 
   @override
@@ -180,7 +182,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 24),
+                          const SizedBox(height: 16),
                           // Options Tiles
                           ..._options.map((option) {
                             return Card(
@@ -209,7 +211,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             );
                           }).toList(),
-                          const SizedBox(height: 24),
+                          const SizedBox(height: 8),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                AppTransitions.fadeNamed(
+                                  LoansScreen.routeName,
+                                ),
+                              );
+                            },
+                            child: CreditProfile(),
+                          ),
+                          const SizedBox(height: 16),
                           // Allowed People Section
                           Container(
                             padding: const EdgeInsets.all(16),
@@ -221,7 +235,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Allowed People',
+                                  'Abakozi bajye',
                                   style: GoogleFonts.outfit(
                                     color: AppColors.textSecondary,
                                     fontSize: 18,
@@ -263,7 +277,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     ),
                                     child: Text(
-                                      'View All',
+                                      'Barebe bose',
                                       style: GoogleFonts.outfit(
                                         color: Colors.white,
                                         fontSize: 16,

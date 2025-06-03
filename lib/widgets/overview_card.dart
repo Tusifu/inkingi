@@ -26,8 +26,7 @@ class OverviewCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border(
           left: BorderSide(
-            color:
-                isPositive ? AppColors.lightGreen : AppColors.secondaryOrange,
+            color: isPositive ? AppColors.incomeColor : AppColors.expensesColor,
             width: 4,
           ),
         ),
@@ -54,28 +53,6 @@ class OverviewCard extends StatelessWidget {
               fontWeight: FontWeight.bold,
               color: AppColors.textColor,
             ),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Icon(
-                isPositive ? Icons.arrow_upward : Icons.arrow_downward,
-                color: isPositive
-                    ? AppColors.lightGreen
-                    : AppColors.secondaryOrange,
-                size: 16,
-              ),
-              const SizedBox(width: 2),
-              Text(
-                '$percentageChange% kuva mugihe giheruka',
-                style: TextStyle(
-                  color: isPositive
-                      ? AppColors.lightGreen
-                      : AppColors.secondaryOrange,
-                  fontSize: 8.5,
-                ),
-              ),
-            ],
           ),
         ],
       ),

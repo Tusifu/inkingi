@@ -34,7 +34,7 @@ class DashboardScreen extends StatelessWidget {
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16.0,
-                vertical: 0.0,
+                vertical: 4.0,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +47,7 @@ class DashboardScreen extends StatelessWidget {
                           SvgPicture.asset("assets/svgs/bk_logo.svg"),
                           const SizedBox(width: 8),
                           Text(
-                            "Incamake y'Imari", // Financial overview
+                            "Ikaze", // Financial overview
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
@@ -79,7 +79,7 @@ class DashboardScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: OverviewCard(
-                          title: 'Amafaranga Yose Yinjiye', // Total Income
+                          title: 'Ayinjiye', // Total Income
                           amount: provider.totalIncome,
                           percentageChange: 12,
                           isPositive: true,
@@ -88,7 +88,7 @@ class DashboardScreen extends StatelessWidget {
                       const SizedBox(width: 16),
                       Expanded(
                         child: OverviewCard(
-                          title: 'Amafaranga Yose Yasohotse', // Total Expenses
+                          title: 'Ayasohotse', // Total Expenses
                           amount: provider.totalExpenses,
                           percentageChange: 5,
                           isPositive: false,
@@ -98,26 +98,26 @@ class DashboardScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   ProfitChart(),
-                  const SizedBox(height: 16),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        AppTransitions.fadeNamed(
-                          LoansScreen.routeName,
-                        ),
-                      );
-                    },
-                    child: CreditProfile(),
-                  ),
-                  // const SizedBox(height: 8),
+                  // const SizedBox(height: 16),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       AppTransitions.fadeNamed(
+                  //         LoansScreen.routeName,
+                  //       ),
+                  //     );
+                  //   },
+                  //   child: CreditProfile(),
+                  // ),
+                  const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
                         'Incamake', // Recent Transactions
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: AppColors.textPrimary,
                         ),
@@ -133,14 +133,14 @@ class DashboardScreen extends StatelessWidget {
                         child: const Text(
                           'Reba Byose', // View All
                           style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                            color: AppColors.textPrimary,
+                            fontWeight: FontWeight.w300,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 0),
                   // Use TransactionTile for the last 3 transactions
                   if (lastThreeTransactions.isEmpty)
                     const Padding(

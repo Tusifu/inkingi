@@ -87,14 +87,14 @@ class ReportsScreen extends StatelessWidget {
                                   Text(
                                     'Ayinjiye ${NumberFormat.decimalPattern().format(data['Income']!)} RWF',
                                     style: const TextStyle(
-                                      color: AppColors.lightGreen,
+                                      color: AppColors.incomeColor,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   Text(
                                     'Ayasohotse: ${NumberFormat.decimalPattern().format(data['Expenses']!)} RWF',
                                     style: const TextStyle(
-                                      color: AppColors.secondaryOrange,
+                                      color: AppColors.expensesColor,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),

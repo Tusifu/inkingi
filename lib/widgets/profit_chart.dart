@@ -2,13 +2,21 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
-import 'package:inkingi/utils/date_utils.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class ProfitChart extends StatelessWidget {
+class ProfitChart extends StatefulWidget {
   const ProfitChart({super.key});
 
+  @override
+  State<ProfitChart> createState() => _ProfitChartState();
+}
+
+Color incomeColor = AppColors.incomeColor;
+Color expensesColor = AppColors.expensesColor;
+Color profitColor = AppColors.profitColor;
+
+class _ProfitChartState extends State<ProfitChart> {
   @override
   Widget build(BuildContext context) {
     return Consumer<DashboardProvider>(
@@ -50,7 +58,9 @@ class ProfitChart extends StatelessWidget {
 
         final now = DateTime.now();
         final last7Days =
-            List.generate(7, (i) => now.subtract(Duration(days: 6 - i)));
+            List.generate(7, (i) => now.subtract(Duration(days: 6 - i)))
+                .map((date) => DateTime(date.year, date.month, date.day))
+                .toList();
         final transactions = dashboardProvider.transactions;
 
         if (transactions.isEmpty) {
@@ -109,16 +119,16 @@ class ProfitChart extends StatelessWidget {
                 ))
             .toList();
 
-        final profitSpots = last7Days
-            .asMap()
-            .entries
-            .map((entry) => FlSpot(
-                  entry.key.toDouble(),
-                  ((dailyData[entry.value]?['income'] ?? 0) -
-                          (dailyData[entry.value]?['expenses'] ?? 0)) /
-                      1000,
-                ))
-            .toList();
+        final profitSpots = last7Days.asMap().entries.map((entry) {
+          final profit = ((dailyData[entry.value]?['income'] ?? 0) -
+                  (dailyData[entry.value]?['expenses'] ?? 0)) /
+              1000;
+          // Ensure profit doesn't go below zero for display purposes
+          return FlSpot(
+            entry.key.toDouble(),
+            profit >= 0 ? profit : 0,
+          );
+        }).toList();
 
         final totalProfit = transactions
             .where((t) => last7Days.any((d) =>
@@ -129,9 +139,9 @@ class ProfitChart extends StatelessWidget {
             .fold(0.0, (a, b) => a + b);
 
         final maxY = [
-              incomeSpots.map((e) => e.y).reduce((a, b) => a > b ? a : b),
-              expenseSpots.map((e) => e.y).reduce((a, b) => a > b ? a : b),
-              profitSpots.map((e) => e.y.abs()).reduce((a, b) => a > b ? a : b),
+              ...incomeSpots.map((e) => e.y),
+              ...expenseSpots.map((e) => e.y),
+              ...profitSpots.map((e) => e.y),
               30.0
             ].reduce((a, b) => a > b ? a : b) *
             1.2;
@@ -140,6 +150,18 @@ class ProfitChart extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Chart Title
+              const Text(
+                'Ishusho y\'icyumweru',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                ),
+              ),
+              const SizedBox(height: 8),
+
+              // Profit Summary
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -156,13 +178,14 @@ class ProfitChart extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color:
-                          totalProfit >= 0 ? AppColors.lightGreen : Colors.red,
+                      color: totalProfit >= 0 ? profitColor : expensesColor,
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 16),
+
+              // The Chart
               SizedBox(
                 height: 160,
                 child: LineChart(
@@ -189,15 +212,19 @@ class ProfitChart extends StatelessWidget {
                         sideTitles: SideTitles(
                           showTitles: true,
                           getTitlesWidget: (value, _) {
-                            final days =
-                                DateUtilities.getDaysOfWeek(abbreviated: true);
-                            return Text(
-                              days[value.toInt()],
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: AppColors.textSecondary,
-                              ),
-                            );
+                            if (value.toInt() >= 0 &&
+                                value.toInt() < last7Days.length) {
+                              final date = last7Days[value.toInt()];
+                              final dayName = DateFormat('E').format(date);
+                              return Text(
+                                dayName,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: AppColors.textSecondary,
+                                ),
+                              );
+                            }
+                            return const Text('');
                           },
                         ),
                       ),
@@ -215,39 +242,61 @@ class ProfitChart extends StatelessWidget {
                       LineChartBarData(
                         spots: incomeSpots,
                         isCurved: true,
-                        color: AppColors.lightGreen,
+                        color: incomeColor,
                         barWidth: 3,
                         dotData: const FlDotData(show: false),
                         belowBarData: BarAreaData(
                           show: true,
-                          color: AppColors.lightGreen.withOpacity(0.2),
+                          color: incomeColor.withOpacity(0.2),
                         ),
                       ),
                       LineChartBarData(
                         spots: expenseSpots,
                         isCurved: true,
-                        color: AppColors.secondaryOrange,
+                        color: expensesColor,
                         barWidth: 3,
                         dotData: const FlDotData(show: false),
                         belowBarData: BarAreaData(
                           show: true,
-                          color: AppColors.secondaryOrange.withOpacity(0.2),
+                          color: expensesColor.withOpacity(0.2),
                         ),
                       ),
                       LineChartBarData(
                         spots: profitSpots,
                         isCurved: true,
-                        color: AppColors.primaryColor,
+                        color: profitColor,
                         barWidth: 3,
                         dotData: const FlDotData(show: false),
                         belowBarData: BarAreaData(
                           show: true,
-                          color: AppColors.primaryColor.withOpacity(0.2),
+                          color: profitColor.withOpacity(0.2),
                         ),
                       ),
                     ],
                   ),
                 ),
+              ),
+
+              // Legend/Key
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildLegendItem(
+                    color: incomeColor,
+                    text: 'Income',
+                  ),
+                  const SizedBox(width: 16),
+                  _buildLegendItem(
+                    color: expensesColor,
+                    text: 'Expenses',
+                  ),
+                  const SizedBox(width: 16),
+                  _buildLegendItem(
+                    color: profitColor,
+                    text: 'Profit',
+                  ),
+                ],
               ),
             ],
           ),
@@ -256,10 +305,49 @@ class ProfitChart extends StatelessWidget {
     );
   }
 
+  Widget _buildLegendItem({
+    required Color color,
+    required String text,
+  }) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 12,
+          height: 12,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(4),
+          ),
+        ),
+        const SizedBox(width: 4),
+        Text(
+          text,
+          style: const TextStyle(
+            fontSize: 12,
+            color: AppColors.textSecondary,
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildEmptyChart() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children: [
+        // Chart Title
+        const Text(
+          'Ishusho y\'icyumweru',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: AppColors.textPrimary,
+          ),
+        ),
+        const SizedBox(height: 8),
+
+        // Empty content
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -276,13 +364,13 @@ class ProfitChart extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                color: AppColors.lightGreen,
+                color: profitColor,
               ),
             ),
           ],
         ),
-        SizedBox(height: 16),
-        Center(
+        const SizedBox(height: 16),
+        const Center(
           child: Text(
             'No data',
             style: TextStyle(
@@ -290,6 +378,28 @@ class ProfitChart extends StatelessWidget {
               fontSize: 14,
             ),
           ),
+        ),
+
+        // Legend/Key (shown even when empty)
+        const SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildLegendItem(
+              color: incomeColor,
+              text: 'Income',
+            ),
+            const SizedBox(width: 16),
+            _buildLegendItem(
+              color: expensesColor,
+              text: 'Expenses',
+            ),
+            const SizedBox(width: 16),
+            _buildLegendItem(
+              color: profitColor,
+              text: 'Profit',
+            ),
+          ],
         ),
       ],
     );

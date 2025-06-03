@@ -10,6 +10,13 @@ class AppColors {
   static const secondaryOrange = Color(0xFFFFA726);
   // static const secondaryOrange = Color.fromARGB(255, 217, 59, 59);
   static const lightGreen = Color(0xFF34D399);
+  static const lightRed = Color.fromARGB(255, 212, 42, 62);
+
+  //transaction colors:
+
+  static const profitColor = Color(0xFFFFA726);
+  static const expensesColor = Color.fromARGB(255, 158, 24, 40);
+  static const incomeColor = Color.fromARGB(197, 62, 225, 81);
   // static const background = Color(0xFFF5F7FA);
   static const background = Color.fromARGB(255, 36, 32, 32);
   // static const cardBackgroundColor = Colors.white;
