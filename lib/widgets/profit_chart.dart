@@ -25,15 +25,18 @@ class _ProfitChartState extends State<ProfitChart> {
           return Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: AppColors.cardBackgroundColor,
               borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
+              border: Border.all(
+                color: const Color.fromARGB(255, 77, 75, 75),
+              ),
+              // gradient: const LinearGradient(
+              //   begin: Alignment.topLeft,
+              //   end: Alignment.bottomRight,
+              //   colors: [
+              //     Color.fromARGB(255, 25, 34, 44), // Dark teal
+              //     Color.fromARGB(255, 23, 32, 41), // Lighter teal
+              //   ],
+              // ),
             ),
             child: child,
           );
@@ -130,13 +133,13 @@ class _ProfitChartState extends State<ProfitChart> {
           );
         }).toList();
 
-        final totalProfit = transactions
-            .where((t) => last7Days.any((d) =>
-                d.year == t.date.year &&
-                d.month == t.date.month &&
-                d.day == t.date.day))
-            .map((t) => t.isIncome ? t.amount : -t.amount)
-            .fold(0.0, (a, b) => a + b);
+        // final totalProfit = transactions
+        //     .where((t) => last7Days.any((d) =>
+        //         d.year == t.date.year &&
+        //         d.month == t.date.month &&
+        //         d.day == t.date.day))
+        //     .map((t) => t.isIncome ? t.amount : -t.amount)
+        //     .fold(0.0, (a, b) => a + b);
 
         final maxY = [
               ...incomeSpots.map((e) => e.y),
@@ -152,38 +155,14 @@ class _ProfitChartState extends State<ProfitChart> {
             children: [
               // Chart Title
               const Text(
-                'Ishusho y\'icyumweru',
+                'Iminsi 7 ishize',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
+                  color: Colors.white70,
                 ),
               ),
-              const SizedBox(height: 8),
-
-              // Profit Summary
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Inyungu',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
-                  Text(
-                    '${totalProfit >= 0 ? '+' : ''}${NumberFormat.decimalPattern().format(totalProfit)} RWF',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: totalProfit >= 0 ? profitColor : expensesColor,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
 
               // The Chart
               SizedBox(
@@ -202,7 +181,7 @@ class _ProfitChartState extends State<ProfitChart> {
                               '${value.toInt()}k',
                               style: const TextStyle(
                                 fontSize: 12,
-                                color: AppColors.textSecondary,
+                                color: Colors.white54,
                               ),
                             );
                           },
@@ -220,7 +199,7 @@ class _ProfitChartState extends State<ProfitChart> {
                                 dayName,
                                 style: const TextStyle(
                                   fontSize: 12,
-                                  color: AppColors.textSecondary,
+                                  color: Colors.white54,
                                 ),
                               );
                             }
@@ -284,17 +263,17 @@ class _ProfitChartState extends State<ProfitChart> {
                 children: [
                   _buildLegendItem(
                     color: incomeColor,
-                    text: 'Income',
+                    text: 'Ayinjiye',
                   ),
                   const SizedBox(width: 16),
                   _buildLegendItem(
                     color: expensesColor,
-                    text: 'Expenses',
+                    text: 'Ayasohotse',
                   ),
                   const SizedBox(width: 16),
                   _buildLegendItem(
                     color: profitColor,
-                    text: 'Profit',
+                    text: 'Inyungu',
                   ),
                 ],
               ),
@@ -325,7 +304,7 @@ class _ProfitChartState extends State<ProfitChart> {
           text,
           style: const TextStyle(
             fontSize: 12,
-            color: AppColors.textSecondary,
+            color: Colors.white54,
           ),
         ),
       ],
@@ -338,43 +317,20 @@ class _ProfitChartState extends State<ProfitChart> {
       children: [
         // Chart Title
         const Text(
-          'Ishusho y\'icyumweru',
+          'Iminsi 7 ishize',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: AppColors.textPrimary,
+            color: Colors.white70,
           ),
         ),
         const SizedBox(height: 8),
 
-        // Empty content
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Inyungu',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
-              ),
-            ),
-            Text(
-              '+0 RWF',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: profitColor,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 16),
         const Center(
           child: Text(
             'No data',
             style: TextStyle(
-              color: AppColors.textSecondary,
+              color: Colors.white54,
               fontSize: 14,
             ),
           ),

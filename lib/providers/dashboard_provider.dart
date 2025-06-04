@@ -6,7 +6,8 @@ class DashboardProvider with ChangeNotifier {
   final StorageService _storageService;
   List<Transaction> _transactions = [];
   String? _error;
-  bool _isLoading = true; // Add loading state
+  bool _isLoading = true;
+  String _filter = 'Daily'; // Default filter
 
   DashboardProvider(this._storageService) {
     _loadTransactions();
@@ -14,18 +15,50 @@ class DashboardProvider with ChangeNotifier {
 
   List<Transaction> get transactions => _transactions;
   String? get error => _error;
-  bool get isLoading => _isLoading; // Expose loading state
+  bool get isLoading => _isLoading;
+  String get filter => _filter;
 
   double get totalIncome {
-    return _transactions
+    final filteredTransactions = _filterTransactions();
+    return filteredTransactions
         .where((t) => t.isIncome)
         .fold(0.0, (sum, t) => sum + t.amount);
   }
 
   double get totalExpenses {
-    return _transactions
+    final filteredTransactions = _filterTransactions();
+    return filteredTransactions
         .where((t) => !t.isIncome)
         .fold(0.0, (sum, t) => sum + t.amount);
+  }
+
+  List<Transaction> _filterTransactions() {
+    final now = DateTime.now();
+    DateTime startDate;
+
+    switch (_filter) {
+      case 'Weekly':
+        startDate = now.subtract(const Duration(days: 7));
+        break;
+      case 'Monthly':
+        startDate = now.subtract(const Duration(days: 30));
+        break;
+      case 'Daily':
+      default:
+        startDate = DateTime(now.year, now.month, now.day);
+        break;
+    }
+
+    return _transactions.where((t) {
+      final transactionDate = t.date;
+      return transactionDate.isAfter(startDate) ||
+          transactionDate.isAtSameMomentAs(startDate);
+    }).toList();
+  }
+
+  void setFilter(String newFilter) {
+    _filter = newFilter;
+    notifyListeners();
   }
 
   Future<void> _loadTransactions() async {

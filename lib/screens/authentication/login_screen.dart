@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inkingi/services/auth_service.dart';
+// import 'package:inkingi/services/auth_service.dart';
 
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/routes/app_routes.dart';
@@ -19,7 +19,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _authService = AuthService();
+  // final _authService = AuthService();
   bool _isLoading = false;
 
   @override

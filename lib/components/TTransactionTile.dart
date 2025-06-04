@@ -19,8 +19,20 @@ class TTransactionTile extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 4.0),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: AppColors.cardBackgroundColor,
         borderRadius: BorderRadius.circular(12),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: transaction.isIncome
+              ? [
+                  const Color(0xFF1C2526), // Dark gray for income
+                  const Color(0xFF2A3435), // Slightly lighter gray
+                ]
+              : [
+                  const Color(0xFF261C1C), // Dark reddish-gray for expense
+                  const Color(0xFF352A2A), // Slightly lighter reddish-gray
+                ],
+        ),
         border: Border(
           left: BorderSide(
             color: transaction.isIncome
@@ -29,13 +41,6 @@ class TTransactionTile extends StatelessWidget {
             width: 4,
           ),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
       ),
       child: Row(
         children: [
@@ -55,14 +60,14 @@ class TTransactionTile extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimary,
+                    color: Colors.white70,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   '${DateFormat('d MMM yyyy, hh:mm a').format(transaction.date)} • ${transaction.category}',
                   style: const TextStyle(
-                    color: AppColors.textSecondary,
+                    color: Colors.white54,
                     fontSize: 12,
                   ),
                 ),
