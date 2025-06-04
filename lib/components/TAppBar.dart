@@ -1,4 +1,3 @@
-// lib/widgets/custom_app_bar.dart
 import 'package:flutter/material.dart';
 import 'package:inkingi/constants/colors.dart';
 
@@ -16,26 +15,33 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      title: Text(
-        title,
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color.fromARGB(255, 32, 58, 85),
+            Colors.transparent,
+          ],
         ),
       ),
-      backgroundColor: AppColors.primaryColor,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: Colors.white),
-        onPressed: onBackPressed ?? () => Navigator.pop(context),
-      ),
-      actions: actions,
-      elevation: 0,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20),
+      child: AppBar(
+        title: Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
+        backgroundColor:
+            Colors.transparent, // Make AppBar transparent to show gradient
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: onBackPressed ?? () => Navigator.pop(context),
+        ),
+        actions: actions,
+        elevation: 0,
       ),
     );
   }

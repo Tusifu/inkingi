@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   // BK Mobile-inspired colors
   // static const primaryColor = Color(0xFF0964CE);
-  static const primaryColor = Color.fromARGB(255, 36, 32, 32);
+  static const primaryColor = Color.fromARGB(255, 32, 34, 36);
   static const primaryColorBlue = Color.fromARGB(255, 15, 60, 111);
   static const primaryColorLight = Color.fromARGB(255, 67, 115, 170);
   static const secondaryOrange = Color(0xFFFFA726);
@@ -18,7 +18,7 @@ class AppColors {
   static const expensesColor = Color.fromARGB(255, 158, 24, 40);
   static const incomeColor = Color.fromARGB(197, 62, 225, 81);
   // static const background = Color(0xFFF5F7FA);
-  static const background = Color.fromARGB(255, 36, 32, 32);
+  static const background = Color.fromARGB(255, 31, 32, 34);
   // static const cardBackgroundColor = Colors.white;
   static const cardBackgroundColor = Color.fromARGB(255, 37, 38, 40);
   // static const textPrimary = Color(0xFF1E293B);

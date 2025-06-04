@@ -19,20 +19,24 @@ class TTransactionTile extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 4.0),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
+        color: AppColors.cardBackgroundColor,
         borderRadius: BorderRadius.circular(12),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: transaction.isIncome
-              ? [
-                  const Color(0xFF1C2526), // Dark gray for income
-                  const Color(0xFF2A3435), // Slightly lighter gray
-                ]
-              : [
-                  const Color(0xFF261C1C), // Dark reddish-gray for expense
-                  const Color(0xFF352A2A), // Slightly lighter reddish-gray
-                ],
-        ),
+        // gradient: LinearGradient(
+        //   begin: Alignment.topLeft,
+        //   end: Alignment.bottomRight,
+        //   colors: transaction.isIncome
+        //       ? [
+        //           const Color.fromARGB(255, 32, 41, 43), // Dark gray for income
+        //           const Color.fromARGB(
+        //               255, 30, 36, 37), // Slightly lighter gray
+        //         ]
+        //       : [
+        //           const Color.fromARGB(
+        //               255, 33, 26, 26), // Dark reddish-gray for expense
+        //           const Color.fromARGB(
+        //               255, 45, 35, 35), // Slightly lighter reddish-gray
+        //         ],
+        // ),
         border: Border(
           left: BorderSide(
             color: transaction.isIncome
@@ -89,7 +93,10 @@ class TTransactionTile extends StatelessWidget {
               ),
               if (onDelete != null)
                 IconButton(
-                  icon: const Icon(Icons.delete, color: Colors.red),
+                  icon: const Icon(
+                    Icons.delete,
+                    color: AppColors.expensesColor,
+                  ),
                   onPressed: onDelete,
                 ),
             ],

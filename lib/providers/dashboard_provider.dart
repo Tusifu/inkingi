@@ -32,6 +32,18 @@ class DashboardProvider with ChangeNotifier {
         .fold(0.0, (sum, t) => sum + t.amount);
   }
 
+  double get incomePercentageChange {
+    final currentTotal = totalIncome;
+    final previousTotal = _getPreviousPeriodTotal(isIncome: true);
+    return _calculatePercentageChange(currentTotal, previousTotal);
+  }
+
+  double get expensePercentageChange {
+    final currentTotal = totalExpenses;
+    final previousTotal = _getPreviousPeriodTotal(isIncome: false);
+    return _calculatePercentageChange(currentTotal, previousTotal);
+  }
+
   List<Transaction> _filterTransactions() {
     final now = DateTime.now();
     DateTime startDate;
@@ -54,6 +66,42 @@ class DashboardProvider with ChangeNotifier {
       return transactionDate.isAfter(startDate) ||
           transactionDate.isAtSameMomentAs(startDate);
     }).toList();
+  }
+
+  double _getPreviousPeriodTotal({required bool isIncome}) {
+    final now = DateTime.now();
+    DateTime previousStartDate;
+    DateTime previousEndDate;
+
+    switch (_filter) {
+      case 'Weekly':
+        previousStartDate = now.subtract(const Duration(days: 14));
+        previousEndDate = now.subtract(const Duration(days: 7));
+        break;
+      case 'Monthly':
+        previousStartDate = now.subtract(const Duration(days: 60));
+        previousEndDate = now.subtract(const Duration(days: 30));
+        break;
+      case 'Daily':
+      default:
+        previousStartDate = DateTime(now.year, now.month, now.day - 1);
+        previousEndDate =
+            DateTime(now.year, now.month, now.day - 1, 23, 59, 59);
+        break;
+    }
+
+    return _transactions.where((t) {
+      final transactionDate = t.date;
+      return transactionDate.isAfter(previousStartDate) &&
+          transactionDate.isBefore(previousEndDate) &&
+          t.isIncome == isIncome;
+    }).fold(0.0, (sum, t) => sum + t.amount);
+  }
+
+  double _calculatePercentageChange(double current, double previous) {
+    if (previous == 0) return current == 0 ? 0.0 : 100.0;
+    final change = ((current - previous) / previous) * 100;
+    return double.parse(change.toStringAsFixed(1));
   }
 
   void setFilter(String newFilter) {

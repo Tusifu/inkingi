@@ -56,7 +56,7 @@ class DashboardScreen extends StatelessWidget {
                             SvgPicture.asset("assets/svgs/bk_logo.svg"),
                             const SizedBox(width: 8),
                             Text(
-                              "Inkingi App",
+                              "Welcome, Tusifu",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,

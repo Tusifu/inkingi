@@ -56,7 +56,7 @@ class ProfitCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF2A5C54),
+                  color: const Color.fromARGB(255, 30, 45, 66),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
