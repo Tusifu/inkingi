@@ -17,17 +17,23 @@ class ProfitCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Color.fromARGB(255, 28, 68, 115),
-            Color.fromARGB(255, 15, 60, 111),
-            Color.fromARGB(255, 8, 28, 51),
-          ],
+          colors: amount > 0
+              ? [
+                  Color.fromARGB(255, 28, 68, 115),
+                  Color.fromARGB(255, 15, 60, 111),
+                  Color.fromARGB(255, 8, 28, 51),
+                ]
+              : [
+                  const Color.fromARGB(255, 126, 35, 35), // Dark red
+                  const Color.fromARGB(255, 125, 40, 40),
+                  const Color.fromARGB(255, 53, 25, 25), // Lighter red
+                ],
         ),
       ),
       child: Stack(

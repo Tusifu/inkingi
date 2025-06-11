@@ -223,7 +223,11 @@ class DashboardScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: ProfitCard(
-                            title: 'Inyungu',
+                            title:
+                                provider.totalIncome - provider.totalExpenses >
+                                        0
+                                    ? 'Inyungu'
+                                    : 'Igihombo',
                             amount:
                                 provider.totalIncome - provider.totalExpenses,
                             percentageChange: 8,

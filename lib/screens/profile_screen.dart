@@ -32,11 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   List<Map<String, String>> _options = [
     {"title": "Hindura umwirondoro", "icon": "edit", "route": "/editProfile"},
     {"title": "Guhindura", "icon": "settings", "route": "/settings"},
-    {
-      "title": "Amamenyesha",
-      "icon": "notifications",
-      "route": "/notifications"
-    },
+    {"title": "Amatangazo", "icon": "notifications", "route": "/notifications"},
     {"title": "Gusohoka", "icon": "logout", "route": "/login"},
   ]; // Placeholder options
 
