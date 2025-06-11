@@ -56,7 +56,7 @@ class DashboardScreen extends StatelessWidget {
                             SvgPicture.asset("assets/svgs/bk_logo.svg"),
                             const SizedBox(width: 8),
                             Text(
-                              "Welcome, Tusifu",
+                              "Inkingi",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
@@ -67,9 +67,10 @@ class DashboardScreen extends StatelessWidget {
                         ),
                         Row(
                           children: [
+                            const SizedBox(width: 8),
                             PopupMenuButton<String>(
                               icon: const Icon(
-                                Icons.filter_list,
+                                Icons.filter_alt,
                                 color: Colors.white70,
                                 size: 30,
                               ),
@@ -83,7 +84,7 @@ class DashboardScreen extends StatelessWidget {
                               ),
                               itemBuilder: (BuildContext context) => [
                                 PopupMenuItem<String>(
-                                  value: 'daily',
+                                  value: 'Daily',
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16, vertical: 8),
@@ -105,15 +106,13 @@ class DashboardScreen extends StatelessWidget {
                                           color: Colors.white70,
                                           size: 24,
                                         ),
-                                        SizedBox(
-                                          width: 24,
-                                        ),
-                                        Text(
+                                        const SizedBox(width: 24),
+                                        const Text(
                                           "Uyu Munsi",
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -141,15 +140,13 @@ class DashboardScreen extends StatelessWidget {
                                           color: Colors.white70,
                                           size: 24,
                                         ),
-                                        SizedBox(
-                                          width: 24,
-                                        ),
-                                        Text(
+                                        const SizedBox(width: 24),
+                                        const Text(
                                           "Iminsi 7 ishize",
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -177,15 +174,13 @@ class DashboardScreen extends StatelessWidget {
                                           color: Colors.white70,
                                           size: 24,
                                         ),
-                                        SizedBox(
-                                          width: 24,
-                                        ),
-                                        Text(
+                                        const SizedBox(width: 24),
+                                        const Text(
                                           "Iminsi 30 ishize",
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -214,7 +209,16 @@ class DashboardScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 4),
+                    Text(
+                      provider.translatedFilter,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white70,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
                     Row(
                       children: [
                         Expanded(

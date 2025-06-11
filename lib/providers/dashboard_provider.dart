@@ -156,4 +156,16 @@ class DashboardProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  String get translatedFilter {
+    switch (_filter) {
+      case 'Weekly':
+        return 'Iminsi 7 ishize';
+      case 'Monthly':
+        return 'Iminsi 30 ishize';
+      case 'Daily':
+      default:
+        return 'Uyu munsi';
+    }
+  }
 }

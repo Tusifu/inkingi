@@ -97,6 +97,7 @@ flutter:
 
     - assets/svgs/bk_logo.svg
     - assets/svgs/vector1.svg
+    - assets/svgs/filter.svg
 
 
     # IMAGES 
