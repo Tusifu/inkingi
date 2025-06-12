@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:inkingi/constants/colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
