@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inkingi/models/product.dart';
 import 'package:inkingi/models/transaction.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
 import 'package:inkingi/services/categorization_service.dart';
@@ -8,14 +9,20 @@ class AddTransactionProvider with ChangeNotifier {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
+  final TextEditingController quantityController = TextEditingController();
   bool isIncome = true;
-  String selectedCategory = 'Sales';
+  String selectedCategory = 'Kugurisha'; // Updated default to match new values
   DateTime? selectedDate;
   bool useManualEntry = true;
+  Product? selectedProduct;
+  int quantity = 1;
+
+  AddTransactionProvider() {
+    quantityController.text = '1'; // Default quantity
+  }
 
   void setTransactionType(bool isIncome) {
     this.isIncome = isIncome;
-    selectedCategory = isIncome ? 'Sales' : 'Expense';
     notifyListeners();
   }
 
@@ -33,6 +40,35 @@ class AddTransactionProvider with ChangeNotifier {
     selectedDate = date;
     dateController.text = "${date.day}/${date.month}/${date.year}";
     notifyListeners();
+  }
+
+  void setSelectedProduct(Product? product) {
+    selectedProduct = product;
+    if (product != null) {
+      amountController.text =
+          (product.price * quantity).toStringAsFixed(0); // Remove decimals
+      // Map the product's category to the full text value
+      final mappedCategory = _mapCategoryToFullText(product.category);
+      if (selectedCategory != mappedCategory) {
+        selectedCategory = mappedCategory;
+      }
+    }
+    notifyListeners();
+  }
+
+  void setQuantity(int value) {
+    quantity = value > 0 ? value : 1;
+    quantityController.text = quantity.toString();
+    updateAmountBasedOnQuantity();
+    notifyListeners();
+  }
+
+  void updateAmountBasedOnQuantity() {
+    if (selectedProduct != null) {
+      final newAmount =
+          (selectedProduct!.price * quantity).toInt(); // Convert to integer
+      amountController.text = newAmount.toString(); // Remove decimals
+    }
   }
 
   void addTransaction(BuildContext context) {
@@ -73,10 +109,11 @@ class AddTransactionProvider with ChangeNotifier {
 
     final transaction = Transaction(
       id: DateTime.now().toString(),
-      description: description.toString(),
-      amount: amount.toDouble(),
+      description: description,
+      amount:
+          amount, // Will be an integer when parsed from text without decimals
       isIncome: isIncome,
-      category: selectedCategory.toString(),
+      category: selectedCategory,
       date: date,
     );
 
@@ -116,14 +153,15 @@ class AddTransactionProvider with ChangeNotifier {
     String category = categorizationResult['category'];
 
     this.isIncome = determinedIsIncome;
-    selectedCategory = category;
+    selectedCategory = _mapCategoryToFullText(category); // Map to full text
 
     final transaction = Transaction(
       id: DateTime.now().toString(),
       description: description,
-      amount: amount,
+      amount:
+          amount, // Will be an integer when parsed from text without decimals
       isIncome: determinedIsIncome,
-      category: category,
+      category: selectedCategory,
       date: DateTime.now(),
     );
 
@@ -153,7 +191,9 @@ class AddTransactionProvider with ChangeNotifier {
     if (matches.isNotEmpty) {
       final match = matches.last;
       try {
-        return double.parse(match.group(1)!);
+        return double.parse(match.group(1)!)
+            .toInt()
+            .toDouble(); // Convert to integer
       } catch (e) {
         print('Error parsing amount: $e');
         return 0.0;
@@ -164,7 +204,9 @@ class AddTransactionProvider with ChangeNotifier {
     final fallbackMatch = fallbackRegExp.firstMatch(description.toLowerCase());
     if (fallbackMatch != null) {
       try {
-        return double.parse(fallbackMatch.group(0)!);
+        return double.parse(fallbackMatch.group(0)!)
+            .toInt()
+            .toDouble(); // Convert to integer
       } catch (e) {
         return 0.0;
       }
@@ -177,9 +219,12 @@ class AddTransactionProvider with ChangeNotifier {
     descriptionController.clear();
     amountController.clear();
     dateController.clear();
+    quantityController.text = '1';
     selectedDate = null;
     isIncome = true;
-    selectedCategory = 'Sales';
+    selectedCategory = 'Kugurisha'; // Updated default to match new values
+    selectedProduct = null;
+    quantity = 1;
     useManualEntry = false;
   }
 
@@ -193,11 +238,40 @@ class AddTransactionProvider with ChangeNotifier {
     );
   }
 
+  // Helper function to map old category values to new full text values
+  String _mapCategoryToFullText(String category) {
+    const categoryMap = {
+      'Sales': 'Kugurisha',
+      'Salary': 'Umushahara',
+      'Rent Income': 'Kodesha Yinjiye',
+      'Dividend': 'Umugabane',
+      'Interest': 'Intere',
+      'Royalty': 'Royalty',
+      'Commission': 'Komisiyo',
+      'Bonus': 'Bonuse',
+      'Income': 'Amafaranga Yinjiye',
+      'Inventory': 'Ibicuruzwa',
+      'Utilities': 'Ibikoresho',
+      'Rent': 'Kukodesha',
+      'Payroll': 'Umushahara Wabakozi',
+      'Loan': 'Inguzanyo',
+      'Insurance': 'Ubwishingizi',
+      'Tax': 'Umutego',
+      'Fine': 'Fine',
+      'Marketing': 'Kwamamaza',
+      'Training': 'Amasomo',
+      'Expense': 'Amafaranga Yasohotse',
+    };
+    return categoryMap[category] ??
+        category; // Return mapped value or original if not found
+  }
+
   @override
   void dispose() {
     descriptionController.dispose();
     amountController.dispose();
     dateController.dispose();
+    quantityController.dispose();
     super.dispose();
   }
 }

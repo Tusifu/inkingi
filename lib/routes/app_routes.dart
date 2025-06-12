@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:inkingi/screens/add_transaction.dart';
+import 'package:inkingi/screens/add_transaction_screen.dart';
 import 'package:inkingi/screens/authentication/login_screen.dart';
 import 'package:inkingi/screens/authentication/register_screen.dart';
 import 'package:inkingi/screens/authentication/verify_otp_screen.dart';
 import 'package:inkingi/screens/dashboard_screen.dart';
 import 'package:inkingi/screens/loans_screen.dart';
+import 'package:inkingi/screens/product/add_product_screen.dart';
 import 'package:inkingi/screens/profile_screen.dart';
 import 'package:inkingi/screens/reports_screen.dart';
 import 'package:inkingi/screens/SplashScreen.dart';
@@ -22,6 +23,7 @@ class AppRoutes {
   static String get login => LoginScreen.routeName;
   static String get verifyOtp => VerifyOtpScreen.routeName;
   static String get profile => ProfileScreen.routeName;
+  static String get product => AddProductScreen.routeName;
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -45,6 +47,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const VerifyOtpScreen());
       case ProfileScreen.routeName:
         return MaterialPageRoute(builder: (_) => const ProfileScreen());
+      case AddProductScreen.routeName:
+        return MaterialPageRoute(builder: (_) => AddProductScreen());
       default:
         return _errorRoute();
     }
@@ -72,6 +76,8 @@ class AppRoutes {
         return const VerifyOtpScreen();
       case ProfileScreen.routeName:
         return const ProfileScreen();
+      case AddProductScreen.routeName:
+        return AddProductScreen();
       default:
         return const Scaffold(
           body: Center(

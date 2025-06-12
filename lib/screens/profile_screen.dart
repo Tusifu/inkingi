@@ -33,6 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     {"title": "Hindura umwirondoro", "icon": "edit", "route": "/editProfile"},
     {"title": "Guhindura", "icon": "settings", "route": "/settings"},
     {"title": "Amatangazo", "icon": "notifications", "route": "/notifications"},
+    {"title": "Add Product", "icon": "add", "route": "/addProduct"},
     {"title": "Gusohoka", "icon": "logout", "route": "/login"},
   ]; // Placeholder options
 

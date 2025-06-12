@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:inkingi/constants/colors.dart';
-import 'package:inkingi/screens/add_transaction.dart';
+import 'package:inkingi/screens/add_transaction_screen.dart';
 import 'package:inkingi/screens/dashboard_screen.dart';
 import 'package:inkingi/screens/loans_screen.dart';
 import 'package:inkingi/screens/reports_screen.dart';
