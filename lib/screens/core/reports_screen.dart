@@ -7,7 +7,6 @@ import 'package:inkingi/providers/reports_provider.dart';
 import 'package:inkingi/utils/date_utils.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'dart:math' as math;
 
 class ReportsScreen extends StatelessWidget {
   static const String routeName = '/reportsScreen';
@@ -86,6 +85,27 @@ class ReportsScreen extends StatelessWidget {
                             productReport, (name) => name, context),
                         _buildReportGrid(
                             categoryReport, (name) => name, context),
+                      ],
+                    ),
+                  ),
+                  // Color Key
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildColorKey(
+                          color: AppColors.incomeColor,
+                          label: 'Ayinjiye',
+                        ),
+                        _buildColorKey(
+                          color: AppColors.expensesColor,
+                          label: 'Ayasohotse',
+                        ),
+                        _buildColorKey(
+                          color: Colors.orange,
+                          label: 'Inyungu',
+                        ),
                       ],
                     ),
                   ),
@@ -182,8 +202,26 @@ class ReportsScreen extends StatelessWidget {
           final income = data['Income'] ?? 0.0;
           final expenses = data['Expenses'] ?? 0.0;
           final total = income + expenses;
-          final incomePercentage = total > 0 ? (income / total) * 100 : 0;
-          final expensesPercentage = total > 0 ? (expenses / total) * 100 : 0;
+          final profit = income - expenses;
+
+          // Calculate percentages
+          double incomePercentage = total > 0 ? (income / total) : 0.0;
+          double expensesPercentage = total > 0 ? (expenses / total) : 0.0;
+          double profitPercentage = total > 0 ? (profit.abs() / total) : 0.0;
+
+          // Normalize to sum to 1.0
+          double sum = incomePercentage + expensesPercentage + profitPercentage;
+          if (sum > 0) {
+            incomePercentage /= sum;
+            expensesPercentage /= sum;
+            profitPercentage /= sum;
+          }
+
+          // Clamp to ensure valid proportions and adjust profit to fit
+          incomePercentage = incomePercentage.clamp(0.0, 1.0);
+          expensesPercentage = expensesPercentage.clamp(0.0, 1.0);
+          profitPercentage =
+              (1.0 - incomePercentage - expensesPercentage).clamp(0.0, 1.0);
 
           return Card(
             color: AppColors.cardBackgroundColor,
@@ -197,16 +235,100 @@ class ReportsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CustomPieChart(
-                    incomePercentage: incomePercentage / 100,
-                    expensesPercentage: expensesPercentage / 100,
+                  Container(
+                    height: 12,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 6,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(6),
+                      child: Stack(
+                        children: [
+                          // Income (Green) with gradient
+                          FractionallySizedBox(
+                            widthFactor: incomePercentage,
+                            child: Container(
+                              height: 12,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    AppColors.incomeColor.withOpacity(0.7),
+                                    AppColors.incomeColor,
+                                  ],
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                ),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(6),
+                                  bottomLeft: Radius.circular(6),
+                                ),
+                              ),
+                            ),
+                          ),
+                          // Expenses (Red) with gradient
+                          FractionallySizedBox(
+                            widthFactor: expensesPercentage,
+                            alignment: Alignment.centerRight,
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Container(
+                                height: 12,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      AppColors.expensesColor.withOpacity(0.7),
+                                      AppColors.expensesColor,
+                                    ],
+                                    begin: Alignment.centerRight,
+                                    end: Alignment.centerLeft,
+                                  ),
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(6),
+                                    bottomRight: Radius.circular(6),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          // Profit (Orange) with gradient
+                          if (profit != 0)
+                            FractionallySizedBox(
+                              widthFactor: profitPercentage,
+                              alignment: Alignment.center,
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Container(
+                                  height: 12,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.orange.withOpacity(0.7),
+                                        Colors.orange,
+                                      ],
+                                      begin: Alignment.center,
+                                      end: Alignment.center,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     labelFormatter(key),
                     style: const TextStyle(
                       color: Colors.white70,
-                      fontSize: 12, // Reduced from 14 to fit better
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
@@ -214,9 +336,9 @@ class ReportsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Profit: ${NumberFormat.decimalPattern().format(income - expenses)} RWF',
+                    'Profit: ${NumberFormat.decimalPattern().format(profit)} RWF',
                     style: TextStyle(
-                      color: (income - expenses) >= 0
+                      color: profit >= 0
                           ? AppColors.incomeColor
                           : AppColors.expensesColor,
                       fontSize: 12,
@@ -249,69 +371,24 @@ class ReportsScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-class CustomPieChart extends StatelessWidget {
-  final double incomePercentage;
-  final double expensesPercentage;
-
-  const CustomPieChart({
-    super.key,
-    required this.incomePercentage,
-    required this.expensesPercentage,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 50,
-      height: 50,
-      child: CustomPaint(
-        painter: PieChartPainter(incomePercentage, expensesPercentage),
-      ),
+  Widget _buildColorKey({required Color color, required String label}) {
+    return Row(
+      children: [
+        Container(
+          width: 15,
+          height: 15,
+          color: color,
+        ),
+        const SizedBox(width: 4),
+        Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white70,
+            fontSize: 12,
+          ),
+        ),
+      ],
     );
   }
-}
-
-class PieChartPainter extends CustomPainter {
-  final double incomePercentage;
-  final double expensesPercentage;
-
-  PieChartPainter(this.incomePercentage, this.expensesPercentage);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final center = Offset(size.width / 2, size.height / 2);
-    final radius = size.width / 2;
-    final paint = Paint()..style = PaintingStyle.fill;
-
-    // Draw income segment (green)
-    paint.color = AppColors.incomeColor;
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
-      -math.pi / 2,
-      -math.pi * 2 * (incomePercentage.clamp(0.0, 1.0)),
-      true,
-      paint,
-    );
-
-    // Draw expenses segment (red)
-    paint.color = AppColors.expensesColor;
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
-      -math.pi / 2 - math.pi * 2 * (incomePercentage.clamp(0.0, 1.0)),
-      -math.pi * 2 * (expensesPercentage.clamp(0.0, 1.0)),
-      true,
-      paint,
-    );
-
-    // Draw border
-    paint.color = Colors.grey.withOpacity(0.3);
-    paint.style = PaintingStyle.stroke;
-    paint.strokeWidth = 1;
-    canvas.drawCircle(center, radius, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

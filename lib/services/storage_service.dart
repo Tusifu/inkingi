@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:inkingi/models/product.dart';
 import 'package:inkingi/models/transaction.dart';
+import 'package:inkingi/models/category.dart';
 import 'package:sqflite/sqflite.dart' as sqf;
 import 'package:path/path.dart';
 
@@ -23,7 +25,7 @@ class StorageService {
 
     return await sqf.openDatabase(
       path,
-      version: 4, // Increment version for new products table
+      version: 5, // Increment version to include categories table
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE transactions (
@@ -41,6 +43,13 @@ class StorageService {
             name TEXT,
             price REAL,
             category TEXT
+          )
+        ''');
+        await db.execute('''
+          CREATE TABLE categories (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            icon INTEGER NOT NULL
           )
         ''');
       },
@@ -77,6 +86,16 @@ class StorageService {
               name TEXT,
               price REAL,
               category TEXT
+            )
+          ''');
+        }
+        if (oldVersion < 5) {
+          // Add categories table
+          await db.execute('''
+            CREATE TABLE categories (
+              id TEXT PRIMARY KEY,
+              name TEXT NOT NULL,
+              icon INTEGER NOT NULL
             )
           ''');
         }
@@ -145,7 +164,7 @@ class StorageService {
     await db.delete('transactions');
   }
 
-  // Product methods
+  // Product methods (unchanged)
   Future<void> insertProduct(Product product) async {
     final db = await database;
     await db.insert(
@@ -190,5 +209,36 @@ class StorageService {
   Future<void> deleteProduct(String id) async {
     final db = await database;
     await db.delete('products', where: 'id = ?', whereArgs: [id]);
+  }
+
+  // Category methods
+  Future<void> insertCategory(Category category) async {
+    final db = await database;
+    await db.insert(
+      'categories',
+      {
+        'id': category.id,
+        'name': category.name,
+        'icon': category.icon.codePoint,
+      },
+      conflictAlgorithm: sqf.ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<List<Category>> getCategories() async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('categories');
+    return List.generate(maps.length, (i) {
+      return Category(
+        id: maps[i]['id'].toString(),
+        name: maps[i]['name'],
+        icon: IconData(maps[i]['icon'], fontFamily: 'MaterialIcons'),
+      );
+    });
+  }
+
+  Future<void> deleteCategory(String id) async {
+    final db = await database;
+    await db.delete('categories', where: 'id = ?', whereArgs: [id]);
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inkingi/providers/auth_provider.dart';
+import 'package:inkingi/providers/category_provider.dart';
+import 'package:inkingi/providers/product_provider.dart';
 import 'package:inkingi/routes/app_routes.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
-import 'package:inkingi/screens/SplashScreen.dart';
+import 'package:inkingi/screens/general/SplashScreen.dart';
 import 'package:inkingi/services/storage_service.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +17,8 @@ class InkingiApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => CategoryProvider()),
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
         // Provide StorageService as a singleton
         Provider<StorageService>(
           create: (_) => StorageService(),

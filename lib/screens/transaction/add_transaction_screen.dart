@@ -1,3 +1,4 @@
+// add_transaction_screen.dart (updated)
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inkingi/components/TAppBar.dart';
@@ -7,7 +8,7 @@ import 'package:inkingi/models/product.dart';
 import 'package:inkingi/providers/add_transaction_provider.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
 import 'package:inkingi/providers/product_provider.dart';
-import 'package:inkingi/screens/dashboard_screen.dart';
+import 'package:inkingi/screens/core/dashboard_screen.dart';
 import 'package:inkingi/utils/Transition/transitionUtils.dart';
 import 'package:provider/provider.dart';
 
@@ -32,12 +33,10 @@ class AddTransactionScreen extends StatelessWidget {
           // Initialize category and amount based on selected product when it changes
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (transactionProvider.selectedProduct != null) {
-              // Map the product's category to the full text value
               final productCategory =
                   transactionProvider.selectedProduct!.category;
-              final mappedCategory = _mapCategoryToFullText(productCategory);
-              if (transactionProvider.selectedCategory != mappedCategory) {
-                transactionProvider.setCategory(mappedCategory);
+              if (transactionProvider.selectedCategory != productCategory) {
+                transactionProvider.setCategory(productCategory);
               }
               if (transactionProvider.quantity != 1) {
                 transactionProvider.setQuantity(1);
@@ -54,51 +53,6 @@ class AddTransactionScreen extends StatelessWidget {
               builder: (context, transactionProvider, productProvider, child) {
                 final dashboardProvider =
                     Provider.of<DashboardProvider>(context, listen: false);
-
-                final List<DropdownMenuItem<String>> categoryItems = [
-                  const DropdownMenuItem(
-                      value: 'Kugurisha', child: Text('Kugurisha 🏷️')),
-                  const DropdownMenuItem(
-                      value: 'Umushahara', child: Text('Umushahara 💸')),
-                  const DropdownMenuItem(
-                      value: 'Kodesha Yinjiye', child: Text('Kodesha Yinjiye')),
-                  const DropdownMenuItem(
-                      value: 'Umugabane', child: Text('Umugabane ꗈ')),
-                  const DropdownMenuItem(
-                      value: 'Intere', child: Text('Intere %')),
-                  const DropdownMenuItem(
-                      value: 'Royalty', child: Text('Royalty')),
-                  const DropdownMenuItem(
-                      value: 'Komisiyo', child: Text('Komisiyo')),
-                  const DropdownMenuItem(
-                      value: 'Bonuse', child: Text('Bonuse')),
-                  const DropdownMenuItem(
-                      value: 'Amafaranga Yinjiye',
-                      child: Text('Amafaranga Yinjiye 📥')),
-                  const DropdownMenuItem(
-                      value: 'Ibicuruzwa', child: Text('Ibicuruzwa 📦')),
-                  const DropdownMenuItem(
-                      value: 'Ibikoresho', child: Text('Ibikoresho 🧱')),
-                  const DropdownMenuItem(
-                      value: 'Kukodesha', child: Text('Kukodesha')),
-                  const DropdownMenuItem(
-                      value: 'Umushahara Wabakozi',
-                      child: Text('Umushahara Wabakozi')),
-                  const DropdownMenuItem(
-                      value: 'Inguzanyo', child: Text('Inguzanyo')),
-                  const DropdownMenuItem(
-                      value: 'Ubwishingizi', child: Text('Ubwishingizi')),
-                  const DropdownMenuItem(
-                      value: 'Umutego', child: Text('Umutego')),
-                  const DropdownMenuItem(value: 'Fine', child: Text('Fine')),
-                  const DropdownMenuItem(
-                      value: 'Kwamamaza', child: Text('Kwamamaza')),
-                  const DropdownMenuItem(
-                      value: 'Amasomo', child: Text('Amasomo')),
-                  const DropdownMenuItem(
-                      value: 'Amafaranga Yasohotse',
-                      child: Text('Amafaranga Yasohotse 📤')),
-                ];
 
                 return SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -484,50 +438,6 @@ class AddTransactionScreen extends StatelessWidget {
                           ],
                         ),
                       const SizedBox(height: 16),
-                      if (transactionProvider.useManualEntry)
-                        DropdownButtonFormField<String>(
-                          value: transactionProvider.selectedCategory,
-                          isExpanded: true,
-                          style: GoogleFonts.outfit(color: Colors.white),
-                          decoration: InputDecoration(
-                            hintText:
-                                'Ikiciro (Default: ${transactionProvider.selectedProduct?.category ?? 'None'})',
-                            hintStyle:
-                                GoogleFonts.outfit(color: Colors.white70),
-                            filled: true,
-                            fillColor: Colors.grey[900],
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: AppColors.greyColor500,
-                                width: 1.5,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: AppColors.greyColor500,
-                                width: 1.5,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: AppColors.greyColor300,
-                                width: 2,
-                              ),
-                            ),
-                          ),
-                          dropdownColor: Colors.grey[850],
-                          onChanged: (value) {
-                            if (value != null) {
-                              transactionProvider.setCategory(value);
-                            }
-                          },
-                          items: categoryItems,
-                        ),
-                      if (transactionProvider.useManualEntry)
-                        const SizedBox(height: 16),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
@@ -585,33 +495,5 @@ class AddTransactionScreen extends StatelessWidget {
         },
       ),
     );
-  }
-
-  // Helper function to map old category values to new full text values
-  String _mapCategoryToFullText(String category) {
-    const categoryMap = {
-      'Sales': 'Kugurisha',
-      'Salary': 'Umushahara',
-      'Rent Income': 'Kodesha Yinjiye',
-      'Dividend': 'Umugabane',
-      'Interest': 'Intere',
-      'Royalty': 'Royalty',
-      'Commission': 'Komisiyo',
-      'Bonus': 'Bonuse',
-      'Income': 'Amafaranga Yinjiye',
-      'Inventory': 'Ibicuruzwa',
-      'Utilities': 'Ibikoresho',
-      'Rent': 'Kukodesha',
-      'Payroll': 'Umushahara Wabakozi',
-      'Loan': 'Inguzanyo',
-      'Insurance': 'Ubwishingizi',
-      'Tax': 'Umutego',
-      'Fine': 'Fine',
-      'Marketing': 'Kwamamaza',
-      'Training': 'Amasomo',
-      'Expense': 'Amafaranga Yasohotse',
-    };
-    return categoryMap[category] ??
-        category; // Return mapped value or original if not found
   }
 }

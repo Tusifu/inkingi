@@ -5,7 +5,7 @@ import 'package:inkingi/components/TProfileAvatar.dart';
 
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/routes/app_routes.dart';
-import 'package:inkingi/screens/loans_screen.dart';
+import 'package:inkingi/screens/core/loans_screen.dart';
 import 'package:inkingi/utils/Transition/transitionUtils.dart';
 import 'package:inkingi/widgets/credit_profile.dart';
 
@@ -24,16 +24,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String _userName = "Tusifu Edison";
   String _companyName = "Inkingi Corp";
   List<String> _allowedPeople = [
-    "Tom",
-    "Jane",
-    "Sarah",
-    "Jan"
+    "Ben",
+    "Djasmine",
+    "Felix",
+    "Tusifu"
   ]; // Placeholder data
   List<Map<String, String>> _options = [
     {"title": "Hindura umwirondoro", "icon": "edit", "route": "/editProfile"},
     {"title": "Guhindura", "icon": "settings", "route": "/settings"},
     {"title": "Amatangazo", "icon": "notifications", "route": "/notifications"},
     {"title": "Ibicuruzwa", "icon": "add", "route": "/addProduct"},
+    {"title": "Ikiciro", "icon": "add", "route": "/addCategory"},
     {"title": "Gusohoka", "icon": "logout", "route": "/login"},
   ]; // Placeholder options
 

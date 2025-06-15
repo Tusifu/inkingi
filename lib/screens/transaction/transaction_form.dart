@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../constants/colors.dart';
-import '../providers/transaction_provider.dart';
+import '../../constants/colors.dart';
+import '../../providers/transaction_provider.dart';
 
 class TransactionForm extends StatelessWidget {
   const TransactionForm({super.key});

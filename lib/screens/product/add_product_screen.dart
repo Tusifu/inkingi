@@ -1,3 +1,4 @@
+// add_product_screen.dart (updated)
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inkingi/components/TAppBar.dart';
@@ -5,6 +6,7 @@ import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/models/product.dart';
 import 'package:inkingi/providers/product_provider.dart';
+import 'package:inkingi/providers/category_provider.dart';
 import 'package:provider/provider.dart';
 
 class AddProductScreen extends StatelessWidget {
@@ -13,36 +15,10 @@ class AddProductScreen extends StatelessWidget {
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _categoryController = TextEditingController();
 
-  final List<DropdownMenuItem<String>> categoryItems = [
-    const DropdownMenuItem(value: 'Kugurisha', child: Text('Kugurisha 🏷️')),
-    const DropdownMenuItem(value: 'Umushahara', child: Text('Umushahara 💸')),
-    const DropdownMenuItem(
-        value: 'Kodesha Yinjiye', child: Text('Kodesha Yinjiye')),
-    const DropdownMenuItem(value: 'Umugabane', child: Text('Umugabane ꗈ')),
-    const DropdownMenuItem(value: 'Intere', child: Text('Intere %')),
-    const DropdownMenuItem(value: 'Royalty', child: Text('Royalty')),
-    const DropdownMenuItem(value: 'Komisiyo', child: Text('Komisiyo')),
-    const DropdownMenuItem(value: 'Bonuse', child: Text('Bonuse')),
-    const DropdownMenuItem(
-        value: 'Amafaranga Yinjiye', child: Text('Amafaranga Yinjiye 📥')),
-    const DropdownMenuItem(value: 'Ibicuruzwa', child: Text('Ibicuruzwa 📦')),
-    const DropdownMenuItem(value: 'Ibikoresho', child: Text('Ibikoresho 🧱')),
-    const DropdownMenuItem(value: 'Kukodesha', child: Text('Kukodesha')),
-    const DropdownMenuItem(
-        value: 'Umushahara Wabakozi', child: Text('Umushahara Wabakozi')),
-    const DropdownMenuItem(value: 'Inguzanyo', child: Text('Inguzanyo')),
-    const DropdownMenuItem(value: 'Ubwishingizi', child: Text('Ubwishingizi')),
-    const DropdownMenuItem(value: 'Umutego', child: Text('Umutego')),
-    const DropdownMenuItem(value: 'Fine', child: Text('Fine')),
-    const DropdownMenuItem(value: 'Kwamamaza', child: Text('Kwamamaza')),
-    const DropdownMenuItem(value: 'Amasomo', child: Text('Amasomo')),
-    const DropdownMenuItem(
-        value: 'Amafaranga Yasohotse', child: Text('Amafaranga Yasohotse 📤')),
-  ];
-
   AddProductScreen({super.key});
 
-  void _showAddProductModal(BuildContext context, ProductProvider provider,
+  void _showAddProductModal(BuildContext context,
+      ProductProvider productProvider, CategoryProvider categoryProvider,
       {Product? productToEdit}) {
     _nameController.text = productToEdit?.name ?? '';
     _priceController.text = productToEdit?.price.toString() ?? '';
@@ -134,48 +110,62 @@ class AddProductScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              DropdownButtonFormField<String>(
-                value: _categoryController.text.isNotEmpty
-                    ? _categoryController.text
-                    : null,
-                isExpanded: true,
-                style: GoogleFonts.outfit(
-                    color: Colors.white), // White text for labels
-                decoration: InputDecoration(
-                  hintText: 'Ikiciro',
-                  hintStyle: GoogleFonts.outfit(color: Colors.white70),
-                  filled: true,
-                  fillColor: Colors.grey[900], // Dark background
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                      color: AppColors.greyColor500,
-                      width: 1.5,
+              Consumer<CategoryProvider>(
+                builder: (context, categoryProvider, child) {
+                  return DropdownButtonFormField<String>(
+                    value: _categoryController.text.isNotEmpty
+                        ? _categoryController.text
+                        : null,
+                    isExpanded: true,
+                    style: GoogleFonts.outfit(color: Colors.white),
+                    decoration: InputDecoration(
+                      hintText: 'Hitamo Ikiciro',
+                      hintStyle: GoogleFonts.outfit(color: Colors.white70),
+                      filled: true,
+                      fillColor: Colors.grey[900],
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(
+                          color: AppColors.greyColor500,
+                          width: 1.5,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(
+                          color: AppColors.greyColor500,
+                          width: 1.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(
+                          color: AppColors.greyColor300,
+                          width: 2,
+                        ),
+                      ),
                     ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                      color: AppColors.greyColor500,
-                      width: 1.5,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                      color: AppColors.greyColor300,
-                      width: 2,
-                    ),
-                  ),
-                ),
-                dropdownColor:
-                    Colors.grey[850], // Dark background for dropdown menu
-                onChanged: (value) {
-                  if (value != null) {
-                    _categoryController.text = value;
-                  }
+                    dropdownColor: Colors.grey[850],
+                    onChanged: (value) {
+                      if (value != null) {
+                        _categoryController.text = value;
+                      }
+                    },
+                    items: categoryProvider.categories.map((category) {
+                      return DropdownMenuItem<String>(
+                        value: category.name,
+                        child: Row(
+                          children: [
+                            Icon(category.icon, color: Colors.white),
+                            const SizedBox(width: 8),
+                            Text(category.name,
+                                style: GoogleFonts.outfit(color: Colors.white)),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  );
                 },
-                items: categoryItems,
               ),
               const SizedBox(height: 20),
               SizedBox(
@@ -220,7 +210,7 @@ class AddProductScreen extends StatelessWidget {
                     }
 
                     if (productToEdit == null) {
-                      await provider.addProduct(name, price, category);
+                      await productProvider.addProduct(name, price, category);
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Igicuruzwa cyongewemo neza'),
@@ -234,7 +224,7 @@ class AddProductScreen extends StatelessWidget {
                         price: price,
                         category: category,
                       );
-                      await provider.updateProduct(updatedProduct);
+                      await productProvider.updateProduct(updatedProduct);
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('amakuru yahinduwe neza'),
@@ -278,20 +268,24 @@ class AddProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => ProductProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
+        ChangeNotifierProvider(create: (_) => CategoryProvider()),
+      ],
       child: Scaffold(
         backgroundColor: AppColors.background,
         bottomNavigationBar: TBottomNavBar(currentSelected: 2),
         appBar: CustomAppBar(title: 'Ibicuruzwa'),
-        body: Consumer<ProductProvider>(
-          builder: (context, provider, child) {
+        body: Consumer2<ProductProvider, CategoryProvider>(
+          builder: (context, productProvider, categoryProvider, child) {
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
                   ElevatedButton(
-                    onPressed: () => _showAddProductModal(context, provider),
+                    onPressed: () => _showAddProductModal(
+                        context, productProvider, categoryProvider),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primaryColorBlue,
                       padding: const EdgeInsets.symmetric(vertical: 12),
@@ -319,9 +313,9 @@ class AddProductScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   Expanded(
                     child: ListView.builder(
-                      itemCount: provider.products.length,
+                      itemCount: productProvider.products.length,
                       itemBuilder: (context, index) {
-                        final product = provider.products[index];
+                        final product = productProvider.products[index];
                         return ListTile(
                           title: Text(product.name,
                               style: GoogleFonts.outfit(color: Colors.white)),
@@ -335,14 +329,15 @@ class AddProductScreen extends StatelessWidget {
                                 icon:
                                     const Icon(Icons.edit, color: Colors.blue),
                                 onPressed: () => _showAddProductModal(
-                                    context, provider,
+                                    context, productProvider, categoryProvider,
                                     productToEdit: product),
                               ),
                               IconButton(
                                 icon:
                                     const Icon(Icons.delete, color: Colors.red),
                                 onPressed: () async {
-                                  await provider.deleteProduct(product.id);
+                                  await productProvider
+                                      .deleteProduct(product.id);
                                 },
                               ),
                             ],

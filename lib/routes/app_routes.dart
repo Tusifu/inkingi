@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:inkingi/screens/add_transaction_screen.dart';
+import 'package:inkingi/screens/category/add_category_screen.dart';
+import 'package:inkingi/screens/transaction/add_transaction_screen.dart';
 import 'package:inkingi/screens/authentication/login_screen.dart';
 import 'package:inkingi/screens/authentication/register_screen.dart';
 import 'package:inkingi/screens/authentication/verify_otp_screen.dart';
-import 'package:inkingi/screens/dashboard_screen.dart';
-import 'package:inkingi/screens/loans_screen.dart';
+import 'package:inkingi/screens/core/dashboard_screen.dart';
+import 'package:inkingi/screens/core/loans_screen.dart';
 import 'package:inkingi/screens/product/add_product_screen.dart';
-import 'package:inkingi/screens/profile_screen.dart';
-import 'package:inkingi/screens/reports_screen.dart';
-import 'package:inkingi/screens/SplashScreen.dart';
-import 'package:inkingi/screens/transactions_screen.dart';
+import 'package:inkingi/screens/general/profile_screen.dart';
+import 'package:inkingi/screens/core/reports_screen.dart';
+import 'package:inkingi/screens/general/SplashScreen.dart';
+import 'package:inkingi/screens/transaction/transactions_screen.dart';
 
 class AppRoutes {
   // Getter methods for each route using the page's routeName
@@ -24,6 +25,7 @@ class AppRoutes {
   static String get verifyOtp => VerifyOtpScreen.routeName;
   static String get profile => ProfileScreen.routeName;
   static String get product => AddProductScreen.routeName;
+  static String get category => AddCategoryScreen.routeName;
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -49,6 +51,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const ProfileScreen());
       case AddProductScreen.routeName:
         return MaterialPageRoute(builder: (_) => AddProductScreen());
+      case AddCategoryScreen.routeName:
+        return MaterialPageRoute(builder: (_) => AddCategoryScreen());
       default:
         return _errorRoute();
     }
@@ -78,6 +82,8 @@ class AppRoutes {
         return const ProfileScreen();
       case AddProductScreen.routeName:
         return AddProductScreen();
+      case AddCategoryScreen.routeName:
+        return AddCategoryScreen();
       default:
         return const Scaffold(
           body: Center(

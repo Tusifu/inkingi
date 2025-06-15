@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:inkingi/constants/colors.dart';
-import 'package:inkingi/screens/add_transaction_screen.dart';
-import 'package:inkingi/screens/dashboard_screen.dart';
-import 'package:inkingi/screens/loans_screen.dart';
-import 'package:inkingi/screens/reports_screen.dart';
-import 'package:inkingi/screens/transactions_screen.dart';
+import 'package:inkingi/screens/transaction/add_transaction_screen.dart';
+import 'package:inkingi/screens/core/dashboard_screen.dart';
+import 'package:inkingi/screens/core/loans_screen.dart';
+import 'package:inkingi/screens/core/reports_screen.dart';
+import 'package:inkingi/screens/transaction/transactions_screen.dart';
 import 'package:inkingi/utils/Transition/transitionUtils.dart';
 
 class TBottomNavBar extends StatelessWidget {
