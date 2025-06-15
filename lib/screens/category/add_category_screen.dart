@@ -77,7 +77,7 @@ class AddCategoryScreen extends StatelessWidget {
                     style: GoogleFonts.outfit(color: Colors.white),
                     cursorColor: Colors.white,
                     decoration: InputDecoration(
-                      hintText: 'Izina ry\'ikiciro (Urugero: Kugurisha)',
+                      hintText: 'Izina ry\'ikiciro (Urugero: Imyenda)',
                       hintStyle: GoogleFonts.outfit(color: Colors.white70),
                       filled: true,
                       fillColor: Colors.grey[900],
@@ -224,8 +224,8 @@ class AddCategoryScreen extends StatelessWidget {
       create: (_) => CategoryProvider(),
       child: Scaffold(
         backgroundColor: AppColors.background,
-        bottomNavigationBar: TBottomNavBar(currentSelected: 2),
-        appBar: CustomAppBar(title: 'Amakiciro'),
+        // bottomNavigationBar: TBottomNavBar(currentSelected: 2),
+        appBar: CustomAppBar(title: 'Ikiciro (Categories)'),
         body: Consumer<CategoryProvider>(
           builder: (context, provider, child) {
             return Padding(

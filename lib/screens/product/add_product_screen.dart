@@ -275,8 +275,8 @@ class AddProductScreen extends StatelessWidget {
       ],
       child: Scaffold(
         backgroundColor: AppColors.background,
-        bottomNavigationBar: TBottomNavBar(currentSelected: 2),
-        appBar: CustomAppBar(title: 'Ibicuruzwa'),
+        // bottomNavigationBar: TBottomNavBar(currentSelected: 2),
+        appBar: CustomAppBar(title: 'Ibicuruzwa (Products)'),
         body: Consumer2<ProductProvider, CategoryProvider>(
           builder: (context, productProvider, categoryProvider, child) {
             return Padding(
