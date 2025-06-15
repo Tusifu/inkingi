@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inkingi/models/product.dart';
 import 'package:inkingi/models/transaction.dart';
 import 'package:inkingi/providers/dashboard_provider.dart';
+import 'package:inkingi/providers/product_provider.dart';
 import 'package:inkingi/services/categorization_service.dart';
 import 'package:provider/provider.dart';
 
@@ -115,6 +116,7 @@ class AddTransactionProvider with ChangeNotifier {
       isIncome: isIncome,
       category: selectedCategory,
       date: date,
+      productName: selectedProduct?.name, // Set product name if selected
     );
 
     final dashboardProvider =
@@ -141,10 +143,30 @@ class AddTransactionProvider with ChangeNotifier {
       return;
     }
 
-    double amount = _extractAmount(description);
-    if (amount <= 0) {
+    final productProvider =
+        Provider.of<ProductProvider>(context, listen: false);
+    String? matchedProductName =
+        _matchProductName(description, productProvider.products);
+    double? extractedAmount = _extractAmount(description); // Changed to double?
+
+    // Use product price if no amount is extracted and a product is matched
+    double amount;
+    if (extractedAmount == null && matchedProductName != null) {
+      final matchedProduct = productProvider.products.firstWhere(
+        (product) => product.name == matchedProductName,
+        orElse: () => productProvider
+            .products.first, // Default to first product if not found
+      );
+      amount =
+          matchedProduct.price * quantity; // Use product price with quantity
+    } else if (extractedAmount != null && extractedAmount <= 0) {
       _showError(context, 'Injiza umubare w\'amafaranga ushoboka (> 0)');
       return;
+    } else if (extractedAmount == null) {
+      _showError(context, 'Injiza umubare w\'amafaranga ushoboka (> 0)');
+      return;
+    } else {
+      amount = extractedAmount; // Use the extracted amount
     }
 
     final categorizationResult =
@@ -159,10 +181,11 @@ class AddTransactionProvider with ChangeNotifier {
       id: DateTime.now().toString(),
       description: description,
       amount:
-          amount, // Will be an integer when parsed from text without decimals
+          amount, // Will be an integer when parsed from text or product price
       isIncome: determinedIsIncome,
       category: selectedCategory,
       date: DateTime.now(),
+      productName: matchedProductName, // Set matched product name
     );
 
     final dashboardProvider =
@@ -181,7 +204,7 @@ class AddTransactionProvider with ChangeNotifier {
     );
   }
 
-  double _extractAmount(String description) {
+  double? _extractAmount(String description) {
     final RegExp amountRegExp = RegExp(
       r'(?:for|at|ya|y|amafranga|francs|rwf)?\s*(\d+\.?\d*)\s*(?:francs|rwf|amafranga)?',
       caseSensitive: false,
@@ -196,7 +219,7 @@ class AddTransactionProvider with ChangeNotifier {
             .toDouble(); // Convert to integer
       } catch (e) {
         print('Error parsing amount: $e');
-        return 0.0;
+        return null;
       }
     }
 
@@ -208,11 +231,24 @@ class AddTransactionProvider with ChangeNotifier {
             .toInt()
             .toDouble(); // Convert to integer
       } catch (e) {
-        return 0.0;
+        return null;
       }
     }
 
-    return 0.0;
+    return null; // Return null if no amount is found
+  }
+
+  String? _matchProductName(String description, List<Product> products) {
+    final words = description.toLowerCase().split(RegExp(r'\s+'));
+    for (var word in words) {
+      for (var product in products) {
+        if (product.name.toLowerCase().contains(word) ||
+            word.contains(product.name.toLowerCase())) {
+          return product.name; // Return the first matching product name
+        }
+      }
+    }
+    return null; // No match found
   }
 
   void _resetForm() {

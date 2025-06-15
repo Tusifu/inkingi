@@ -5,6 +5,7 @@ class Transaction {
   final double amount;
   final bool isIncome;
   final DateTime date;
+  final String? productName;
 
   Transaction({
     required this.id,
@@ -13,6 +14,7 @@ class Transaction {
     required this.amount,
     required this.isIncome,
     required this.date,
+    this.productName,
   });
 
   Map<String, dynamic> toJson() => {
@@ -21,7 +23,8 @@ class Transaction {
         'category': category,
         'amount': amount,
         'isIncome': isIncome ? 1 : 0,
-        'date': date.millisecondsSinceEpoch, // Store as int
+        'date': date.millisecondsSinceEpoch,
+        'productName': productName,
       };
 
   factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
@@ -33,5 +36,6 @@ class Transaction {
         date: json['date'] is String
             ? DateTime.parse(json['date'])
             : DateTime.fromMillisecondsSinceEpoch(json['date']),
+        productName: json['productName'],
       );
 }
