@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inkingi/components/TAppBar.dart';
-import 'package:inkingi/components/TBottomNavBar.dart';
 import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/models/product.dart';
 import 'package:inkingi/providers/product_provider.dart';
@@ -48,7 +47,7 @@ class AddProductScreen extends StatelessWidget {
                 style: GoogleFonts.outfit(color: Colors.white),
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
-                  hintText: 'Izina ry\'igicuruzwa (Urugero: Imyenda)',
+                  hintText: 'Izina ry\'igicuruzwa (Urugero: Ishati)',
                   hintStyle: GoogleFonts.outfit(color: Colors.white70),
                   filled: true,
                   fillColor: Colors.grey[900],

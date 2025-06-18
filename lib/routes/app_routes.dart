@@ -10,6 +10,7 @@ import 'package:inkingi/screens/product/add_product_screen.dart';
 import 'package:inkingi/screens/general/profile_screen.dart';
 import 'package:inkingi/screens/core/reports_screen.dart';
 import 'package:inkingi/screens/general/SplashScreen.dart';
+import 'package:inkingi/screens/transaction/transaction_message_reader.dart';
 import 'package:inkingi/screens/transaction/transactions_screen.dart';
 
 class AppRoutes {
@@ -26,6 +27,7 @@ class AppRoutes {
   static String get profile => ProfileScreen.routeName;
   static String get product => AddProductScreen.routeName;
   static String get category => AddCategoryScreen.routeName;
+  static String get messageReader => MessageReaderScreen.routeName;
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -53,6 +55,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => AddProductScreen());
       case AddCategoryScreen.routeName:
         return MaterialPageRoute(builder: (_) => AddCategoryScreen());
+      case MessageReaderScreen.routeName:
+        return MaterialPageRoute(builder: (_) => MessageReaderScreen());
       default:
         return _errorRoute();
     }
@@ -84,6 +88,8 @@ class AppRoutes {
         return AddProductScreen();
       case AddCategoryScreen.routeName:
         return AddCategoryScreen();
+      case MessageReaderScreen.routeName:
+        return MessageReaderScreen();
       default:
         return const Scaffold(
           body: Center(

@@ -369,6 +369,7 @@ class TransactionKeywords {
     'yishyuye',
     'nacuruje',
     'nakopye',
+    'kuranguza',
   ];
 
   // Kinyarwanda keywords for Expenses
@@ -472,6 +473,7 @@ class TransactionKeywords {
     'n\'ahashye',
     'naguze',
     'nahaye',
-    'nakopwe'
+    'nakopwe',
+    'kurangura'
   ];
 }

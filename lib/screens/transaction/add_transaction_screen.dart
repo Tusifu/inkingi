@@ -297,7 +297,7 @@ class AddTransactionScreen extends StatelessWidget {
                         decoration: InputDecoration(
                           hintText: transactionProvider.useManualEntry
                               ? 'Ibisobanuro (Urugero: Imyenda Yaguzwe)'
-                              : 'Ibisobanuro (Urugero: Naranguye amashati 3 kuri 15000)',
+                              : 'Ibisobanuro (Urugero: Kuranguza vans za 45000)',
                           hintStyle: GoogleFonts.outfit(color: Colors.white70),
                           filled: true,
                           fillColor: Colors.grey[900],

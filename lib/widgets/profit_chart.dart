@@ -328,7 +328,7 @@ class _ProfitChartState extends State<ProfitChart> {
 
         const Center(
           child: Text(
-            'No data',
+            'Ntamakuru arajyamo',
             style: TextStyle(
               color: Colors.white54,
               fontSize: 14,
@@ -343,17 +343,17 @@ class _ProfitChartState extends State<ProfitChart> {
           children: [
             _buildLegendItem(
               color: incomeColor,
-              text: 'Income',
+              text: 'Ayinjiye',
             ),
             const SizedBox(width: 16),
             _buildLegendItem(
               color: expensesColor,
-              text: 'Expenses',
+              text: 'Ayasohotse',
             ),
             const SizedBox(width: 16),
             _buildLegendItem(
               color: profitColor,
-              text: 'Profit',
+              text: 'Inyungu',
             ),
           ],
         ),

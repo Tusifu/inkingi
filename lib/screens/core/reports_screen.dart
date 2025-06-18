@@ -336,10 +336,10 @@ class ReportsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Profit: ${NumberFormat.decimalPattern().format(profit)} RWF',
+                    'Inyungu: ${NumberFormat.decimalPattern().format(profit)} RWF',
                     style: TextStyle(
                       color: profit >= 0
-                          ? AppColors.incomeColor
+                          ? AppColors.profitColor
                           : AppColors.expensesColor,
                       fontSize: 12,
                     ),

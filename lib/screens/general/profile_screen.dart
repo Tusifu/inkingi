@@ -34,7 +34,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     {"title": "Guhindura", "icon": "settings", "route": "/settings"},
     {"title": "Amatangazo", "icon": "notifications", "route": "/notifications"},
     {"title": "Ibicuruzwa", "icon": "add", "route": "/addProduct"},
-    {"title": "Ikiciro", "icon": "add", "route": "/addCategory"},
+    {"title": "Ikiciro", "icon": "plus", "route": "/addCategory"},
+    {
+      "title": "Gusoma Ubutumwa",
+      "icon": "mail",
+      "route": "/messageReaderScreen"
+    },
     {"title": "Gusohoka", "icon": "logout", "route": "/login"},
   ]; // Placeholder options
 

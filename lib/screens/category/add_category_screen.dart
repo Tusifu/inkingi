@@ -77,7 +77,7 @@ class AddCategoryScreen extends StatelessWidget {
                     style: GoogleFonts.outfit(color: Colors.white),
                     cursorColor: Colors.white,
                     decoration: InputDecoration(
-                      hintText: 'Izina ry\'ikiciro (Urugero: Imyenda)',
+                      hintText: 'Izina ry\'ikiciro (Urugero: Ishati)',
                       hintStyle: GoogleFonts.outfit(color: Colors.white70),
                       filled: true,
                       fillColor: Colors.grey[900],
