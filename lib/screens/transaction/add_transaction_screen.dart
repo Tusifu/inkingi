@@ -1,4 +1,3 @@
-// add_transaction_screen.dart (updated)
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inkingi/components/TAppBar.dart';
@@ -27,8 +26,6 @@ class AddTransactionScreen extends StatelessWidget {
         builder: (context) {
           final transactionProvider =
               Provider.of<AddTransactionProvider>(context, listen: false);
-          final productProvider =
-              Provider.of<ProductProvider>(context, listen: false);
 
           // Initialize category and amount based on selected product when it changes
           WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -81,85 +78,87 @@ class AddTransactionScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       if (transactionProvider.useManualEntry) ...[
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/addProduct');
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primaryColorBlue,
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              elevation: 5,
-                            ),
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.add, color: Colors.white),
-                                SizedBox(width: 8),
-                                Text(
-                                  'Ongera Igicuruzwa',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                        const SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: DropdownButtonFormField<Product>(
+                                value: transactionProvider.selectedProduct,
+                                isExpanded: true,
+                                style: GoogleFonts.outfit(color: Colors.white),
+                                decoration: InputDecoration(
+                                  hintText: 'Hitamo Igicuruzwa',
+                                  hintStyle:
+                                      GoogleFonts.outfit(color: Colors.white70),
+                                  filled: true,
+                                  fillColor: Colors.grey[900],
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: const BorderSide(
+                                      color: AppColors.greyColor500,
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: const BorderSide(
+                                      color: AppColors.greyColor500,
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: const BorderSide(
+                                      color: AppColors.greyColor300,
+                                      width: 2,
+                                    ),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        DropdownButtonFormField<Product>(
-                          value: transactionProvider.selectedProduct,
-                          isExpanded: true,
-                          style: GoogleFonts.outfit(color: Colors.white),
-                          decoration: InputDecoration(
-                            hintText: 'Hitamo Igicuruzwa',
-                            hintStyle:
-                                GoogleFonts.outfit(color: Colors.white70),
-                            filled: true,
-                            fillColor: Colors.grey[900],
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: AppColors.greyColor500,
-                                width: 1.5,
+                                dropdownColor: Colors.grey[850],
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    transactionProvider
+                                        .setSelectedProduct(value);
+                                  }
+                                },
+                                items: productProvider.products.map((product) {
+                                  return DropdownMenuItem<Product>(
+                                    value: product,
+                                    child: Text(
+                                      '${product.name}',
+                                      style: GoogleFonts.outfit(
+                                          color: Colors.white),
+                                    ),
+                                  );
+                                }).toList(),
                               ),
                             ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: AppColors.greyColor500,
-                                width: 1.5,
+                            const SizedBox(width: 16),
+                            Expanded(
+                              flex: 1,
+                              child: SizedBox(
+                                height: 56,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/addProduct');
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.primaryColorBlue,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    elevation: 5,
+                                  ),
+                                  child: const Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
                               ),
                             ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: AppColors.greyColor300,
-                                width: 2,
-                              ),
-                            ),
-                          ),
-                          dropdownColor: Colors.grey[850],
-                          onChanged: (value) {
-                            if (value != null) {
-                              transactionProvider.setSelectedProduct(value);
-                            }
-                          },
-                          items: productProvider.products.map((product) {
-                            return DropdownMenuItem<Product>(
-                              value: product,
-                              child: Text(
-                                '${product.name}',
-                                style: GoogleFonts.outfit(color: Colors.white),
-                              ),
-                            );
-                          }).toList(),
+                          ],
                         ),
                         const SizedBox(height: 20),
                         Row(
@@ -227,7 +226,7 @@ class AddTransactionScreen extends StatelessWidget {
                                         : AppColors.greyColor500,
                                   ),
                                   Container(
-                                    width: 40,
+                                    width: 18,
                                     alignment: Alignment.center,
                                     child: Text(
                                       transactionProvider.quantity.toString(),
