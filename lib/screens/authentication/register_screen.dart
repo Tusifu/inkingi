@@ -123,7 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: GoogleFonts.outfit(color: Colors.white),
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
-                        hintText: 'Email',
+                        hintText: 'Emeyili',
                         hintStyle: GoogleFonts.outfit(color: Colors.white70),
                         filled: true,
                         fillColor: Colors.grey[900],
@@ -150,7 +150,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: GoogleFonts.outfit(color: Colors.white),
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
-                        hintText: 'First Name',
+                        hintText: 'Izina r\'ibanza',
                         hintStyle: GoogleFonts.outfit(color: Colors.white70),
                         filled: true,
                         fillColor: Colors.grey[900],
@@ -177,7 +177,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: GoogleFonts.outfit(color: Colors.white),
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
-                        hintText: 'Last Name',
+                        hintText: 'Izina \' riheruka',
                         hintStyle: GoogleFonts.outfit(color: Colors.white70),
                         filled: true,
                         fillColor: Colors.grey[900],
@@ -204,7 +204,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: GoogleFonts.outfit(color: Colors.white),
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
-                        hintText: 'Password',
+                        hintText: 'Ijambo banga',
                         hintStyle: GoogleFonts.outfit(color: Colors.white70),
                         filled: true,
                         fillColor: Colors.grey[900],
@@ -231,7 +231,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: GoogleFonts.outfit(color: Colors.white),
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
-                        hintText: 'Phone Number (e.g., 0726666939)',
+                        hintText: 'Nimero (urugero:., 0726666939)',
                         hintStyle: GoogleFonts.outfit(color: Colors.white70),
                         filled: true,
                         fillColor: Colors.grey[900],
@@ -258,7 +258,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: GoogleFonts.outfit(color: Colors.white),
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
-                        hintText: 'Username',
+                        hintText: 'Ijambo ryo kwinjira',
                         hintStyle: GoogleFonts.outfit(color: Colors.white70),
                         filled: true,
                         fillColor: Colors.grey[900],
@@ -303,7 +303,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             )
                           : Text(
-                              'Register',
+                              'Iyandikishe',
                               style: GoogleFonts.outfit(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -315,7 +315,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     TextButton(
                       onPressed: _navigateToLogin,
                       child: Text(
-                        'Already have an account? Login',
+                        'Nsanzwe mfite Konti, Kinjira',
                         style: GoogleFonts.outfit(
                           color: Colors.white70,
                           fontSize: 14,

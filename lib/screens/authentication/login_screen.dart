@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: GoogleFonts.outfit(color: Colors.white),
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
-                        hintText: 'Username',
+                        hintText: 'Ijambo ryo kwinjira',
                         hintStyle: GoogleFonts.outfit(color: Colors.white70),
                         filled: true,
                         fillColor: Colors.grey[900],
@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: GoogleFonts.outfit(color: Colors.white),
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
-                        hintText: 'Password',
+                        hintText: 'Ijambo Banga',
                         hintStyle: GoogleFonts.outfit(color: Colors.white70),
                         filled: true,
                         fillColor: Colors.grey[900],
@@ -195,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             )
                           : Text(
-                              'Login',
+                              'Injira',
                               style: GoogleFonts.outfit(
                                 color: Colors.white,
                                 fontSize: 14,
@@ -207,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextButton(
                       onPressed: _navigateToRegister,
                       child: Text(
-                        'Don’t have an account? Register',
+                        'Gufungura konti yo gukoresha bushya',
                         style: GoogleFonts.outfit(
                           color: Colors.white70,
                           fontSize: 14,
