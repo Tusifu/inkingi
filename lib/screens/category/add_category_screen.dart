@@ -43,8 +43,8 @@ class AddCategoryScreen extends StatelessWidget {
     IconData? initialIcon;
     if (categoryToEdit?.icon != null &&
         _availableIcons
-            .any((icon) => icon.codePoint == categoryToEdit!.icon!.codePoint)) {
-      initialIcon = categoryToEdit!.icon!;
+            .any((icon) => icon.codePoint == categoryToEdit!.icon.codePoint)) {
+      initialIcon = categoryToEdit!.icon;
     } else {
       initialIcon = defaultIcon;
     }
@@ -225,7 +225,7 @@ class AddCategoryScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.background,
         // bottomNavigationBar: TBottomNavBar(currentSelected: 2),
-        appBar: CustomAppBar(title: 'Ikiciro (Categories)'),
+        appBar: CustomAppBar(title: 'Ikiciro (Category)'),
         body: Consumer<CategoryProvider>(
           builder: (context, provider, child) {
             return Padding(

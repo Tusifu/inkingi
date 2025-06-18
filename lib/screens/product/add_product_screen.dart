@@ -1,4 +1,3 @@
-// add_product_screen.dart (updated)
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inkingi/components/TAppBar.dart';
@@ -6,6 +5,7 @@ import 'package:inkingi/constants/colors.dart';
 import 'package:inkingi/models/product.dart';
 import 'package:inkingi/providers/product_provider.dart';
 import 'package:inkingi/providers/category_provider.dart';
+import 'package:inkingi/screens/category/add_category_screen.dart';
 import 'package:provider/provider.dart';
 
 class AddProductScreen extends StatelessWidget {
@@ -111,58 +111,98 @@ class AddProductScreen extends StatelessWidget {
               const SizedBox(height: 20),
               Consumer<CategoryProvider>(
                 builder: (context, categoryProvider, child) {
-                  return DropdownButtonFormField<String>(
-                    value: _categoryController.text.isNotEmpty
-                        ? _categoryController.text
-                        : null,
-                    isExpanded: true,
-                    style: GoogleFonts.outfit(color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: 'Hitamo Ikiciro',
-                      hintStyle: GoogleFonts.outfit(color: Colors.white70),
-                      filled: true,
-                      fillColor: Colors.grey[900],
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(
-                          color: AppColors.greyColor500,
-                          width: 1.5,
+                  print(
+                      'Categories available: ${categoryProvider.categories.length}'); // Debug output
+                  return Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: DropdownButtonFormField<String>(
+                          value: _categoryController.text.isNotEmpty &&
+                                  categoryProvider.categories.any(
+                                      (c) => c.name == _categoryController.text)
+                              ? _categoryController.text
+                              : null,
+                          isExpanded: true,
+                          style: GoogleFonts.outfit(color: Colors.white),
+                          decoration: InputDecoration(
+                            hintText: 'Hitamo Ikiciro',
+                            hintStyle:
+                                GoogleFonts.outfit(color: Colors.white70),
+                            filled: true,
+                            fillColor: Colors.grey[900],
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: AppColors.greyColor500,
+                                width: 1.5,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: AppColors.greyColor500,
+                                width: 1.5,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: AppColors.greyColor300,
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                          dropdownColor: Colors.grey[850],
+                          onChanged: (value) {
+                            if (value != null) {
+                              _categoryController.text = value;
+                              print(
+                                  'Selected category: $value'); // Debug output
+                            }
+                          },
+                          items: categoryProvider.categories.map((category) {
+                            return DropdownMenuItem<String>(
+                              value: category.name,
+                              child: Row(
+                                children: [
+                                  Icon(category.icon, color: Colors.white),
+                                  const SizedBox(width: 8),
+                                  Text(category.name,
+                                      style: GoogleFonts.outfit(
+                                          color: Colors.white)),
+                                ],
+                              ),
+                            );
+                          }).toList(),
                         ),
                       ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(
-                          color: AppColors.greyColor500,
-                          width: 1.5,
+                      const SizedBox(width: 16),
+                      Expanded(
+                        flex: 1,
+                        child: SizedBox(
+                          height: 56,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, AddCategoryScreen.routeName);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primaryColorBlue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              elevation: 5,
+                            ),
+                            child: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
                         ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(
-                          color: AppColors.greyColor300,
-                          width: 2,
-                        ),
-                      ),
-                    ),
-                    dropdownColor: Colors.grey[850],
-                    onChanged: (value) {
-                      if (value != null) {
-                        _categoryController.text = value;
-                      }
-                    },
-                    items: categoryProvider.categories.map((category) {
-                      return DropdownMenuItem<String>(
-                        value: category.name,
-                        child: Row(
-                          children: [
-                            Icon(category.icon, color: Colors.white),
-                            const SizedBox(width: 8),
-                            Text(category.name,
-                                style: GoogleFonts.outfit(color: Colors.white)),
-                          ],
-                        ),
-                      );
-                    }).toList(),
+                    ],
                   );
                 },
               ),

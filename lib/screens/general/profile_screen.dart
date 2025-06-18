@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     {"title": "Ikiciro", "icon": "plus", "route": "/addCategory"},
     {
       "title": "Gusoma Ubutumwa",
-      "icon": "mail",
+      "icon": "mail_rounded",
       "route": "/messageReaderScreen"
     },
     {"title": "Gusohoka", "icon": "logout", "route": "/login"},
